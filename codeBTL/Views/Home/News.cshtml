@@ -1,0 +1,650 @@
+﻿
+@{
+    ViewData["Title"] = "Tin tức";
+    Layout = "_LayoutQLBDT";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Basic page needs
+    ============================================ -->
+        <title>Tin tức</title>
+        <meta charset="utf-8" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="Magentech" />
+        <meta name="robots" content="index, follow" />
+
+        <!-- Mobile specific metas
+    ============================================ -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <!-- Favicon
+    ============================================ -->
+
+        <link rel="shortcut icon" type="image/png" href="ico/" />
+
+        <!-- Libs CSS
+    ============================================ -->
+        <link
+            rel="stylesheet"
+            href="./assets/css/news/css/bootstrap/css/bootstrap.min.css"
+        />
+        <link
+            href="./assets/css/news/css/font-awesome/css/font-awesome.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="js/datetimepicker/bootstrap-datetimepicker.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/js/news/js/owl-carousel/owl.carousel.css"
+            rel="stylesheet"
+        />
+        <link href="./assets/css/news/css/themecss/lib.css" rel="stylesheet" />
+        <link
+            href="./assets/js/news/js/jquery-ui/jquery-ui.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/js/news/js/minicolors/miniColors.css"
+            rel="stylesheet"
+        />
+
+        <!-- Theme CSS
+    ============================================ -->
+        <link
+            href="./assets/css/news/css/themecss/so_searchpro.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/css/news/css/themecss/so_megamenu.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/css/news/css/themecss/so-categories.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/css/news/css/themecss/so-listing-tabs.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/css/news/css/themecss/so-newletter-popup.css"
+            rel="stylesheet"
+        />
+
+        <link
+            href="./assets/css/news/css/footer/footer1.css"
+            rel="stylesheet"
+        />
+        <link
+            href="./assets/css/news/css/header/header1.css"
+            rel="stylesheet"
+        />
+        <link
+            id="color_scheme"
+            href="./assets/css/news/css/theme.css"
+            rel="stylesheet"
+        />
+        <link href="./assets/css/news/css/responsive.css" rel="stylesheet" />
+
+        <!-- Google web fonts
+    ============================================ -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <style type="text/css">
+            body {
+                font-family: "Roboto", sans-serif;
+            }
+        </style>
+    </head>
+
+    <body class="res layout-1">
+        <div id="wrapper" class="wrapper-fluid banners-effect-5">
+            <!-- Main Container  -->
+            <div class="main-container container">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li><a href="#">Tin tức</a></li>
+                </ul>
+
+                <div class="row" style="justify-content:center; al">
+                    <!--Middle Part Start-->
+                    <div id="content" class="col-md-9 col-sm-8">
+                        <div class="blog-header">
+                            <h3>Tin tức</h3>
+                        </div>
+                        <div class="blog-category clearfix">
+                            <div class="blog-listitem row">
+                                <div
+                                    class="blog-item col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                                >
+                                    <div class="blog-item-inner clearfix">
+                                        <div class="itemBlogImg clearfix">
+                                            <div class="article-image">
+                                                <div>
+                                                    <a
+                                                        class="popup-gallery"
+                                                        href="./img/phones.jpg"
+                                                    >
+                                                        <img
+                                                            src="~/assets/images/products/ip13pm.png"
+                                                            alt="phones"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="article-date">
+                                                    <div class="date">
+                                                        <span
+                                                            class="article-date"
+                                                        >
+                                                            <b>04</b> tháng 12
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="itemBlogContent clearfix">
+                                            <div class="blog-content">
+                                                <div
+                                                    class="article-title font-title"
+                                                >
+                                                    <h4>
+                                                        <a
+                                                            href="./news-detail.html"
+                                                            >Duis autem vel eum
+                                                            irure sed diam
+                                                            nonumy</a
+                                                        >
+                                                    </h4>
+                                                </div>
+                                                <div class="blog-meta">
+                                                    <span class="author"
+                                                        ><i
+                                                            class="fa fa-user"
+                                                        ></i
+                                                        ><span>Đăng bởi </span
+                                                        >Admin</span
+                                                    >
+                                                </div>
+                                                <p class="article-description">
+                                                    Lorem ipsum dolor sit amet,
+                                                    consetetur sadipscing elitr,
+                                                    sed diam nonumy eirmod
+                                                    tempor invidunt ut labore et
+                                                    dolore magna aliquyam erat,
+                                                    sed diam voluptua. At vero
+                                                    eos et accusam et justo duo
+                                                    dolores et ea rebum. Stet
+                                                    clita kasd gubergren, no sea
+                                                    takimata sanctus est Lorem
+                                                    ipsum dolor sit amet.
+                                                    Lore...
+                                                </p>
+                                                <div class="readmore">
+                                                    <a
+                                                        class="btn-readmore font-title"
+                                                        href="./news-detail.html"
+                                                        ><i
+                                                            class="fa fa-caret-right"
+                                                        ></i
+                                                        >Đọc thêm</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="blog-item col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                                >
+                                    <div class="blog-item-inner clearfix">
+                                        <div class="itemBlogImg clearfix">
+                                            <div class="article-image">
+                                                <div>
+                                                    <a
+                                                        class="popup-gallery"
+                                                        href="./img/phones.jpg"
+                                                    >
+                                                        <img
+                                                            src="~/assets/images/products/ip13pm.png"
+                                                            alt="phone"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="article-date">
+                                                    <div class="date">
+                                                        <span
+                                                            class="article-date"
+                                                        >
+                                                            <b>04</b> tháng 12
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="itemBlogContent clearfix">
+                                            <div class="blog-content">
+                                                <div
+                                                    class="article-title font-title"
+                                                >
+                                                    <h4>
+                                                        <a
+                                                            href="./news-detail.html"
+                                                            >Biten demons lector
+                                                            in henderit in
+                                                            vulp</a
+                                                        >
+                                                    </h4>
+                                                </div>
+                                                <div class="blog-meta">
+                                                    <span class="author"
+                                                        ><i
+                                                            class="fa fa-user"
+                                                        ></i
+                                                        ><span>Đăng bởi </span
+                                                        >Admin</span
+                                                    >
+                                                </div>
+                                                <p class="article-description">
+                                                    Duis autem vel eum iriure
+                                                    dolor in hendrerit in
+                                                    vulputate velit esse
+                                                    molestie consequat, vel
+                                                    illum dolore eu feugiat
+                                                    nulla facilisis at vero eros
+                                                    et accumsan et iusto odio
+                                                    dignissim qui blandit
+                                                    praesent luptatum zzril
+                                                    delenit augue duis dolore te
+                                                    feugait nulla facilisi.
+                                                    Lorem ipsum dolor sit amet,
+                                                    c...
+                                                </p>
+                                                <div class="readmore">
+                                                    <a
+                                                        class="btn-readmore font-title"
+                                                        href="./news-detail.html"
+                                                        ><i
+                                                            class="fa fa-caret-right"
+                                                        ></i
+                                                        >Đọc thêm</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="blog-item col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                                >
+                                    <div class="blog-item-inner clearfix">
+                                        <div class="itemBlogImg clearfix">
+                                            <div class="article-image">
+                                                <div>
+                                                    <a
+                                                        class="popup-gallery"
+                                                        href="./img/phones.jpg"
+                                                    >
+                                                        <img
+                                                            src="~/assets/images/products/ip13pm.png"
+                                                            alt="phone"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="article-date">
+                                                    <div class="date">
+                                                        <span
+                                                            class="article-date"
+                                                        >
+                                                            <b>15</b> tháng 1
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="itemBlogContent clearfix">
+                                            <div class="blog-content">
+                                                <div
+                                                    class="article-title font-title"
+                                                >
+                                                    <h4>
+                                                        <a
+                                                            href="./news-detail.html"
+                                                            >Duis autem vel eum
+                                                            tempor invidunt ut
+                                                            labore et
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div class="blog-meta">
+                                                    <span class="author"
+                                                        ><i
+                                                            class="fa fa-user"
+                                                        ></i
+                                                        ><span>Đăng bởi </span
+                                                        >Admin</span
+                                                    >
+                                                    <span class="comment_count"
+                                                        ><i
+                                                            class="fa fa-comment-o"
+                                                        ></i
+                                                        ><a href="#"
+                                                            >0 Bình luận</a
+                                                        ></span
+                                                    >
+                                                </div>
+                                                <p class="article-description">
+                                                    Lorem ipsum dolor sit amet,
+                                                    consetetur sadipscing elitr,
+                                                    sed diam nonumy eirmod
+                                                    tempor invidunt ut labore et
+                                                    dolore magna aliquyam erat,
+                                                    sed diam voluptua. At vero
+                                                    eos et accusam et justo duo
+                                                    dolores et ea rebum. Stet
+                                                    clita kasd gubergren, no sea
+                                                    takimata sanctus est Lorem
+                                                    ipsum dolor sit amet.
+                                                    Lore...
+                                                </p>
+                                                <div class="readmore">
+                                                    <a
+                                                        class="btn-readmore font-title"
+                                                        href="./news-detail.html"
+                                                        ><i
+                                                            class="fa fa-caret-right"
+                                                        ></i
+                                                        >Đọc thêm</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="blog-item col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                                >
+                                    <div class="blog-item-inner clearfix">
+                                        <div class="itemBlogImg clearfix">
+                                            <div class="article-image">
+                                                <div>
+                                                    <a
+                                                        class="popup-gallery"
+                                                        href="./img/phones.jpg"
+                                                    >
+                                                        <img
+                                                            src="~/assets/images/products/ip13pm.png"
+                                                            alt="phone"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="article-date">
+                                                    <div class="date">
+                                                        <span
+                                                            class="article-date"
+                                                        >
+                                                            <b>15</b> tháng 1
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="itemBlogContent clearfix">
+                                            <div class="blog-content">
+                                                <div
+                                                    class="article-title font-title"
+                                                >
+                                                    <h4>
+                                                        <a
+                                                            href="./news-detail.html"
+                                                            >Enim ad minim
+                                                            veniam justo duo
+                                                            dolores et ea</a
+                                                        >
+                                                    </h4>
+                                                </div>
+                                                <div class="blog-meta">
+                                                    <span class="author"
+                                                        ><i
+                                                            class="fa fa-user"
+                                                        ></i
+                                                        ><span>Đăng bởi </span
+                                                        >Admin</span
+                                                    >
+                                                    <span class="comment_count"
+                                                        ><i
+                                                            class="fa fa-comment-o"
+                                                        ></i
+                                                        ><a href="#"
+                                                            >1 Bình luận</a
+                                                        ></span
+                                                    >
+                                                </div>
+                                                <p class="article-description">
+                                                    Lorem ipsum dolor sit amet,
+                                                    consetetur sadipscing elitr,
+                                                    sed diam nonumy eirmod
+                                                    tempor invidunt ut labore et
+                                                    dolore magna aliquyam erat,
+                                                    sed diam voluptua. At vero
+                                                    eos et accusam et justo duo
+                                                    dolores et ea rebum. Stet
+                                                    clita kasd gubergren, no sea
+                                                    takimata sanctus est Lorem
+                                                    ipsum dolor sit amet.
+                                                    Lore...
+                                                </p>
+                                                <div class="readmore">
+                                                    <a
+                                                        class="btn-readmore font-title"
+                                                        href="./news-detail.html"
+                                                        ><i
+                                                            class="fa fa-caret-right"
+                                                        ></i
+                                                        >Đọc thêm</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="blog-item col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                                >
+                                    <div class="blog-item-inner clearfix">
+                                        <div class="itemBlogImg clearfix">
+                                            <div class="article-image">
+                                                <div>
+                                                    <a
+                                                        class="popup-gallery"
+                                                        href="./img/phones.jpg"
+                                                    >
+                                                        <img
+                                                            src="~/assets/images/products/ip13pm.png"
+                                                            alt="phone"
+                                                        />
+                                                    </a>
+                                                </div>
+                                                <div class="article-date">
+                                                    <div class="date">
+                                                        <span
+                                                            class="article-date"
+                                                        >
+                                                            <b>15</b> tháng 1
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="itemBlogContent clearfix">
+                                            <div class="blog-content">
+                                                <div
+                                                    class="article-title font-title"
+                                                >
+                                                    <h4>
+                                                        <a
+                                                            href="./news-detail.html"
+                                                            >Kire tuma feugiat
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div class="blog-meta">
+                                                    <span class="author"
+                                                        ><i
+                                                            class="fa fa-user"
+                                                        ></i
+                                                        ><span>Đăng bởi </span
+                                                        >Admin</span
+                                                    >
+                                                </div>
+                                                <p class="article-description">
+                                                    Lorem ipsum dolor sit amet,
+                                                    consetetur sadipscing elitr,
+                                                    sed diam nonumy eirmod
+                                                    tempor invidunt ut labore et
+                                                    dolore magna aliquyam erat,
+                                                    sed diam voluptua. At vero
+                                                    eos et accusam et justo duo
+                                                    dolores et ea rebum. Stet
+                                                    clita kasd gubergren, no sea
+                                                    takimata sanctus est Lorem
+                                                    ipsum dolor sit amet.
+                                                    Lore...
+                                                </p>
+                                                <div class="readmore">
+                                                    <a
+                                                        class="btn-readmore font-title"
+                                                        href="./news-detail.html"
+                                                        ><i
+                                                            class="fa fa-caret-right"
+                                                        ></i
+                                                        >Đọc thêm</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="product-filter product-filter-bottom filters-panel clearfix"
+                            >
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="product-filter product-filter-top filters-panel hidden-sm hidden-xs"
+                            >
+                                <div class="row">
+                                    <div class="col-sm-4 view-mode">
+                                        <div class="list-view">
+                                            <button
+                                                type="button"
+                                                id="grid-view"
+                                                class="btn btn-view hidden-sm hidden-xs"
+                                            >
+                                                1
+                                            </button>
+                                            <button
+                                                type="button"
+                                                id="grid-view-2"
+                                                class="btn btn-view"
+                                            >
+                                                2
+                                            </button>
+                                            <button
+                                                type="button"
+                                                id="grid-view-3"
+                                                class="btn btn-view hidden-sm hidden-xs"
+                                            >
+                                                3
+                                            </button>
+                                            <button
+                                                type="button"
+                                                id="grid-view-4"
+                                                class="btn btn-view hidden-sm hidden-xs"
+                                            >
+                                                4
+                                            </button>
+                                            <button
+                                                type="button"
+                                                id="list-view"
+                                                class="btn btn-view list"
+                                            >
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Middle Part End-->
+            </div>
+            <!-- //Main Container -->
+        </div>
+
+        <!-- Include Libs & Plugins
+	============================================ -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script
+            type="text/javascript"
+            src="js/owl-carousel/owl.carousel.js"
+        ></script>
+        <script type="text/javascript" src="js/themejs/libs.js"></script>
+        <script
+            type="text/javascript"
+            src="js/unveil/jquery.unveil.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/countdown/jquery.countdown.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/datetimepicker/moment.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/datetimepicker/bootstrap-datetimepicker.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="js/jquery-ui/jquery-ui.min.js"
+        ></script>
+
+        <!-- Theme files
+	============================================ -->
+
+        <script type="text/javascript" src="js/themejs/so_megamenu.js"></script>
+        <script type="text/javascript" src="js/themejs/addtocart.js"></script>
+        <script type="text/javascript" src="js/themejs/application.js"></script>
+    </body>
+
+    <!--  demo.smartaddons.com/templates/html/emarket/blog-page.html by AkrAm, Sat, 20 Apr 2019 20:00:44 GMT -->
+</html>
+
+

@@ -1,0 +1,252 @@
+@import url(./base.css);
+@import url(./base.css);
+
+/* begin header */
+header {
+    height: 226px;
+    width: 100%;
+    background-color: #1eaef6;
+    padding-top: 15px;
+    position: relative;
+}
+
+.top__header {
+    height: calc(226px - 73px);
+    width: 100%;
+}
+
+.top__header-img {
+    width: 100%;
+    height: 70%;
+    border-radius: 4px;
+}
+
+.bottom__header {
+    height: 73px;
+    width: 100%;
+    background-color: #22a0df;
+    padding: 15px 0;
+    position: sticky !important;
+    top: 0;
+}
+
+.bottom__header-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottom__header-right,
+.bottom_header-left {
+    height: 100%;
+    width: 290px;
+}
+
+.bottom__header-right button,
+.bottom_header-left button,
+.bottom_header-left div {
+    height: 100%;
+    font-size: 1.5rem;
+}
+
+.bottom__header-right input,
+.bottom_header-right input::placeholder,
+.bottom_header-left input,
+.bottom_header-left input::placeholder {
+    font-size: 1.5rem;
+}
+
+.bottom__header-right span {
+    font-size: 2rem;
+}
+
+/* end header */
+
+/* begin nav */
+.navbar {
+    margin-top: 15px;
+    height: 56px;
+    box-shadow: 0 0 4px rgb(0 0 0 / 20%);
+    position: sticky !important;
+    top: 0;
+    z-index: 999;
+}
+
+.nav-link {
+    font-size: 1.4rem;
+    color: #000;
+    cursor: pointer;
+    margin: 0 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.dropdown {
+    width: 40px;
+}
+
+.dropdown a {
+    width: 100%;
+    height: 100%;
+}
+
+/* end nav */
+
+/* main */
+
+main {
+    padding: 15px 0;
+}
+
+.banner {
+    display: flex;
+    column-gap: 15px;
+}
+.banner__left {
+    width: 75%;
+    height: 100%;
+}
+
+.banner__right {
+    width: 25%;
+}
+
+.banner__right img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.bestsell-block {
+    background-color: #fff;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 15px;
+}
+.home-block-inner {
+    border-width: 0 !important;
+    float: left;
+    background: #0aa2ee;
+    min-height: 390px;
+}
+.home-block-inner:after {
+    content: "";
+    position: absolute;
+    top: 6%;
+    left: 23%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent transparent transparent #0aa2ee;
+    display: block;
+    width: 0;
+    right: inherit;
+    z-index: 10;
+}
+.block-content {
+    margin-left: 24.5%;
+    padding: 0px;
+    width: 76.5%;
+}
+#bestsell-slider.product-flexslider {
+    margin: 0px;
+}
+.block-title {
+    color: #fff;
+    font-family: "Raleway", sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 28px;
+    padding: 25px 25px 15px;
+    position: relative;
+}
+.block-title h2 {
+    margin: auto;
+    font-weight: bold;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+.owl-pagination {
+    background: inherit;
+    left: -29%;
+    padding-left: inherit;
+    position: absolute;
+    right: inherit;
+    text-align: center;
+    top: 85%;
+    z-index: 7;
+}
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+    filter: Alpha(Opacity=100);
+    opacity: 1;
+    background: #0773a9 !important;
+}
+.owl-theme .owl-controls .owl-page span {
+    width: 12px;
+    height: 12px;
+    border: none;
+    margin-right: 6px;
+    background: #c8ecfe;
+}
+.block-title em {
+    font-style: normal;
+    font-weight: 300;
+}
+.home-block-inner .pretext {
+    margin-top: 0px;
+    color: #cbedfe;
+    float: right;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 24px;
+    text-transform: none;
+    margin-left: 25px;
+    margin-right: 25px;
+    letter-spacing: 0.5px;
+}
+a.view_more_bnt {
+    border: none;
+    background: #fff;
+    text-transform: uppercase;
+    color: #666;
+    padding: 8px 25px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    float: left;
+    margin-top: 20px;
+    margin-left: 25px;
+    z-index: 1;
+    position: relative;
+    border-radius: 3px;
+}
+a.view_more_bnt:hover {
+    background: #018cd1;
+    color: #fff;
+}
+.category-products .text-banner {
+    background-color: #fff;
+    border-top: 1px solid #eaeaea;
+    bottom: -60px;
+    left: 0;
+    padding-bottom: 20px;
+    padding-top: 25px;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+}
+
+/* begin footer */
+
+footer {
+    font-size: 1.7rem;
+}
+
+h6 {
+    font-size: 1.8rem;
+}
+
+/* end footer */

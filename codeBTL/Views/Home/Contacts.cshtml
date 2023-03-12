@@ -1,0 +1,263 @@
+﻿@{
+    ViewData["Title"] = "Liên hệ";
+    Layout = "_LayoutQLBDT";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- Latest compiled and minified CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="./assets/css/contact.css" />
+
+        <link
+            rel="stylesheet"
+            href="./assets/icon/fontawesome-free-5.15.1-web/css/all.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("form").submit(function (event) {
+                    // Ngăn chặn việc submit form mặc định
+                    event.preventDefault();
+
+                    // Lấy các giá trị từ các trường họ tên, email, số điện thoại và bình luận
+                    var fullName = $("#fullName").val();
+                    var email = $("#email").val();
+                    var phoneNumber = $("#phoneNumber").val();
+                    var comment = $("#comment").val();
+
+                    // Kiểm tra xem các trường có được điền đầy đủ hay không
+                    if (!fullName || !email || !phoneNumber || !comment) {
+                        $("#error").text("Vui lòng điền đầy đủ thông tin.");
+                        return false;
+                    }
+
+                    // Kiểm tra trường họ tên có chứa ký tự đặc biệt hay không
+                    var nameRegex = /^[a-zA-Z ]+$/;
+                    if (!fullName.match(nameRegex)) {
+                        $("#error").text(
+                            "Họ tên không hợp lệ. Vui lòng chỉ nhập các ký tự chữ và khoảng trắng."
+                        );
+                        return false;
+                    }
+
+                    // Kiểm tra email có đúng định dạng hay không
+                    var emailRegex = "";
+                    if (!email.match(emailRegex)) {
+                        $("#error").text(
+                            "Email không hợp lệ. Vui lòng nhập địa chỉ email đúng định dạng."
+                        );
+                        return false;
+                    }
+
+                    // Kiểm tra số điện thoại có đúng định dạng hay không
+                    var phoneRegex = /^\d{10}$/;
+                    if (!phoneNumber.match(phoneRegex)) {
+                        $("#error").text(
+                            "Số điện thoại không hợp lệ. Vui lòng nhập đúng định dạng 10 số."
+                        );
+                        return false;
+                    }
+
+                    // Kiểm tra bình luận có độ dài từ 10 đến 100 ký tự hay không
+                    if (comment.length < 10 || comment.length > 100) {
+                        $("#error").text(
+                            "Bình luận phải có độ dài từ 10 đến 100 ký tự."
+                        );
+                        return false;
+                    }
+
+                    // Nếu tất cả các kiểm tra đều đã được pass, thì submit form
+                    $(this).unbind("submit").submit();
+                });
+            });
+        </script>
+    </head>
+
+    <body >
+        <div class="content mb-5 mt-5 contacts">
+            <iframe
+                class="mb-5"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1131158083263!2d105.80123181472459!3d21.028159493175043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab424a50fff9%3A0xbe3a7f3670c0a45f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBHaWFvIHRow7RuZyBW4bqtbiB04bqjaQ!5e0!3m2!1svi!2s!4v1677765416407!5m2!1svi!2s"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div class="container">
+                <div class="main-content row">
+                    <div class="content-left col-4">
+                        <h3>Liên hệ với chúng tôi</h3>
+                        <hr />
+                        <div class="contact-info mt-4">
+                            <div class="hotline d-flex mb-3">
+                                <i class="fas fa-headphones-alt"></i>
+                                <div>
+                                    <p>Hotline free 24/24:</p>
+                                    <p>(+84) 123 456 789</p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="address">
+                                    <strong>Địa chỉ:</strong> 3 Đ. Cầu Giấy,
+                                    Láng Thượng, Đống Đa, Hà Nội, Việt Nam.
+                                </li>
+                                <li class="email-contact">
+                                    <strong>Email:</strong> Dienthoai@gmail.com
+                                </li>
+                                <li class="fax">
+                                    <strong>Fax:</strong> (+100) 123 456 7890 -
+                                    (+100) 123 456 789
+                                </li>
+                                <li class="phone-contact">
+                                    <strong>Số điện thoại:</strong> (+84) 123
+                                    456 7890
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content-right col-8">
+                        <h3>Gửi cho chúng tôi một tin nhắn</h3>
+                        <hr />
+                        <form action="" class="mt-4">
+                            <div class="field name-email row">
+                                <div class="name col-6 mb-3">
+                                    <label for="" class="mb-3"
+                                        >Họ và tên <span>*</span></label
+                                    >
+                                    <div class="control">
+                                        <input
+                                            type="text"
+                                            name="fullName"
+                                            id="fullName"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="email-user col-6 mb-3">
+                                    <label for="" class="mb-3"
+                                        >Email <span>*</span></label
+                                    >
+                                    <div class="control">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field phone-user mb-3">
+                                <label for="" class="mb-3"
+                                    >Số điện thoại <span>*</span></label
+                                >
+                                <div class="control">
+                                    <input
+                                        type="tel"
+                                        name="phoneNumber"
+                                        id="phoneNumber"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="field comment mb-3">
+                                <label for="" class="mb-3"
+                                    >Bạn đang nghĩ gì? <span>*</span></label
+                                >
+                                <div class="control">
+                                    <textarea
+                                        name="comment"
+                                        id="comment"
+                                        cols="30"
+                                        rows="10"
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <input
+                                type="submit"
+                                class="btn btn-warning button mb-2"
+                                value="Gửi tin nhắn"
+                                required
+                            />
+                            <div
+                                id="error"
+                                class="control"
+                                style="color: red"
+                            ></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <style>
+    .contacts iframe {
+            width: 100%;
+        }
+
+        .contacts .fas {
+            font-size: 60px;
+        }
+
+        .contacts .hotline i {
+            color: #ff9300;
+        }
+
+        .contacts .hotline div {
+            padding-left: 15px;
+        }
+
+        .contacts .hotline p {
+            margin-bottom: 5px;
+        }
+
+        .contacts .hotline p:first-child {
+            font-weight: 500;
+            color: #999;
+        }
+
+        .contacts .hotline p:last-child {
+            font-weight: 600;
+            font-size: 20px;
+            color: #ff9300;
+        }
+
+        .contacts label {
+            color: #555;
+        }
+        .contacts label span {
+            color: #ff9300;
+            margin: 0 0 0 5px;
+        }
+
+        .contacts .control input,
+        .contacts .control textarea {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 3px;
+            border: 1px solid #e6e6e6;
+            outline: none;
+        }
+
+        .contacts .button {
+            width: 150px;
+            color: #fff;
+            font-weight: 500;
+        }
+    </style>
+</html>
+
