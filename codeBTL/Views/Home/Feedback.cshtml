@@ -40,6 +40,15 @@
                     reader.readAsDataURL(file);
                 }
             });
+            $('.success').click(function () {
+                alert('Bạn đã phản hồi thành công');
+                $('#feedback').val('');
+                $('#image-preview-container').find('.image-preview').remove();
+            });
+            $('.cancel').click(function () {
+                $('#feedback').val('');
+                $('#image-preview-container').find('.image-preview').remove();
+            });
         });
     </script>
 </head>
@@ -51,7 +60,7 @@
             <div class="form">
                 <div class="product">
                     <a href="#" class="row">
-                        <img src="./assets/images/feedback/a03s.jpg"
+                        <img src="../assets/images/feedback/a03s.jpg"
                              alt="Ảnh sản phẩm"
                              class="img-product col-3" />
                         <p class="name-product col-9">
@@ -111,11 +120,11 @@
                     </div>
                     <div class="button-accept">
                         <input type="button"
-                               class="btn btn-warning"
-                               value="Hủy" />
+                               class="cancel btn btn-warning"
+                               value="Hủy" style="outline:none"/>
                         <input type="button"
-                               class="btn btn-success"
-                               value="Hoàn thành" />
+                               class="success btn btn-success"
+                               value="Hoàn thành" style="outline:none" />
                     </div>
                 </form>
             </div>

@@ -18,7 +18,7 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="./assets/css/contact.css" />
+        <link rel="stylesheet" href="../assets/css/contact.css" />
 
         <link
             rel="stylesheet"
@@ -134,7 +134,7 @@
                         <hr />
                         <form action="" class="mt-4">
                             <div class="field name-email row">
-                                <div class="name col-6 mb-3">
+                                <div class="name col-6 mb-3" style="padding-left:0px !important; padding-right: 0px !important">
                                     <label for="" class="mb-3"
                                         >Họ và tên <span>*</span></label
                                     >
@@ -147,7 +147,7 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="email-user col-6 mb-3">
+                            <div class="email-user col-6 mb-3 style=" padding-left:0px !important; padding-right: 0px !important"">
                                     <label for="" class="mb-3"
                                         >Email <span>*</span></label
                                     >
@@ -189,6 +189,7 @@
                             </div>
                             <input
                                 type="submit"
+                               style="outline:none"
                                 class="btn btn-warning button mb-2"
                                 value="Gửi tin nhắn"
                                 required
@@ -204,60 +205,6 @@
             </div>
         </div>
     </body>
-    <style>
-    .contacts iframe {
-            width: 100%;
-        }
-
-        .contacts .fas {
-            font-size: 60px;
-        }
-
-        .contacts .hotline i {
-            color: #ff9300;
-        }
-
-        .contacts .hotline div {
-            padding-left: 15px;
-        }
-
-        .contacts .hotline p {
-            margin-bottom: 5px;
-        }
-
-        .contacts .hotline p:first-child {
-            font-weight: 500;
-            color: #999;
-        }
-
-        .contacts .hotline p:last-child {
-            font-weight: 600;
-            font-size: 20px;
-            color: #ff9300;
-        }
-
-        .contacts label {
-            color: #555;
-        }
-        .contacts label span {
-            color: #ff9300;
-            margin: 0 0 0 5px;
-        }
-
-        .contacts .control input,
-        .contacts .control textarea {
-            width: 100%;
-            padding: 15px 25px;
-            border-radius: 3px;
-            border: 1px solid #e6e6e6;
-            outline: none;
-        }
-
-        .contacts .button {
-            width: 150px;
-            color: #fff;
-            font-weight: 500;
-        }
-    </style>
+    
 </html>
 

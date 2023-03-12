@@ -96,6 +96,7 @@ textarea {
     position: relative;
     overflow: hidden;
     display: inline-block;
+    margin-top: 20px;
 }
 
 .btn-add-img {
