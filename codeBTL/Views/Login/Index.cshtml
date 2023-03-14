@@ -1,0 +1,98 @@
+﻿
+
+@model Login
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+
+@if (ViewBag.Error != null)
+{
+<p class="text-danger">@ViewBag.Error</p>
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/login.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <title>Đăng nhập - Đăng ký</title>
+</head>
+<body>
+    <h2>Cảm ơn bạn đã ghé thăm chúng tôi!</h2>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Tạo tài khoản</h1>
+                <div class="social-container">
+                    <a href="#" class="social">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+                    <a href="#" class="social">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <span>Bạn có thể đăng ký tài khoản bằng email</span>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button >Đăng ký</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form asp-controller="Login" asp-action="Index" method="post">
+                <h1>Đăng nhập</h1>
+                <div class="social-container">
+                    <a href="#" class="social">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+                    <a href="#" class="social">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <span>hoặc dùng tài khoản của bạn</span>
+                <input type="text" id="username" name="username"  placeholder="Username"/>
+                <input type="password" id="password" name="password"  placeholder="Password" />
+                <a href="forgotPassword.html">Quên mật khẩu?</a>
+                <button type="submit">Đăng nhập</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Chào mừng bạn quay trở lại!</h1>
+                    <p>
+                        Để giữ kết nối với chúng tôi, vui lòng đăng nhập
+                        bằng thông tin cá nhân của bạn!
+                    </p>
+                    <button class="ghost" id="signIn">Đăng nhập</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Xin chào!</h1>
+                    <p>
+                        Nhập thông tin cá nhân của bạn và bắt đầu hành trình
+                        với chúng tôi
+                    </p>
+                    <button class="ghost" id="signUp">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/assets/js/jsItem.js"></script>
+</body>
+</html>
