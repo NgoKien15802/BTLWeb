@@ -1,0 +1,233 @@
+
+
+
+
+
+.main{
+    margin-top: 24px;
+    margin-bottom: 200px;
+}
+
+.product-img {
+}
+.product-img img {
+    max-width: 100%;
+    border: 1px solid rgba(212, 212, 212, 0.8);
+    padding: 4px;
+}
+.product-name {
+    padding: 12px;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+.product-rating {
+    font-weight: lighter;
+    padding: 12px;
+}
+
+.price-box .price {
+    display: block;
+    font-weight: bolder;
+    color: brown;
+    margin-bottom: 8px;
+}
+
+.product-info .in-stock {
+    color: white;
+    background-color: green;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: lighter;
+    
+}
+
+.input-text {
+    height: 40px;
+    text-align: center;
+    width: 60px;
+    vertical-align: top;
+
+    border: 1px solid #a3a3a3;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 3px;
+    
+}
+
+button.items-count {
+    font-size: 12px;
+    line-height: 0px;
+    padding: 13px 12px 9px 12px;
+    height: 40px;
+    width: 40px;
+    border-radius: 3px;
+    background-color: white;
+    border: 1px solid #a3a3a3;
+}
+button.items-count:hover {
+    background-color: #d5d5d5;
+    transition: ease-in-out .3s;
+}
+
+.fa-cart-plus {
+    font-size: 16px;
+}
+
+.add-to-box .btn-cart {
+
+    font-size: 12px;
+    text-shadow: none;
+    padding: 7px 12px;
+    margin-top: 0px;
+    font-weight: bold;
+    margin-left: 12px;
+    border: none;
+    height: 40px;
+    text-transform: uppercase;
+    background-color: green;
+    color: white;
+    border-radius: 3px;
+}
+
+.add-to-box .btn-cart:hover {
+    background-color: rgb(0, 71, 0);
+    transition: ease-in-out .3s;
+}
+
+.product-view .email-friend a:before,
+.product-view .product-shop .add-to-links .link-wishlist:before,
+.product-view .product-shop .add-to-links .link-compare:before {
+    content: "";
+    font-size: 16px;
+}
+
+.slider-items-products .owl-buttons .owl-next a:before {
+    content: "";
+}
+
+.product-details {
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 20px 0;
+}
+
+.box-title {
+    font-weight: bold;
+}
+
+.product-specs{
+    max-width: 700px !important;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #cccccc66;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.specs{
+    display: block;
+    margin: 0 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-specs .box-title{
+    text-align: center;
+}
+
+.spec-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between!important;
+}
+
+.spec-item p {
+    display: block;
+    margin-bottom: 0;
+    width: 40%;
+}
+
+.spec-item div {
+    width: 50%;
+}
+
+.list-group-striped li:nth-of-type(even) {
+    background-color: #f0f0f0;
+  }
+.comment-form {
+    max-width: 700px !important;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #b8b8b866;
+    border-radius: 10px;
+    padding: 16px !important;
+    background-color: #fafafa;
+}
+
+.cmt-box {
+    padding: 8px;
+}
+
+.comment-item {
+    margin-bottom: 20px;
+}
+
+.box-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+}
+
+.box-info .comment-date {
+    display: flex;
+}
+
+.box-info .comment-date i {
+    line-height: 24px;
+    margin-right: 4px;
+}
+
+.box-info .user-avatar {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    background-color: #dedede;
+    margin-right: 6px;
+    border-radius: 5px;
+}
+
+.box-info .user-avatar span {
+    line-height: 24px;
+    font-weight: bold;
+    color: #45768f;
+}
+
+.box-info p {
+    line-height: 24px;
+}
+
+.comment-content {
+    max-width: 90% !important;
+    margin-left: 5%;
+    margin-right: 20px;
+    border: 1px solid #b8b8b866;
+    padding: 8px 8px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.comment-content .reply {
+    display: flex;
+    justify-content: flex-end;
+    color: #0aa2ee;
+}
+
+.comment-content .reply i {
+    margin-right: 4px;
+}
+
+.comment-content .reply a:hover {
+    text-decoration: none;
+}
