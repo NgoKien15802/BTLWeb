@@ -1771,11 +1771,31 @@
     <None Include="wwwroot\assets\js\themejs\so_megamenu.js" />
     <None Include="wwwroot\assets\js\themejs\toppanel.js" />
     <None Include="wwwroot\assets\js\unveil\jquery.unveil.js" />
+    <None Include="wwwroot\assets\tranggioithieu\css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\tranggioithieu\css\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
+    <None Include="wwwroot\assets\tranggioithieu\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\countdown\jquery.countdown.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\datetimepicker\bootstrap-datetimepicker.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\datetimepicker\moment.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\dcjqaccordion\jquery.dcjqaccordion.2.8.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\jquery-2.2.4.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\jquery-ui\jquery-ui.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\lightslider\lightslider.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\minicolors\jquery.miniColors.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\modernizr\modernizr-2.6.2.min.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\owl-carousel\owl.carousel.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\themejs\addtocart.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\themejs\application.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\themejs\homepage.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\themejs\libs.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\themejs\so_megamenu.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\themejs\toppanel.js" />
+    <None Include="wwwroot\assets\tranggioithieu\js\unveil\jquery.unveil.js" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.2.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
   </ItemGroup>
 
   <ItemGroup>
