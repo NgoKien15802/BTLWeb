@@ -13,7 +13,7 @@ namespace codeBTL.Controllers
         [HttpPost]
         public IActionResult Index(Login login)
         {
-            if (login.username == "zxc" && login.password == "123")
+            if (login.username == "123" && login.password == "123")
             {
                 return RedirectToAction("Index", "Home");
             }
