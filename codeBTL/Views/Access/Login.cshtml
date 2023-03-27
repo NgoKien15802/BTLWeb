@@ -1,19 +1,6 @@
-﻿
-
-@model Login
-
-@{
-    ViewData["Title"] = "Login";
+﻿@{
     Layout = null;
 }
-
-
-@if (ViewBag.Error != null)
-{
-<p class="text-danger">@ViewBag.Error</p>
-}
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +34,11 @@
                 <input type="text" placeholder="Name" />
                 <input type="email" placeholder="Email" />
                 <input type="password" placeholder="Password" />
-                <button >Đăng ký</button>
+                <button>Đăng ký</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form asp-controller="Login" asp-action="Index" method="post">
+            <form action="#">
                 <h1>Đăng nhập</h1>
                 <div class="social-container">
                     <a href="#" class="social">
@@ -65,10 +52,10 @@
                     </a>
                 </div>
                 <span>hoặc dùng tài khoản của bạn</span>
-                <input type="text" id="username" name="username"  placeholder="Username"/>
-                <input type="password" id="password" name="password"  placeholder="Password" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
                 <a href="forgotPassword.html">Quên mật khẩu?</a>
-                <button type="submit">Đăng nhập</button>
+                <button>Đăng nhập</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -93,6 +80,6 @@
         </div>
     </div>
 
-    <script src="~/assets/js/jsItem.js"></script>
+    <script src="./assets/js/jsItem.js"></script>
 </body>
 </html>
