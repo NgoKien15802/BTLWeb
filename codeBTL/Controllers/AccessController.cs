@@ -6,7 +6,8 @@ namespace codeBTL.Controllers
     public class AccessController : Controller
     {
         DtddContext db = new DtddContext();
-        // login trước lúc ktra
+
+        [HttpGet]
         public IActionResult Login()
         {
             if (HttpContext.Session.GetString("UserName") == null)
@@ -21,12 +22,12 @@ namespace codeBTL.Controllers
 
         // login vào hệ thống
         [HttpPost]
-        public IActionResult Login(Taikhoan tk)
+        public IActionResult Login(Taikhoan user)
         {
             if (HttpContext.Session.GetString("UserName") == null)
             {
 
-                var obj = db.Taikhoans.Where(x => x.Username == tk.Username && x.Password == tk.Password).FirstOrDefault();
+                var obj = db.Taikhoans.Where(x => x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
                 if (obj != null)
                 {
                     // nếu có tồn tại thì set string cho 1 key = username và value là tên                   
