@@ -17,5 +17,39 @@ namespace codeBTL.Areas.Admin.Controllers
         {
             return View();
         }
+
+
+
+        [Route("GetAllOrders")]
+        public IActionResult GetAllOrders()
+        {
+           
+            return View();
+        }
+
+        [Route("GetAllSmartPhones")]
+        public IActionResult GetAllSmartPhones()
+        {
+            return View();
+        }
+
+
+        [Route("GetAllPhoneAccessories")]
+        public IActionResult GetAllPhoneAccessories()
+        {
+            return View();
+        }
+
+        [Route("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            return View();
+        }
+
+        [Route("SalesReport")]
+        public IActionResult SalesReport()
+        {
+            return View();
+        }
     }
 }

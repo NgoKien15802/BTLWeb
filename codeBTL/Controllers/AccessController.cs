@@ -39,5 +39,13 @@ namespace codeBTL.Controllers
             // nếu ko có tồn tại trong db thì vẫn trang login
             return View();
         }
+
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("Username");
+            return RedirectToAction("Login", "Access");
+        }
     }
 }
