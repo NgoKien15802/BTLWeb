@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace codeBTL.Models;
 
-public partial class Hang
+public partial class Loaisp
 {
-    public string MaHangSx { get; set; } = null!;
+    public string MaLoai { get; set; } = null!;
 
-    public string TenHangSx { get; set; } = null!;
+    public string TenLoai { get; set; } = null!;
 
     public virtual ICollection<Sanpham> Sanphams { get; } = new List<Sanpham>();
 }

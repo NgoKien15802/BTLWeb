@@ -17,5 +17,5 @@ public partial class Hoadonban
 
     public virtual Nhanvien MaNvNavigation { get; set; } = null!;
 
-    public virtual Taikhoan User { get; set; } = null!;
+    public virtual Userinfo User { get; set; } = null!;
 }

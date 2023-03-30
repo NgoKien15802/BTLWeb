@@ -5,7 +5,7 @@ namespace codeBTL.Models;
 
 public partial class Chitietddh
 {
-    public string MaDt { get; set; } = null!;
+    public string MaSp { get; set; } = null!;
 
     public string MaDh { get; set; } = null!;
 
@@ -15,5 +15,5 @@ public partial class Chitietddh
 
     public virtual Dondathang MaDhNavigation { get; set; } = null!;
 
-    public virtual Dienthoai MaDtNavigation { get; set; } = null!;
+    public virtual Sanpham MaSpNavigation { get; set; } = null!;
 }

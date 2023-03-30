@@ -1,10 +1,12 @@
-﻿using codeBTL.Models;
+﻿
+using codeBTL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace codeBTL.Controllers
 {
     public class AccessController : Controller
     {
+       
         DtddContext db = new DtddContext();
 
         [HttpGet]
@@ -22,12 +24,12 @@ namespace codeBTL.Controllers
 
         // login vào hệ thống
         [HttpPost]
-        public IActionResult Login(Taikhoan user)
+        public IActionResult Login(Userinfo user)
         {
             if (HttpContext.Session.GetString("UserName") == null)
             {
 
-                var obj = db.Taikhoans.Where(x => x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
+                var obj = db.Userinfos.Where(x => x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
                 if (obj != null)
                 {
                     // nếu có tồn tại thì set string cho 1 key = username và value là tên                   

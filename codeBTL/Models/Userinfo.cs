@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace codeBTL.Models;
 
-public partial class Taikhoan
+public partial class Userinfo
 {
     public string UserId { get; set; } = null!;
 
@@ -16,6 +16,8 @@ public partial class Taikhoan
     public string DiaChiUser { get; set; } = null!;
 
     public string Email { get; set; } = null!;
+
+    public int Role { get; set; }
 
     public virtual ICollection<Dondathang> Dondathangs { get; } = new List<Dondathang>();
 

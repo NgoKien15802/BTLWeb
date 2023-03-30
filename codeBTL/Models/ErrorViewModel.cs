@@ -1,4 +1,4 @@
-﻿namespace codeBTL.Models
+namespace codeBTL.Models
 {
     public class ErrorViewModel
     {
