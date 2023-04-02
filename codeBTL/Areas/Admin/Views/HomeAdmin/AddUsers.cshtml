@@ -1,0 +1,60 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model codeBTL.Models.Userinfo
+@{
+    ViewData["Title"] = "AddUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Tạo mới khách hàng</h3>
+            <div class="tile-body">
+               
+                <form asp-action="AddUsers" class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="UserId" class="control-label"></label>
+                        <input asp-for="UserId" class="form-control" />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="Sdtuser" class="control-label"></label>
+                        <input asp-for="Sdtuser" class="form-control" />
+                        <span asp-validation-for="Sdtuser" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="DiaChiUser" class="control-label"></label>
+                        <input asp-for="DiaChiUser" class="form-control" />
+                        <span asp-validation-for="DiaChiUser" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-4">
+                        <label asp-for="Role" class="control-label"></label>
+                        <input asp-for="Role" class="form-control" value="0"/>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+                   <div class="form-group col-md-12">
+                        <input type="submit" value="Lưu lại" class="btn btn-save" />
+                        <a class="btn btn-cancel" asp-controller="admin" asp-action="GetAllUsers">Hủy bỏ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

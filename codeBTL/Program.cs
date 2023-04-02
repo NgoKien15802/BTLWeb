@@ -1,8 +1,16 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// tắt chức năng tự trả về lỗi để sử dụng do customize
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    // tắt bỏ 
+    options.SuppressModelStateInvalidFilter = true;
+});
 builder.Services.AddSession();
 var app = builder.Build();
 
@@ -13,6 +21,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

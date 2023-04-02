@@ -1,6 +1,8 @@
 ﻿
 using codeBTL.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace codeBTL.Controllers
@@ -60,5 +62,9 @@ namespace codeBTL.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+     
+       
+
     }
 }

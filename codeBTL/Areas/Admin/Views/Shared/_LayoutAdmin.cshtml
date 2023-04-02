@@ -22,9 +22,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-Ylu/jd6n5U6A4Q4waxYYq3vDlcpCJ8xGyD14+XIVaJ2M83IKW8be5ZgGkZSL42vZbJxWd8lELyapX+LlQJhkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-4/uV+1a6mNa8h2ZlQte9Qqy+6JzPYcJZpjklDpR1mDMMIAdAzdE8tXnJg7OYKJqw97L7bI+BZwTtM+GxOJWV7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-3mXr50REoB94I0cHbPs31CITgRZ5E5/KnU6KLzU6DDYX6Svdr6JLW8x3q6lIXc2FL+iop33XY11e2QbF+M9X1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- CSS của SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.min.css">
+
+    <!-- JavaScript của SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.3/dist/sweetalert2.all.min.js"></script>
 </head>
 
-<body onload="time()" class="app sidebar-mini rtl">
+<body>
     <!-- Navbar-->
     <header class="app-header">
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
@@ -71,7 +79,7 @@
             </li>
             <li>
                 <a class="app-menu__item" asp-controller="admin" asp-action="GetAllPhoneAccessories">
-                    <i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý phụ kiện</span>
+                    <i class='app-menu__icon bx bx-headphone'></i><span class="app-menu__label">Quản lý phụ kiện</span>
                 </a>
             </li>
             <li>
@@ -82,18 +90,18 @@
 
             <li>
                 <a class="app-menu__item" asp-controller="admin" asp-action="SalesReport">
-                    <i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span>
+                    <i class='app-menu__icon bx bxs-report'></i><span class="app-menu__label">Báo cáo doanh thu</span>
                 </a>
             </li>
 
             <li>
                 <a class="app-menu__item" asp-controller="Access" asp-action="Logout">
-                    <i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Đăng xuất</span>
+                    <i class='app-menu__icon bx bx-log-out-circle'></i><span class="app-menu__label">Đăng xuất</span>
                 </a>
             </li>
         </ul>
     </aside>
-    <main class="app-content">
+    <main class="app-content" style="margin-top:60px;">
         @RenderBody()
     </main>
     <script src="~/assets/dashboard/js/jquery-3.2.1.min.js"></script>
@@ -146,6 +154,49 @@
             }
         }
     </script>
+
+    <style>
+        .pagination li {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+
+            .pagination li:hover {
+                background: #7fad39;
+            }
+
+                .pagination li:hover a {
+                    color: #ffffff;
+                }
+
+            .pagination li.active {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                background: #7fad39;
+                border-color: #7fad39;
+                color: #ffffff;
+                font-weight: bold;
+                margin: 0 10px;
+            }
+
+            .d-flex{
+                display:flex;
+              
+               justify-content:center;
+            }
+
+         
+    </style>
 </body>
 
 </html>
