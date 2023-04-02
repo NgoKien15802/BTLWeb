@@ -1,0 +1,273 @@
+﻿
+@{
+    ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/_LayoutQLBDT.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page needs
+    ============================================ -->
+    <title>Thông tin đơn hàng</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Favicon
+    ============================================ -->
+
+    <link rel="shortcut icon" type="image/png" href="ico/" />
+
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet"
+          href="./assets/css/bootstrap/css/bootstrap.min.css" />
+    <link href="./assets/css/font-awesome/css/font-awesome.min.css"
+          rel="stylesheet" />
+    <link href="./assets/js/datetimepicker/bootstrap-datetimepicker.min.css"
+          rel="stylesheet" />
+    <link href="./assets/js/owl-carousel/owl.carousel.css"
+          rel="stylesheet" />
+    <link href="./assets/css/themecss/lib.css" rel="stylesheet" />
+    <link href="./assets/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="./assets/js/minicolors/miniColors.css" rel="stylesheet" />
+
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="./assets/css/themecss/so_searchpro.css" rel="stylesheet" />
+    <link href="./assets/css/themecss/so_megamenu.css" rel="stylesheet" />
+    <link href="./assets/css/themecss/so-categories.css" rel="stylesheet" />
+    <link href="./assets/css/themecss/so-listing-tabs.css"
+          rel="stylesheet" />
+    <link href="./assets/css/themecss/so-newletter-popup.css"
+          rel="stylesheet" />
+
+    <link href="./assets/css/footer/footer1.css" rel="stylesheet" />
+    <link href="./assets/css/header/header1.css" rel="stylesheet" />
+    <link id="color_scheme" href="css/theme.css" rel="stylesheet" />
+    <link href="./assets/css/responsive.css" rel="stylesheet" />
+
+    <!-- Google web fonts
+    ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700"
+          rel="stylesheet"
+          type="text/css" />
+    <style type="text/css">
+        body {
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="res layout-1 layout-subpage">
+    <div id="wrapper" class="wrapper-fluid banners-effect-5">
+        <!-- Main Container  -->
+        <div class="main-container container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#"><i class="fa fa-home"></i></a>
+                </li>
+                <li><a href="#">Thông tin đơn hàng</a></li>
+            </ul>
+
+            <div class="row">
+                <!--Middle Part Start-->
+                <div id="content" class="col-sm-9">
+                    <h2 class="title">Thông tin đơn hàng</h2>
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td colspan="2" class="text-left">
+                                    Chi tiết đơn hàng
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    <b>Mã đơn hàng:</b> #1
+                                    <br />
+                                    <b>Ngày đặt:</b> 20/06/2022
+                                </td>
+                                <td style="width: 50%" class="text-left">
+                                    <b>Phương thức thanh toán:</b> Thanh
+                                    toán khi nhận hàng
+                                    <br />
+                                    <b>Phương thức giao hàng:</b> Giao hàng
+                                    nhanh
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td style="width: 50%; vertical-align: top"
+                                    class="text-left">
+                                    Địa chỉ thanh toán
+                                </td>
+                                <td style="width: 50%; vertical-align: top"
+                                    class="text-left">
+                                    Địa chỉ giao hàng
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">
+                                    Nguyễn Văn A <br />Cầu Giấy <br />Hà Nội
+                                </td>
+                                <td class="text-left">
+                                    Nguyễn Văn A <br />Cầu Giấy <br />Hà Nội
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td class="text-left">Tên sản phẩm</td>
+                                    <td class="text-left">Model</td>
+                                    <td class="text-right">Số lượng</td>
+                                    <td class="text-right">Giá</td>
+                                    <td class="text-right">Tổng tiền</td>
+                                    <td style="width: 20px"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">
+                                        iPhone 13 Pro Max - 128GB
+                                    </td>
+                                    <td class="text-left">Xanh - 128GB</td>
+                                    <td class="text-right">1</td>
+                                    <td class="text-right">21.890.000₫</td>
+                                    <td class="text-right">21.890.000₫</td>
+                                    <td style="white-space: nowrap"
+                                        class="text-right">
+                                        <a class="btn btn-primary"
+                                           title=""
+                                           data-toggle="tooltip"
+                                           href="#"
+                                           data-original-title="Đặt lại">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                        <a class="btn btn-danger"
+                                           title=""
+                                           data-toggle="tooltip"
+                                           href="return.html"
+                                           data-original-title="Trở về">
+                                            <i class="fa fa-reply"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="text-right">
+                                        <b>Tổng tiền hàng</b>
+                                    </td>
+                                    <td class="text-right">21.890.000₫</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="text-right">
+                                        <b>Phí giao hàng</b>
+                                    </td>
+                                    <td class="text-right">0₫</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="text-right">
+                                        <b>Thành tiền</b>
+                                    </td>
+                                    <td class="text-right">21.890.000₫</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <h3>Order History</h3>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td class="text-left">Ngày đặt</td>
+                                <td class="text-left">Tình trạng</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">20/06/2022</td>
+                                <td class="text-left">Đang xử lí</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">21/06/2022</td>
+                                <td class="text-left">Đang giao hàng</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">24/06/2022</td>
+                                <td class="text-left">Đã giao</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="buttons clearfix">
+                        <div class="pull-right">
+                            <a class="btn btn-primary" href="#">Tiếp tục</a>
+                        </div>
+                    </div>
+                </div>
+                <!--Middle Part End-->
+            </div>
+        </div>
+        <!-- //Main Container -->
+    </div>
+
+    <!-- Include Libs & Plugins
+    ============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="./assets/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/themejs/libs.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/unveil/jquery.unveil.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/datetimepicker/moment.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Theme files
+    ============================================ -->
+
+    <script type="text/javascript"
+            src="./assets/js/themejs/so_megamenu.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/themejs/addtocart.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/themejs/application.js"></script>
+</body>
+</html>
+
+
