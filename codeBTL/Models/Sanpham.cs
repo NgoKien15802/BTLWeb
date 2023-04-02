@@ -30,4 +30,5 @@ public partial class Sanpham
     public virtual Hang MaHangSxNavigation { get; set; } = null!;
 
     public virtual Loaisp MaLoaiNavigation { get; set; } = null!;
+
 }
