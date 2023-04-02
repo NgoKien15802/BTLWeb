@@ -1,17 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-    Layout = "_LayoutQLBDT";
-}
-
-@using X.PagedList.Mvc.Core
+﻿@using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc
 @model X.PagedList.IPagedList<codeBTL.ViewModels.SanPhamViewModel>
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
-
 <style>
     .item-img-info {
-        width: 270px;
-        height: 290px;
+        width: 270px !important;
+        height: 290px !important;
     }
 
     #product-collection-image-446 {
@@ -22,91 +16,16 @@
     .home-block-inner {
         margin-bottom: 40px;
     }
-
-    form {
-        display: flex;
-        justify-content: space-around;
-    }
-
-        form input {
-            margin-right: 30px;
-        }
 </style>
+@if (Model.Count() == 0)
+{
+    <p>Không tìm thấy sản phẩm nào</p>
+}
+else
+{
+    <div class="row">
 
-<!-- content ở đây -->
-<!-- begin banner -->
-@await Html.PartialAsync("_PartialBanner")
-<!-- end banner -->
-<!-- danh sách điện thoại -->
-
-<div class="row mt-4">
-    <div class="col-md-3 mt-5">
-        <div class="home-block-inner">
-            <div class="block-title">
-                <h2>Bán chạy nhất</h2>
-            </div>
-            <!--block-title-->
-            <div class="pretext">
-                Lorem Ipsum is simply dummy text of the printing
-                and typesetting industry. Curabitur eu odio non
-                justo euismod congue ut nec orci.
-            </div>
-            <a class="view_more_bnt"
-               href="http://mas1.magikthemes.com/index.php/bolt/bolt_bestseller_product_list">hiện tất cả</a>
-        </div>
-        <div class="home-block-inner">
-            <div class="block-title">
-                <h2>Bán chạy nhất</h2>
-            </div>
-            <!--block-title-->
-            <div class="pretext">
-                Lorem Ipsum is simply dummy text of the printing
-                and typesetting industry. Curabitur eu odio non
-                justo euismod congue ut nec orci.
-            </div>
-            <a class="view_more_bnt"
-               href="http://mas1.magikthemes.com/index.php/bolt/bolt_bestseller_product_list">hiện tất cả</a>
-        </div>
-    </div>
-    <div class="col-md-9">
-        <div class="bottom_header-left">
-
-            @* <input type="text" class="form-control" style="height: 100%" placeholder="Search..." fdprocessedid="c8ff7m">
-            <div class="input-group-append">
-            <button class="btn btn-primary" type="submit" fdprocessedid="nzvmk">
-            Search
-            </button>
-            </div>*@
-            <form id="search-form">
-                <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm..." id="s">
-                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-            </form>
-            <div id="search-results">
-                <!-- Kết quả tìm kiếm sẽ được cập nhật ở đây -->
-            </div>
-            <script>
-                $(function () {
-                    $('#search-form').submit(function (e) {
-                        e.preventDefault(); // Ngăn chặn submit form
-                        var formData = $(this).serialize(); // Lấy dữ liệu form
-                        $.ajax({
-                            url: $(this).attr('action'),
-                            type: $(this).attr('method'),
-                            data: formData,
-                            success: function (response) {
-                                $('#search-results').html(response); // Cập nhật kết quả tìm kiếm trên trang
-                                $("#defaultPagination").hide();
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    });
-                });
-
-            </script>
-        </div>
-        <ul class="products-grid first last odd col-12" id="defaultPagination">
+        <ul class="products-grid first last odd">
             @foreach (var item in Model)
             {
                 <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
@@ -184,11 +103,9 @@
                     <!--item-inner-->
                 </li>
             }
-            <div class="product__pagination col-12">
-                @Html.PagedListPager(Model,page => Url.Action("Index","Home", new {page=page }))
-            </div>
         </ul>
+        <div class="product__pagination col-12">
+            @Html.PagedListPager(Model,page => Url.Action("Index","Home", new {page=page,searchString = ViewBag.CurrentFilter }))
+        </div>
     </div>
-</div>
-
-
+}
