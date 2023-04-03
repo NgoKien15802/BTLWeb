@@ -68,12 +68,12 @@
                                     </label>
                                 </div>
                             </div>
-                        </div><div class="row">
+                        </div>
+                        <div class="row" id="table__partial">
                             <div class="col-sm-12">
                                 @Html.Partial("GetAllUsersTable")
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
             type: 'GET', // Phương thức HTTP để lấy dữ liệu
             data: { pageSize: pageSize, filter: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
             success: function (result) {
-                console.log(result);
+                document.querySelector('#table__partial div > .row').style.display = 'none'
                 $('#sampleTable').html(result); // Cập nhật nội dung của bảng dữ liệu trong trang web
             }
         });
