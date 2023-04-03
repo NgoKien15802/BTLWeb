@@ -17,6 +17,7 @@
         margin-bottom: 40px;
     }
 </style>
+
 @if (Model.Count() == 0)
 {
     <p>Không tìm thấy sản phẩm nào</p>
@@ -24,7 +25,6 @@
 else
 {
     <div class="row">
-
         <ul class="products-grid first last odd">
             @foreach (var item in Model)
             {
@@ -105,7 +105,26 @@ else
             }
         </ul>
         <div class="product__pagination col-12">
-            @Html.PagedListPager(Model,page => Url.Action("Index","Home", new {page=page,searchString = ViewBag.CurrentFilter }))
+            @Html.PagedListPager(Model,page => Url.Action("SearchProducts","Home", new {page=page}))
         </div>
     </div>
+    <script>
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault(); // ngăn chặn trình duyệt chuyển hướng đến đường dẫn trong href
+            // Lấy đường dẫn từ href của link phân trang và thêm tham số tìm kiếm vào
+            var url = $(this).attr('href') + '&searchText=' + $('#searchProducts').val();
+
+            // Gửi request AJAX để lấy kết quả trang 2
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (result) {
+                    // Thay đổi nội dung của phần hiển thị kết quả tìm kiếm
+                    $('#products-filter').html(result);
+                    $('#default-products').hide();
+                    $("#top-products").hide();
+                }
+            });
+        });
+    </script>
 }

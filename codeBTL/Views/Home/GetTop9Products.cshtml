@@ -1,0 +1,99 @@
+﻿@model List<codeBTL.ViewModels.SanPhamViewModel>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<style>
+    .item-img-info {
+        width: 270px !important;
+        height: 290px !important;
+    }
+
+    #product-collection-image-446 {
+        width: 270px;
+        height: 290px;
+    }
+
+    .home-block-inner {
+        margin-bottom: 40px;
+    }
+</style>
+<div class="row">
+    <ul class="products-grid first last odd">
+        @foreach (var item in Model)
+        {
+            <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                <div class="item-inner">
+                    <div class="item-img">
+                        <div class="item-img-info">
+                            <a asp-controller="Home" asp-action="SmartphoneDetails"
+                               class="product-image">
+                                <img id="product-collection-image-446"
+                                     class="img-responsive"
+                                     src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
+                            </a>
+                            <div class="box-hover">
+                                <ul class="add-to-links">
+                                    <li>
+                                        <a rel="nofollow"
+                                           href="#"
+                                           data-fancybox-type="iframe"
+                                           class="magik-btn-quickview link-quickview">Quick View</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="link-wishlist"
+                                           title="Add to Wishlist">Wishlist</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="link-compare"
+                                           title="Add to Compare">Compare</a>
+                                    </li>
+                                </ul>
+                                <!--add-to-links-->
+                            </div>
+                            <!--box-hover-->
+                        </div>
+                        <!--item-img-info-->
+                    </div>
+                    <!--item-img-->
+                    <div class="item-info">
+                        <div class="info-inner">
+                            <div class="item-title">
+                                <a href="#">@item.TenSp</a>
+                            </div>
+                            <!--item-title-->
+                            <div class="item-content">
+                                <div class="ratings">
+                                    <div class="rating-box">
+                                        <div style="width: 0%"
+                                             class="rating"></div>
+                                    </div>
+                                </div>
+                                <div class="item-Giá">
+                                    <div class="Giá-box">
+                                        <span class="regular-Giá">
+                                            <span class="Giá">@item.DonGiaBan</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!--item-Giá-->
+                                <div class="action">
+                                    <button type="button"
+                                            title="Thêm giỏ hàng"
+                                            class="button btn-cart">
+                                        <span>Thêm giỏ hàng</span>
+                                    </button>
+                                </div>
+                                <!--action-->
+                            </div>
+                            <!--item-content-->
+                        </div>
+                        <!--info-inner-->
+                    </div>
+                    <!--item-info-->
+                </div>
+                <!--item-inner-->
+            </li>
+        }
+    </ul>
+</div>
+
