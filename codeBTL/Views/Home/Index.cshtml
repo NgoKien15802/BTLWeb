@@ -46,148 +46,164 @@
                 <h2>Bán chạy nhất</h2>
             </div>
             <!--block-title-->
-            <div class="pretext">
-                Lorem Ipsum is simply dummy text of the printing
-                and typesetting industry. Curabitur eu odio non
-                justo euismod congue ut nec orci.
+            <img src="~/assets/images/products/hot-trends-banner.jpg" alt="banner">
+            <div style="text-align:center">
+                <button class="btn-top-products">hiện tất cả</button>
             </div>
-            <a class="view_more_bnt"
-               href="http://mas1.magikthemes.com/index.php/bolt/bolt_bestseller_product_list">hiện tất cả</a>
-        </div>
-        <div class="home-block-inner">
-            <div class="block-title">
-                <h2>Bán chạy nhất</h2>
-            </div>
-            <!--block-title-->
-            <div class="pretext">
-                Lorem Ipsum is simply dummy text of the printing
-                and typesetting industry. Curabitur eu odio non
-                justo euismod congue ut nec orci.
-            </div>
-            <a class="view_more_bnt"
-               href="http://mas1.magikthemes.com/index.php/bolt/bolt_bestseller_product_list">hiện tất cả</a>
         </div>
     </div>
     <div class="col-md-9">
         <div class="bottom_header-left">
-
-            @* <input type="text" class="form-control" style="height: 100%" placeholder="Search..." fdprocessedid="c8ff7m">
-            <div class="input-group-append">
-            <button class="btn btn-primary" type="submit" fdprocessedid="nzvmk">
-            Search
-            </button>
-            </div>*@
             <form id="search-form">
-                <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm..." id="s">
-                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                <input type="search" class="form-control" placeholder="Tìm kiếm..." id="searchProducts">
+                <button type="button" class="btn btn-primary btn-filter-products">Tìm kiếm</button>
             </form>
-            <div id="search-results">
-                <!-- Kết quả tìm kiếm sẽ được cập nhật ở đây -->
-            </div>
             <script>
-                $(function () {
-                    $('#search-form').submit(function (e) {
-                        e.preventDefault(); // Ngăn chặn submit form
-                        var formData = $(this).serialize(); // Lấy dữ liệu form
+                @*
+                    function getProductsFilter(event) {
+                    var searchText = $("#searchProducts").val(); // Lấy giá trị của input tìm kiếm
+                    loadData(searchText); // Thực hiện yêu cầu Ajax để tải lại bảng dữ liệu
+                    }
+                    function loadData(searchText) {
+                    $.ajax({
+                    url: "@Url.Action("SearchProducts", "Home")", // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
+                    type: 'GET', // Phương thức HTTP để lấy dữ liệu
+                    data: { searchString: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
+                    success: function (result) {
+                    $('#products-filter').html(result); // Cập nhật nội dung của bảng dữ liệu trong trang web
+                    $('#default-products').hide();
+                    $("#top-products").hide();
+                    }
+                    });
+                    }
+
+                    *@
+                    $(".btn-filter-products").on("click", function (event) {
+                        var searchText = $("#searchProducts").val();
+                        event.preventDefault(); // ngăn chặn trang bị load lại
                         $.ajax({
-                            url: $(this).attr('action'),
-                            type: $(this).attr('method'),
-                            data: formData,
-                            success: function (response) {
-                                $('#search-results').html(response); // Cập nhật kết quả tìm kiếm trên trang
-                                $("#defaultPagination").hide();
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(error);
+                            url: "@Url.Action("SearchProducts", "Home")", // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
+                            type: 'GET', // Phương thức HTTP để lấy dữ liệu
+                            data: { searchString: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
+                            success: function (result) {
+                                console.log(result);
+                                $('#products-filter').html(result); // Cập nhật nội dung của bảng dữ liệu trong trang web
+                                $('#default-products').hide();
+                                $("#top-products").hide();
+                                if ($('#products-filter').is(":hidden")) {
+                                    $('#products-filter').show();
+                                }
                             }
                         });
-                    });
-                });
+                    })
 
+                $(".btn-top-products").on("click", function (event) {
+                    event.preventDefault(); // ngăn chặn trang bị load lại
+                    $.ajax({
+                        url: "@Url.Action("GetTop9Products", "Home")",
+                        type: "GET",
+                        success: function (result) {
+                            $("#top-products").html(result);
+                            $('#products-filter').hide();
+                            $('#default-products').hide();
+                            if ($('#top-products').is(":hidden")) {
+                                $('#top-products').show();
+                            }
+                        }
+                    });
+                })
             </script>
         </div>
-        <ul class="products-grid first last odd col-12" id="defaultPagination">
-            @foreach (var item in Model)
-            {
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <div class="item-inner">
-                        <div class="item-img">
-                            <div class="item-img-info">
-                                <a asp-controller="Home" asp-action="SmartphoneDetails"
-                                   class="product-image">
-                                    <img id="product-collection-image-446"
-                                         class="img-responsive"
-                                         src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
-                                </a>
-                                <div class="box-hover">
-                                    <ul class="add-to-links">
-                                        <li>
-                                            <a rel="nofollow"
-                                               href="#"
-                                               data-fancybox-type="iframe"
-                                               class="magik-btn-quickview link-quickview">Quick View</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                               class="link-wishlist"
-                                               title="Add to Wishlist">Wishlist</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                               class="link-compare"
-                                               title="Add to Compare">Compare</a>
-                                        </li>
-                                    </ul>
-                                    <!--add-to-links-->
+        <div class="row">
+            <ul class="products-grid first last odd col-12" id="default-products">
+                @foreach (var item in Model)
+                {
+                    <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <div class="item-inner">
+                            <div class="item-img">
+                                <div class="item-img-info">
+                                    <a asp-controller="Home" asp-action="SmartphoneDetails"
+                                       class="product-image">
+                                        <img id="product-collection-image-446"
+                                             class="img-responsive"
+                                             src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
+                                    </a>
+                                    <div class="box-hover">
+                                        <ul class="add-to-links">
+                                            <li>
+                                                <a rel="nofollow"
+                                                   href="#"
+                                                   data-fancybox-type="iframe"
+                                                   class="magik-btn-quickview link-quickview">Quick View</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                   class="link-wishlist"
+                                                   title="Add to Wishlist">Wishlist</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                   class="link-compare"
+                                                   title="Add to Compare">Compare</a>
+                                            </li>
+                                        </ul>
+                                        <!--add-to-links-->
+                                    </div>
+                                    <!--box-hover-->
                                 </div>
-                                <!--box-hover-->
+                                <!--item-img-info-->
                             </div>
-                            <!--item-img-info-->
-                        </div>
-                        <!--item-img-->
-                        <div class="item-info">
-                            <div class="info-inner">
-                                <div class="item-title">
-                                    <a href="#">@item.TenSp</a>
-                                </div>
-                                <!--item-title-->
-                                <div class="item-content">
-                                    <div class="ratings">
-                                        <div class="rating-box">
-                                            <div style="width: 0%"
-                                                 class="rating"></div>
+                            <!--item-img-->
+                            <div class="item-info">
+                                <div class="info-inner">
+                                    <div class="item-title">
+                                        <a href="#">@item.TenSp</a>
+                                    </div>
+                                    <!--item-title-->
+                                    <div class="item-content">
+                                        <div class="ratings">
+                                            <div class="rating-box">
+                                                <div style="width: 0%"
+                                                     class="rating"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="item-Giá">
-                                        <div class="Giá-box">
-                                            <span class="regular-Giá">
-                                                <span class="Giá">@item.DonGiaBan</span>
-                                            </span>
+                                        <div class="item-Giá">
+                                            <div class="Giá-box">
+                                                <span class="regular-Giá">
+                                                    <span class="Giá">@item.DonGiaBan</span>
+                                                </span>
+                                            </div>
                                         </div>
+                                        <!--item-Giá-->
+                                        <div class="action">
+                                            <button type="button"
+                                                    title="Thêm giỏ hàng"
+                                                    class="button btn-cart">
+                                                <span>Thêm giỏ hàng</span>
+                                            </button>
+                                        </div>
+                                        <!--action-->
                                     </div>
-                                    <!--item-Giá-->
-                                    <div class="action">
-                                        <button type="button"
-                                                title="Thêm giỏ hàng"
-                                                class="button btn-cart">
-                                            <span>Thêm giỏ hàng</span>
-                                        </button>
-                                    </div>
-                                    <!--action-->
+                                    <!--item-content-->
                                 </div>
-                                <!--item-content-->
+                                <!--info-inner-->
                             </div>
-                            <!--info-inner-->
+                            <!--item-info-->
                         </div>
-                        <!--item-info-->
-                    </div>
-                    <!--item-inner-->
-                </li>
-            }
-            <div class="product__pagination col-12">
-                @Html.PagedListPager(Model,page => Url.Action("Index","Home", new {page=page }))
-            </div>
-        </ul>
+                        <!--item-inner-->
+                    </li>
+                }
+                <div class="product__pagination col-12">
+                    @Html.PagedListPager(Model,page => Url.Action("Index","Home", new {page=page}))
+                </div>
+            </ul>
+        </div>
+        <div id="top-products">
+            <!-- Đây là nơi để hiển thị danh sách sản phẩm -->
+        </div>
+        <div id="products-filter">
+            <!-- Đây là nơi để hiển thị danh sách sản phẩm -->
+        </div>
     </div>
 </div>
 
