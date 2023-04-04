@@ -6,6 +6,7 @@ using System.Diagnostics;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
 using codeBTL.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace codeBTL.Controllers
 {
