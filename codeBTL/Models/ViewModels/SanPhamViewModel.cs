@@ -1,5 +1,6 @@
 ﻿using codeBTL.Models;
-namespace codeBTL.ViewModels
+
+namespace codeBTL.Models.ViewModels
 {
 
     public class SanPhamViewModel : Sanpham

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+using codeBTL.Models.ViewModels;
 
 namespace codeBTL.Controllers
 {
@@ -24,14 +25,14 @@ namespace codeBTL.Controllers
             var products = (from sp in db.Sanphams
                             join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                             orderby sp.TenSp
-                            select new ViewModels.SanPhamViewModel
+                            select new Models.ViewModels.SanPhamViewModel
                             {
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
 
-            PagedList<ViewModels.SanPhamViewModel> pagedList = new PagedList<ViewModels.SanPhamViewModel>(products, pageNumber, pageSize);
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
             return View(pagedList);
         }
 
@@ -45,27 +46,27 @@ namespace codeBTL.Controllers
                                       join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                                       where sp.TenSp.Contains(searchString) // Lọc sản phẩm theo tên
                                       orderby sp.TenSp
-                                      select new ViewModels.SanPhamViewModel
+                                      select new Models.ViewModels.SanPhamViewModel
                                       {
                                           TenSp = sp.TenSp,
                                           AnhDaiDien = sp.AnhDaiDien,
                                           DonGiaBan = cts.DonGiaBan
                                       }).OrderBy(x => x.TenSp);
 
-                PagedList<ViewModels.SanPhamViewModel> pagedListFilter = new PagedList<ViewModels.SanPhamViewModel>(productsFilter, pageNumber, pageSize);
+                PagedList<SanPhamViewModel> pagedListFilter = new PagedList<SanPhamViewModel>(productsFilter, pageNumber, pageSize);
                 return PartialView("SearchProducts", pagedListFilter);
             }
             var products = (from sp in db.Sanphams
                             join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                             orderby sp.TenSp
-                            select new ViewModels.SanPhamViewModel
+                            select new Models.ViewModels.SanPhamViewModel
                             {
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
 
-            PagedList<ViewModels.SanPhamViewModel> pagedList = new PagedList<ViewModels.SanPhamViewModel>(products, pageNumber, pageSize);
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
             return PartialView("SearchProducts", pagedList);
         }
 
@@ -75,7 +76,7 @@ namespace codeBTL.Controllers
                                join sp in db.Sanphams on ctdh.MaSp equals sp.MaSp
                                join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                                orderby ctdh.Sldat descending
-                               select new ViewModels.SanPhamViewModel
+                               select new Models.ViewModels.SanPhamViewModel
                                {
                                    TenSp = sp.TenSp,
                                    AnhDaiDien = sp.AnhDaiDien,

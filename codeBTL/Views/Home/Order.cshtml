@@ -3,6 +3,7 @@
     ViewData["Title"] = "Order";
     Layout = "~/Views/Shared/_LayoutQLBDT.cshtml";
 }
+@model codeBTL.Models.ViewModels.OrderDetailsViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,9 +94,9 @@
                         <tbody>
                             <tr>
                                 <td style="width: 50%" class="text-left">
-                                    <b>Mã đơn hàng:</b> #1
+                                    <b>Mã đơn hàng:</b> @Model.MaDh
                                     <br />
-                                    <b>Ngày đặt:</b> 20/06/2022
+                                    <b>Ngày đặt:</b> @Model.NgayDat
                                 </td>
                                 <td style="width: 50%" class="text-left">
                                     <b>Phương thức thanh toán:</b> Thanh
@@ -110,11 +111,8 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <td style="width: 50%; vertical-align: top"
-                                    class="text-left">
-                                    Địa chỉ thanh toán
-                                </td>
-                                <td style="width: 50%; vertical-align: top"
+                                
+                                <td style=" vertical-align: top"
                                     class="text-left">
                                     Địa chỉ giao hàng
                                 </td>
@@ -123,10 +121,7 @@
                         <tbody>
                             <tr>
                                 <td class="text-left">
-                                    Nguyễn Văn A <br />Cầu Giấy <br />Hà Nội
-                                </td>
-                                <td class="text-left">
-                                    Nguyễn Văn A <br />Cầu Giấy <br />Hà Nội
+                                    @Model.Username <br />@Model.Address
                                 </td>
                             </tr>
                         </tbody>
@@ -146,12 +141,24 @@
                             <tbody>
                                 <tr>
                                     <td class="text-left">
-                                        iPhone 13 Pro Max - 128GB
+                                        @Model.TenSp
                                     </td>
-                                    <td class="text-left">Xanh - 128GB</td>
-                                    <td class="text-right">1</td>
-                                    <td class="text-right">21.890.000₫</td>
-                                    <td class="text-right">21.890.000₫</td>
+                                    <td class="text-right option-sldat">
+                                        <select>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-right">@Model.DonGiaBan</td>
+                                    <td class="text-right">@Model.TongTien</td>
                                     <td style="white-space: nowrap"
                                         class="text-right">
                                         <a class="btn btn-primary"
@@ -161,42 +168,18 @@
                                            data-original-title="Đặt lại">
                                             <i class="fa fa-shopping-cart"></i>
                                         </a>
+                                        @*
                                         <a class="btn btn-danger"
                                            title=""
                                            data-toggle="tooltip"
-                                           href="return.html"
+                                           href="#"
                                            data-original-title="Trở về">
                                             <i class="fa fa-reply"></i>
                                         </a>
+                                        *@
                                     </td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td class="text-right">
-                                        <b>Tổng tiền hàng</b>
-                                    </td>
-                                    <td class="text-right">21.890.000₫</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td class="text-right">
-                                        <b>Phí giao hàng</b>
-                                    </td>
-                                    <td class="text-right">0₫</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td class="text-right">
-                                        <b>Thành tiền</b>
-                                    </td>
-                                    <td class="text-right">21.890.000₫</td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                     <h3>Order History</h3>
