@@ -1,0 +1,43 @@
+﻿@model codeBTL.Models.Chitietddh
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "EditOrderDetails";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Sửa chi tiết đơn đặt hàng</h3>
+            <div class="tile-body">
+                <form asp-action="EditOrderDetails" class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MaSp" class="control-label"></label>
+                        <select asp-for="MaSp" class="form-control" asp-items="ViewBag.MaSp"></select>
+                        <span asp-validation-for="MaSp" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="MaDh" />
+                    <div class="form-group col-md-4">
+                        <label asp-for="KhuyenMai" class="control-label"></label>
+                        <input asp-for="KhuyenMai" class="form-control" />
+                        <span asp-validation-for="KhuyenMai" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Sldat" class="control-label"></label>
+                        <input asp-for="Sldat" class="form-control" />
+                        <span asp-validation-for="Sldat" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

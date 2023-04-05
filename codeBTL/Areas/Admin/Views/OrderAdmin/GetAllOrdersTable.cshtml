@@ -41,9 +41,7 @@
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
                         <a asp-action="EditOrders" asp-route-maDH="@item.IdOrder"> <i class="fas fa-edit btn-primary"></i></a>
                     </button>
-                    <button class="btn btn-primary btn-sm trash" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
-                        <a asp-action="Delete" asp-route-id="@item.IdOrder"><i class="fas fa-trash-alt btn-cart"></i></a>
-                    </button>
+                    <a type="button" class="btn btn-primary delete-btn" data-toggle="modal" data-target="#deleteDialog" onclick="openDeleteDialog('@item.IdOrder')"><i class="fas fa-trash-alt btn-cart"></i></a>
                 </td>
             </tr>
         }
@@ -86,12 +84,12 @@
 }
 
 <script>
-    function openDeleteDialog(userId) {
+    function openDeleteDialog(maDH) {
         $("#deleteDialog").modal("show"); // hiển thị modal
-        $("#deleteUserId").text(userId); // hiển thị userId trong modal body
+        $("#deleteUserId").text(maDH); // hiển thị userId trong modal body
         $("#confirmDeleteBtn").on("click", function () { // xóa khi nhấn vào nút Xóa trong modal footer
             $("#deleteDialog").modal("hide"); // ẩn modal
-            $("#deleteLink").attr("href", "DeleteUsers?maKH=" + userId);
+            $("#deleteLink").attr("href", "DeleteOrders?maDH=" + maDH);
         });
     }
 </script>

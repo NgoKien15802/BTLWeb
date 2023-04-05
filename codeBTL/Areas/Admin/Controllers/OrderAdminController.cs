@@ -219,7 +219,7 @@ namespace codeBTL.Areas.Admin.Controllers
         }
 
         /// <summary>
-        ///     Sửa điện thoại
+        ///     Sửa đơn hàng
         /// </summary>
         [Route("EditOrders")]
         [HttpGet]
@@ -233,7 +233,7 @@ namespace codeBTL.Areas.Admin.Controllers
 
 
         /// <summary>
-        ///     Sửa hóa đơn
+        ///     Sửa chi tiết hóa đơn
         /// </summary>
         /// <param name="userinfo"></param>
         /// <returns></returns>
@@ -246,10 +246,89 @@ namespace codeBTL.Areas.Admin.Controllers
             {
                 db.Entry(dondathang).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("GetAllOrders");
+                RouteValueDictionary rv = new RouteValueDictionary();
+                rv.Add("MaDH", dondathang.MaDh);
+                return RedirectToAction("EditOrderDetails", rv);
             }
             return View(dondathang);
         }
 
+        /// <summary>
+        ///     Sửa đơn hàng
+        /// </summary>
+        [Route("EditOrderDetails")]
+        [HttpGet]
+        public IActionResult EditOrderDetails(string maDH)
+        {
+            ViewBag.MaSp = new SelectList(db.Sanphams.ToList(), "MaSp", "TenSp");
+            var dh = db.Chitietddhs.Find(maDH);
+            return View(dh);
+        }
+
+
+        /// <summary>
+        ///     Sửa chi tiết hóa đơn
+        /// </summary>
+        /// <param name="userinfo"></param>
+        /// <returns></returns>
+        [Route("EditOrderDetails")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditOrderDetails(Chitietddh chitietddh)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {// Select the record that you want to update
+                    var originalChitietddh = db.Chitietddhs.Find(chitietddh.MaDh);
+
+                    // Modify the selected record
+                    originalChitietddh.MaSp = chitietddh.MaSp;
+                    originalChitietddh.KhuyenMai = chitietddh.KhuyenMai;
+                    originalChitietddh.Sldat = chitietddh.Sldat;
+
+                    // Save the changes back to the database
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception
+                    return View("Error", ex);
+                }
+
+                return RedirectToAction("GetAllOrders");
+            }
+
+            return View(chitietddh);
+
+        }
+
+        /// <summary>
+        ///     Xóa 1 hóa đơn
+        /// </summary>
+        /// <param name="maKH"></param>
+        /// <returns></returns>
+        [Route("DeleteOrders")]
+        [HttpGet]
+        public IActionResult DeleteOrders(string maDH)
+        {
+           
+            try
+            {
+                var ctHD = db.Chitietddhs.Where(x => x.MaDh == maDH).ToList();
+                if (ctHD.Any()) db.RemoveRange(ctHD);
+                db.Remove(db.Dondathangs.Find(maDH));
+                db.SaveChanges();
+                TempData["Message"] = $"Đơn đặt hàng có mã {maDH} đã được xóa";
+                TempData["MessageType"] = "success";
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = "Xóa đơn hàng không thành công: " + ex.Message;
+                TempData["MessageType"] = "error";
+            }
+
+            return RedirectToAction("GetAllOrders");
+        }
     }
 }

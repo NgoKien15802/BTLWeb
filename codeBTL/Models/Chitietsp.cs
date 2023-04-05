@@ -20,7 +20,7 @@ public partial class Chitietsp
 
     [Required(ErrorMessage = "Đơn giá bán không được để trống.")]
     [DisplayName("Đơn giá bán")]
-    public decimal DonGiaBan { get; set; }
+    public decimal? DonGiaBan { get; set; }
 
     [DisplayName("Đơn giá nhập")]
     public decimal? DonGiaNhap { get; set; }

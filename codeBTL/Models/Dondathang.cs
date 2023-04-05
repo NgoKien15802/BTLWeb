@@ -23,12 +23,14 @@ public partial class Dondathang
     [DisplayName("Ngày đặt")]
     public DateTime? NgayDat { get; set; }
 
+    [DisplayName("Ngày giao")]
     public DateTime? NgayGiao { get; set; }
 
     [Required(ErrorMessage = "Tổng tiền không được để trống.")]
     [DisplayName("Tổng tiền")]
     public decimal? TongTien { get; set; }
 
+    [DisplayName("Tổng thanh toán")]
     public decimal? TongThanhToan { get; set; }
 
     public virtual Nhanvien? MaNvNavigation { get; set; } = null!;

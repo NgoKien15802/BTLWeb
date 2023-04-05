@@ -25,15 +25,5 @@ namespace codeBTL.Areas.Admin.Controllers
         }
 
 
-        /// <summary>
-        ///     Trang báo cáo doanh thu
-        /// </summary>
-        /// <returns></returns>
-        [Route("SalesReport")]
-        public IActionResult SalesReport()
-        {
-            return View();
-        }
-
     }
 }

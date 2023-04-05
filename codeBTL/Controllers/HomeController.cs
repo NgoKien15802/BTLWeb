@@ -28,7 +28,7 @@ namespace codeBTL.Controllers
                             {
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
-                                DonGiaBan = cts.DonGiaBan
+                                DonGiaBan = (decimal)cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
 
             PagedList<ViewModels.SanPhamViewModel> pagedList = new PagedList<ViewModels.SanPhamViewModel>(products, pageNumber, pageSize);
@@ -49,7 +49,7 @@ namespace codeBTL.Controllers
                                       {
                                           TenSp = sp.TenSp,
                                           AnhDaiDien = sp.AnhDaiDien,
-                                          DonGiaBan = cts.DonGiaBan
+                                          DonGiaBan = (decimal)cts.DonGiaBan
                                       }).OrderBy(x => x.TenSp);
 
                 PagedList<ViewModels.SanPhamViewModel> pagedListFilter = new PagedList<ViewModels.SanPhamViewModel>(productsFilter, pageNumber, pageSize);
@@ -62,7 +62,7 @@ namespace codeBTL.Controllers
                             {
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
-                                DonGiaBan = cts.DonGiaBan
+                                DonGiaBan = (decimal)cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
 
             PagedList<ViewModels.SanPhamViewModel> pagedList = new PagedList<ViewModels.SanPhamViewModel>(products, pageNumber, pageSize);
@@ -79,7 +79,7 @@ namespace codeBTL.Controllers
                                {
                                    TenSp = sp.TenSp,
                                    AnhDaiDien = sp.AnhDaiDien,
-                                   DonGiaBan = cts.DonGiaBan
+                                   DonGiaBan = (decimal)cts.DonGiaBan
                                }).Take(9).ToList();
 
             return PartialView("GetTop9Products", topProducts);

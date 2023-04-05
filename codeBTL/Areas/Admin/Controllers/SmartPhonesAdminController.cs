@@ -211,15 +211,50 @@ namespace codeBTL.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 db.Entry(sp).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("GetAllSmartPhones");
+                RouteValueDictionary rv = new RouteValueDictionary();
+                var MaSPNumber = int.Parse(sp.MaSp.Substring(2));
+                rv.Add("MaCTSP", "CTSP"+ (MaSPNumber < 10 ? "0" + MaSPNumber : MaSPNumber));
+                return RedirectToAction("EditSmartPhoneDetails", rv);
             }
             return View(sp);
         }
 
 
+        /// <summary>
+        ///     Sửa chi tiết điện thoại
+        /// </summary>
+        [Route("EditSmartPhoneDetails")]
+        [HttpGet]
+        public IActionResult EditSmartPhoneDetails(string MaCTSP)
+        {
+            var sp = db.Chitietsps.Find(MaCTSP);
+            ViewBag.MaSp = sp.MaSp;
+            return View(sp);
+        }
+
+
+        /// <summary>
+        ///     Sửa chi điện thoại
+        /// </summary>
+        /// <param name="userinfo"></param>
+        /// <returns></returns>
+        [Route("EditSmartPhoneDetails")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditSmartPhoneDetails(Chitietsp ctsp)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(ctsp).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("GetAllSmartPhones");
+            }
+            return View(ctsp);
+        }
+
+       
         /// <summary>
         ///     Xóa 1 user
         /// </summary>
