@@ -4,28 +4,32 @@
     ViewData["Title"] = "AddImageDetails";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<h1>AddImageDetails</h1>
+
+<h4>Chitietanh</h4>
+<hr />
 <div class="row">
-    <div class="col-md-12">
-        <div class="tile">
-            <h3 class="tile-title">Tạo mới chi tiết ảnh</h3>
-            <div class="tile-body">
-                <form asp-action="AddImageDetails" class="row">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="MaSp" class="control-label"></label>
-                        <select asp-for="MaSp" class="form-control" asp-items="ViewBag.MaSp"></select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label asp-for="TenFileAnh" class="control-label"></label>
-                        <input asp-for="TenFileAnh" class="form-control" />
-                        <span asp-validation-for="TenFileAnh" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <input type="submit" value="Lưu" class="btn btn-primary" />
-                    </div>
-                </form>
+    <div class="col-md-4">
+        <form asp-action="AddImageDetails">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaSp" class="control-label"></label>
+                <select asp-for="MaSp" class ="form-control" asp-items="ViewBag.MaSp"></select>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="TenFileAnh" class="control-label"></label>
+                <input asp-for="TenFileAnh" class="form-control" />
+                <span asp-validation-for="TenFileAnh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 

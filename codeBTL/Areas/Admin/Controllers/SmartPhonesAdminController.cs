@@ -110,7 +110,7 @@ namespace codeBTL.Areas.Admin.Controllers
             {
                 db.Sanphams.Add(sp);
                 db.SaveChanges();
-                return RedirectToAction("addSmartPhoneDetails", rv);
+                return RedirectToAction("AddSmartPhoneDetails", rv);
             }
 
             return View(sp);
@@ -175,6 +175,8 @@ namespace codeBTL.Areas.Admin.Controllers
             ViewBag.MaSp = new SelectList(db.Sanphams.Where(x => x.MaLoai.Equals("LOAI01")).ToList(), "MaSp", "TenSp");
             if (ModelState.IsValid)
             {
+                // Tạo một giá trị Guid mới
+                chitietanh.MaCTA = Guid.NewGuid();
                 db.Chitietanhs.Add(chitietanh);
                 db.SaveChanges();
                 return RedirectToAction("GetAllSmartPhones");

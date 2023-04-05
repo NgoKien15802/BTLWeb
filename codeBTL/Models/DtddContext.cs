@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using codeBTL.ViewModels;
 
 namespace codeBTL.Models;
 
@@ -53,9 +54,9 @@ public partial class DtddContext : DbContext
     {
         modelBuilder.Entity<Chitietanh>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("CHITIETANH");
+
+            entity.HasKey(e => e.MaCTA).HasName("PK__CHITIETANH__27258E765F0F938C");
+            entity.ToTable("CHITIETANH");
 
             entity.Property(e => e.MaSp)
                 .HasMaxLength(50)
@@ -72,9 +73,8 @@ public partial class DtddContext : DbContext
 
         modelBuilder.Entity<Chitietddh>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("CHITIETDDH");
+            entity.HasKey(e => e.MaDh).HasName("PK__CHITIETDDH__27258E765F0F938C");
+            entity.ToTable("CHITIETDDH");
 
             entity.Property(e => e.KhuyenMai).HasColumnType("money");
             entity.Property(e => e.MaDh)
@@ -414,4 +414,6 @@ public partial class DtddContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    public DbSet<codeBTL.ViewModels.OrderViewModel>? OrderViewModel { get; set; }
 }

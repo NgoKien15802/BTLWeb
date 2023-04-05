@@ -8,10 +8,13 @@ namespace codeBTL.Models;
 
 public partial class Chitietanh
 {
-    public Guid MaCTA { get; set; }
+   
+    public Guid MaCTA { get; set; } = Guid.Empty!;
+
 
     [DisplayName("Mã sản phẩm")]
     public string MaSp { get; set; } = null!;
+
 
     [DisplayName("Tên file ảnh")]
     [FileExtensions(Extensions = "jpg,img", ErrorMessage = "đuôi file ảnh phải img, jpg")]

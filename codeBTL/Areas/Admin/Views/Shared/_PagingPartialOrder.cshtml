@@ -1,12 +1,13 @@
 ﻿@using X.PagedList.Web.Common
 @using X.PagedList.Mvc.Core
-@using codeBTL.Models
-@model X.PagedList.IPagedList<Sanpham>
+
+@using codeBTL.ViewModels
+@model X.PagedList.IPagedList<OrderViewModel>
 <div class="row">
     <div class="col-sm-12 col-md-7">
         <div class="dataTables_paginate paging_simple_numbers" id="sampleTable_paginate">
             <ul class="pagination">
-                @Html.PagedListPager(Model, page => Url.Action("GetAllSmartPhones", new { page = page, pageSize =  ViewBag.pageSize, filter = ViewBag.filter}))
+                @Html.PagedListPager(Model, page => Url.Action("GetAllOrders", new { page = page, pageSize =  ViewBag.pageSize, filter = ViewBag.filter}))
             </ul>
         </div>
     </div>
