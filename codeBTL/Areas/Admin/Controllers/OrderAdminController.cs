@@ -2,7 +2,7 @@
 
 namespace codeBTL.Areas.Admin.Controllers
 {
-    public class UsersController : Controller
+    public class OrderAdminController : Controller
     {
         public IActionResult Index()
         {

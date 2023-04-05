@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="tile">
             <h3 class="tile-title">Tạo mới điện thoại</h3>
-          
+
             <div class="tile-body">
                 <form asp-action="AddSmartPhones" class="row">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <input type="submit" value="Lưu và thêm chi tiết" class="btn btn-save" />
-                        <a class="btn btn-cancel" asp-controller="admin" asp-action="GetAllSmartPhones">Hủy bỏ</a>
+                        <a class="btn btn-cancel" asp-controller="SmartPhonesAdmin" asp-action="GetAllSmartPhones">Hủy bỏ</a>
                     </div>
                 </form>
             </div>

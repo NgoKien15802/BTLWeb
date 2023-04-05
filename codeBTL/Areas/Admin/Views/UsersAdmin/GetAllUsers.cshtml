@@ -20,7 +20,7 @@
                 <div class="tile-body">
                     <div class="row element-button">
                         <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" asp-controller="admin" asp-action="AddUsers" title="Thêm">
+                            <a class="btn btn-add btn-sm" asp-controller="UsersAdmin" asp-action="AddUsers" title="Thêm">
                                 <i class="fas fa-plus"></i>
                                 Tạo mới khách hàng
                             </a>
@@ -99,7 +99,7 @@
 
     function loadData(pageSize, searchText) {
         $.ajax({
-            url: "@Url.Action("GetAllUsersTable", "Admin")", // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
+            url: "@Url.Action("GetAllUsersTable", "UsersAdmin")?pageSize=" + pageSize + "&searchText=" + searchText, // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
             type: 'GET', // Phương thức HTTP để lấy dữ liệu
             data: { pageSize: pageSize, filter: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
             success: function (result) {
