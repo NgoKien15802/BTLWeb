@@ -84,7 +84,7 @@ public partial class DtddContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("MaSP");
             entity.Property(e => e.Sldat).HasColumnName("SLDat");
-
+            
             entity.HasOne(d => d.MaDhNavigation).WithMany()
                 .HasForeignKey(d => d.MaDh)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -214,7 +214,6 @@ public partial class DtddContext : DbContext
             entity.Property(e => e.UserId)
                 .HasMaxLength(20)
                 .HasColumnName("UserID");
-
             entity.HasOne(d => d.MaNvNavigation).WithMany(p => p.Dondathangs)
                 .HasForeignKey(d => d.MaNv)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -407,6 +406,7 @@ public partial class DtddContext : DbContext
             entity.Property(e => e.Sdtuser)
                 .HasMaxLength(10)
                 .HasColumnName("SDTUser");
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.Username).HasMaxLength(100);
         });
 

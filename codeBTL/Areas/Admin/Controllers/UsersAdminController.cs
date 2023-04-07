@@ -112,6 +112,7 @@ namespace codeBTL.Areas.Admin.Controllers
             ViewBag.maxMaKHNumber = "KH" + maxMaKHNumber;
             if (ModelState.IsValid)
             {
+                userinfo.CreatedAt = DateTime.Now;
                 db.Userinfos.Add(userinfo);
                 db.SaveChanges();
                 return RedirectToAction("GetAllUsers", "UsersAdmin");

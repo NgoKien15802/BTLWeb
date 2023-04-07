@@ -33,6 +33,8 @@ public partial class Userinfo
     [Range(0, 1, ErrorMessage = "Vai trò không hợp lệ ( 0:User, 1:Admin ).")]
     [DisplayName("Vai trò ( 0:User, 1:Admin )")]
     public int Role { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
     public virtual ICollection<Dondathang> Dondathangs { get; } = new List<Dondathang>();
 
     public virtual ICollection<Hoadonban> Hoadonbans { get; } = new List<Hoadonban>();

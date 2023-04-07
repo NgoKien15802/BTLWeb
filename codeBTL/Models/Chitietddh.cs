@@ -22,6 +22,8 @@ public partial class Chitietddh
     [DisplayName("Số lượng đặt")]
     public int? Sldat { get; set; }
 
+    
+
     public virtual Dondathang? MaDhNavigation { get; set; } = null!;
 
     public virtual Sanpham? MaSpNavigation { get; set; } = null!;

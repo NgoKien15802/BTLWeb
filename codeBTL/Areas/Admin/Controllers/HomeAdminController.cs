@@ -21,6 +21,23 @@ namespace codeBTL.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            var countUser = db.Userinfos.AsNoTracking().Select(x => x.UserId).Distinct().Count();
+            ViewBag.countUser = countUser;
+            var countOrder = db.Dondathangs.AsNoTracking().Select(x => x.MaDh).Distinct().Count();
+            ViewBag.countOrder = countOrder;
+            var countProduct = db.Sanphams.AsNoTracking().Select(x => x.MaSp).Distinct().Count();
+            ViewBag.countProduct = countProduct;
+
+            var orders = db.Dondathangs.OrderByDescending(o => o.NgayDat)
+                .Take(4)
+                .Join(db.Userinfos, o => o.UserId, u => u.UserId, (o, u) => new { Order = o, User = u })
+                .ToList();
+            var users = db.Userinfos.OrderByDescending(u => u.CreatedAt).Take(4).ToList();
+
+
+            ViewBag.Orders = orders;
+            ViewBag.Users = users;
+
             return View();
         }
 
