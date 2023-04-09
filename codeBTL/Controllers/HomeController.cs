@@ -124,28 +124,16 @@ namespace codeBTL.Controllers
             return View();
         }
 
-        public IActionResult Order(string maDh)
+      /*  public IActionResult Order(string maDh)
         {
-            // Lấy thông tin đơn đặt hàng và chi tiết đơn đặt hàng tương ứng
-            var donDatHang = db.Dondathangs.Include(d => d.User).Where(d => d.MaDh == maDh).FirstOrDefault();
-            var chiTietDDHs = db.Chitietddhs.Include(c => c.MaSpNavigation).Where(c => c.MaDh == maDh).ToList();
-
-            // Tạo ViewModel và truyền dữ liệu vào
-            var viewModel = new OrderDetailsViewModel();
-            viewModel.MaDh = donDatHang.MaDh;
-            viewModel.NgayDat = donDatHang.NgayDat;
-            viewModel.Username = donDatHang.User.Username;
-            viewModel.DiaChiUser = donDatHang.User.DiaChiUser;
-            viewModel.TenSp = SanPham.TenSp;
-            viewModel.TongTien = chiTietDDHs.Sum(c => c.Sldat * c.DonGiaBan);
-
-            // Trả về View với ViewModel
+           
             return View(viewModel);
 
         }
-     
+     */
         public IActionResult CreateOrder(string maSp)
         {
+
             // Tạo đơn đặt hàng mới
             var donDatHang = new Dondathang();
 
