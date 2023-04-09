@@ -70,132 +70,86 @@
 </head>
 
 <body class="res layout-1 layout-subpage">
-    @*<div id="wrapper" class="wrapper-fluid banners-effect-5">
-    <!-- Main Container  -->
-    <div class="main-container container">
-    <ul class="breadcrumb">
-    <li>
-    <a href="#"><i class="fa fa-home"></i></a>
-    </li>
-    <li><a href="#">Lịch sử đặt hàng</a></li>
-    </ul>
+    <div id="wrapper" class="wrapper-fluid banners-effect-5">
+        <!-- Main Container  -->
+        <div class="main-container container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#"><i class="fa fa-home"></i></a>
+                </li>
+                <li><a href="#">Lịch sử đặt hàng</a></li>
+            </ul>
 
-    <div class="row">
-    <!--Middle Part Start-->
-    <div id="content" class="col-sm-9">
-    <h2 class="title">Lịch sử đặt hàng</h2>
-    <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-    <thead>
-    <tr>
-    <td class="text-center">Hình ảnh</td>
-    <td class="text-left">Tên sản phẩm</td>
-    <td class="text-center">Mã đơn hàng</td>
-    <td class="text-center">Số lượng</td>
-    <td class="text-center">Ngày mua</td>
-    <td class="text-right">Tổng tiền</td>
-    <td></td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="text-center">
-    <a href="product.html"
-    ><img
-    width="85"
-    class="img-thumbnail"
-    title="iPhone 13 Pro Max - 128GB"
-    alt="iPhone 13 Pro Max - 128GB"
-    src="./assets/images/products/ip13pm.png"
-    />
-    </a>
-    </td>
-    <td class="text-left">
-    <a href="product.html"
-    >iPhone 13 Pro Max - 128GB</a
-    >
-    </td>
-    <td class="text-center">#1</td>
-    <td class="text-center">1</td>
-    <td class="text-center">21/06/2022</td>
-    <td class="text-right">21.890.000₫</td>
-    <td class="text-center">
-    <a
-    class="btn btn-info"
-    title=""
-    data-toggle="tooltip"
-    href="order-information.html"
-    data-original-title="Xem chi tiết"
-    ><i class="fa fa-eye"></i
-    ></a>
-    </td>
-    </tr>
-    <tr>
-    <td class="text-center">
-    <a href="product.html"
-    ><img
-    width="85"
-    class="img-thumbnail"
-    title="Samsung Galaxy Z Fold 4 5G - RAM 12GB - 512GB"
-    alt="Samsung Galaxy Z Fold 4 5G - RAM 12GB - 512GB"
-    src="./assets/images/products/ss_z_fold4_5g.png"
-    />
-    </a>
-    </td>
-    <td class="text-left">
-    <a href="product.html"
-    >Samsung Galaxy Z Fold 4 5G -
-    RAM 12GB - 512GB</a
-    >
-    </td>
-    <td class="text-center">#2</td>
-    <td class="text-center">1</td>
-    <td class="text-center">20/06/2022</td>
-    <td class="text-right">32.690.000₫</td>
-    <td class="text-center">
-    <a
-    class="btn btn-info"
-    title=""
-    data-toggle="tooltip"
-    href="order-information.html"
-    data-original-title="Xem chi tiết"
-    ><i class="fa fa-eye"></i
-    ></a>
-    </td>
-    </tr>
-    </tbody>
-    </table>
+            <div class="row">
+                <!--Middle Part Start-->
+                <div id="content" class="col-md-12">
+                    <h2 class="title">Lịch sử đặt hàng</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td class="text-center">Hình ảnh</td>
+                                    <td class="text-left">Tên sản phẩm</td>
+                                    <td class="text-center">Mã đơn hàng</td>
+                                    <td class="text-center">Số lượng</td>
+                                    <td class="text-center">Ngày mua</td>
+                                    <td class="text-right">Tổng tiền</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="showHistoryOrder">
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--Middle Part End-->
+            </div>
+        </div>
+        <!-- //Main Container -->
     </div>
-    </div>
-    <!--Middle Part End-->
-    </div>
-    </div>
-    <!-- //Main Container -->
-    </div>*@
     <div id="history-orders"></div>
 
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: '/HistoryOrderAPI/GetHistoryOrder',
+                url: 'https://localhost:7206/api/HistoryOrderAPI',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     var html = '';
                     $.each(data, function (index, order) {
-                        html += '<div class="order">';
-                        html += '<div class="order-date">' + order.NgayDat + '</div>';
-                        html += '<div class="order-item">';
-                        html += '<p>' + order.TenSp + '</p>';
-                        html += '<div class="order-item-info">';
-                        html += '<div class="order-item-name">' + order.TenSp + '</div>';
-                        html += '<div class="order-item-quantity">Số lượng: ' + order.Sldat + '</div>';
-                        html += '<div class="order-item-price">Tổng tiền: ' + order.TongTien + '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
+                        html += `
+                                    <tr>
+                                            <td class="text-center">
+                                                <a href="product.html">
+                                                    <img width="85"
+                                                         class="img-thumbnail"
+                                                                 alt=${order.tenSp}
+                                                                 src="../assets/images/products/${order.anhDaiDien}" />
+                                                </a>
+                                            </td>
+                                            <td class="text-left">
+                                                 <a href="product.html">${order.tenSp}</a>
+                                            </td>
+                                                            <td class="text-center">${order.maDh} </td>
+                                                            <td class="text-center">${order.sldat}</td>
+                                                            <td class="text-center">${order.ngayDat}</td>
+                                                            <td class="text-right">${order.tongTien}₫</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-info"
+                                                   title=""
+                                                   data-toggle="tooltip"
+                                                   href="order-information.html"
+                                                   data-original-title="Xem chi tiết">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                        `
                     });
-                    $('#history-orders').html(html);
+                    $('#showHistoryOrder').html(html);
                 },
                 error: function (xhr, status, error) {
                     alert('Error');

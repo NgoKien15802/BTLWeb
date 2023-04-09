@@ -39,11 +39,13 @@ namespace codeBTL.Controllers
                 if (obj.Role == 1)
                 {
                     HttpContext.Session.SetString("Username", obj.Username.ToString());
+                    HttpContext.Session.SetString("UserId", obj.UserId.ToString());
                     return RedirectToAction("index", "admin");
                 }
                 else
                 {
                     HttpContext.Session.SetString("Username", obj.Username.ToString());
+                    HttpContext.Session.SetString("UserId", obj.UserId.ToString());
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -60,6 +62,7 @@ namespace codeBTL.Controllers
         {
             HttpContext.Session.Clear();
             HttpContext.Session.Remove("Username");
+            HttpContext.Session.Remove("UserId");
             return RedirectToAction("Login", "Access");
         }
         [AllowAnonymous, HttpGet("forgot-password")]

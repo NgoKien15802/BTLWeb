@@ -1,7 +1,10 @@
 ﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
+@using Microsoft.AspNetCore.Http
+
+@{
+    HttpContext context = ViewContext.HttpContext;
+}
 <header>
     <div class="container_cus">
         <div class="top__header">
@@ -12,7 +15,11 @@
     </div>
     <div class="bottom__header">
         <div class="container_cus bottom__header-container">
-            <div></div>
+            <div>
+                <a class="btn btn-primary" disable>
+                    <span>Welcome, @context.Session.GetString("Username")</span>
+                </a>
+            </div>
             <div class="bottom__header-center">
                 <img src="../assets/images/home/logo.png" alt="" />
             </div>
@@ -23,10 +30,10 @@
                                 align-items: center;
                                 column-gap: 10px;
                             ">
-                   
                     <div class="input-group-append">
                         <a class="btn btn-primary" type="button" asp-controller="Home" asp-action="HistoryOrder">
                             <span class="bi bi-cart"></span>
+                            Lịch sử đơn hàng
                         </a>
                     </div>
                 </div>

@@ -44,6 +44,7 @@ namespace codeBTL.Controllers
 
         public IActionResult SearchProducts(int? page, string? searchString)
         {
+
             int pageSize = 9;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
             if(searchString != null)
@@ -169,15 +170,13 @@ namespace codeBTL.Controllers
             // Tạo mã đơn đặt hàng tự động
             int nextMaDh = db.Dondathangs.Count() + 1;
             donDatHang.MaDh = "DDH" + nextMaDh.ToString();
-            string username = HttpContext.Session.GetString("Username");
-            var user = db.Userinfos.AsNoTracking().FirstOrDefault(x => x.Username == username);
-            if (user != null)
+            string userId = HttpContext.Session.GetString("UserId");
+            if (userId != null)
             {
-                donDatHang.UserId = user.UserId;
+                donDatHang.UserId = userId;
                 // Lấy UserId của người đăng nhập hiện tại
 
                 // Cập nhật thông tin cho đơn đặt hàng mới
-                donDatHang.UserId = user.UserId;
                 donDatHang.NgayDat = DateTime.Now;
                 donDatHang.MaNv = "NV01";
                 var ctsp = db.Chitietsps.AsNoTracking().Where(x => x.MaSp == MaSp).FirstOrDefault();
