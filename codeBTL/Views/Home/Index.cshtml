@@ -2,10 +2,8 @@
     ViewData["Title"] = "Home Page";
     Layout = "_LayoutQLBDT";
 }
-
 @using X.PagedList.Mvc.Core
-@using X.PagedList.Mvc
-@model X.PagedList.IPagedList<codeBTL.ViewModels.SanPhamViewModel>
+@model X.PagedList.IPagedList<codeBTL.Models.ViewModels.SanPhamViewModel>
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 
 <style>
@@ -59,25 +57,7 @@
                 <button type="button" class="btn btn-primary btn-filter-products">Tìm kiếm</button>
             </form>
             <script>
-                @*
-                    function getProductsFilter(event) {
-                    var searchText = $("#searchProducts").val(); // Lấy giá trị của input tìm kiếm
-                    loadData(searchText); // Thực hiện yêu cầu Ajax để tải lại bảng dữ liệu
-                    }
-                    function loadData(searchText) {
-                    $.ajax({
-                    url: "@Url.Action("SearchProducts", "Home")", // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
-                    type: 'GET', // Phương thức HTTP để lấy dữ liệu
-                    data: { searchString: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
-                    success: function (result) {
-                    $('#products-filter').html(result); // Cập nhật nội dung của bảng dữ liệu trong trang web
-                    $('#default-products').hide();
-                    $("#top-products").hide();
-                    }
-                    });
-                    }
 
-                    *@
                     $(".btn-filter-products").on("click", function (event) {
                         var searchText = $("#searchProducts").val();
                         event.preventDefault(); // ngăn chặn trang bị load lại
@@ -176,11 +156,10 @@
                                         </div>
                                         <!--item-Giá-->
                                         <div class="action">
-                                            <button type="button"
-                                                    title="Thêm giỏ hàng"
-                                                    class="button btn-cart">
-                                                <span>Thêm giỏ hàng</span>
-                                            </button>
+                                            <a asp-controller="Home" asp-action="Order"
+                                               class="button btn-cart">
+                                                <span>Đặt hàng</span>
+                                            </a>
                                         </div>
                                         <!--action-->
                                     </div>

@@ -1,0 +1,90 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using codeBTL.Models
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Userinfo>
+<table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Mã khách hàng: activate to sort column ascending" style="width: 118.988px;text-align: center;">Họ tên</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Tên khách hàng: activate to sort column ascending" style="width: 41.925px;text-align: center;">Số điện thoại</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Ảnh: activate to sort column ascending" style="width: 200.1125px;text-align: center;">Địa chỉ</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Số lượng: activate to sort column ascending" style="width: 86.275px;text-align: center;">Email</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Tình trạng: activate to sort column ascending" style="width: 93.325px;text-align: center;">Role</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Chức năng: activate to sort column ascending" style="width: 100.325px;text-align: center;">Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sdtuser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChiUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td style="display: flex; align-items: center;justify-content: center;column-gap: 6px;">
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
+                        <a asp-controller="UsersAdmin" asp-action="EditUsers" asp-route-maKH="@item.UserId"> <i class="fas fa-edit btn-primary"></i></a>
+                    </button>
+                    <a type="button" class="btn btn-primary delete-btn" data-toggle="modal" data-target="#deleteDialog" onclick="openDeleteDialog('@item.UserId')"><i class="fas fa-trash-alt btn-cart"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_PagingPartial")
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="deleteDialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteDialogLabel">Xác nhận xóa?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa mã <span id="deleteUserId"></span> không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                    <a id="deleteLink">Xóa</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*show toast*@
+@if (TempData["Message"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: '@TempData["MessageType"]',
+            title: '@TempData["Message"]'
+        });
+    </script>
+}
+
+<script>
+    function openDeleteDialog(userId) {
+        $("#deleteDialog").modal("show"); // hiển thị modal
+        $("#deleteUserId").text(userId); // hiển thị userId trong modal body
+        $("#confirmDeleteBtn").on("click", function () { // xóa khi nhấn vào nút Xóa trong modal footer
+            $("#deleteDialog").modal("hide"); // ẩn modal
+            $("#deleteLink").attr("href", "DeleteUsers?maKH=" + userId);
+        });
+    }
+</script>

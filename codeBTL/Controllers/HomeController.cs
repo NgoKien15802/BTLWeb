@@ -1,11 +1,16 @@
 ﻿using codeBTL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Diagnostics;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+
 using codeBTL.Models.Authentication;
+using codeBTL.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace codeBTL.Controllers
 {
@@ -25,14 +30,14 @@ namespace codeBTL.Controllers
             var products = (from sp in db.Sanphams
                             join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                             orderby sp.TenSp
-                            select new ViewModels.SanPhamViewModel
+                            select new Models.ViewModels.SanPhamViewModel
                             {
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
 
-            PagedList<ViewModels.SanPhamViewModel> pagedList = new PagedList<ViewModels.SanPhamViewModel>(products, pageNumber, pageSize);
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
             return View(pagedList);
         }
 
@@ -46,27 +51,27 @@ namespace codeBTL.Controllers
                                       join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                                       where sp.TenSp.Contains(searchString) // Lọc sản phẩm theo tên
                                       orderby sp.TenSp
-                                      select new ViewModels.SanPhamViewModel
+                                      select new Models.ViewModels.SanPhamViewModel
                                       {
                                           TenSp = sp.TenSp,
                                           AnhDaiDien = sp.AnhDaiDien,
                                           DonGiaBan = cts.DonGiaBan
                                       }).OrderBy(x => x.TenSp);
 
-                PagedList<ViewModels.SanPhamViewModel> pagedListFilter = new PagedList<ViewModels.SanPhamViewModel>(productsFilter, pageNumber, pageSize);
+                PagedList<SanPhamViewModel> pagedListFilter = new PagedList<SanPhamViewModel>(productsFilter, pageNumber, pageSize);
                 return PartialView("SearchProducts", pagedListFilter);
             }
             var products = (from sp in db.Sanphams
                             join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                             orderby sp.TenSp
-                            select new ViewModels.SanPhamViewModel
+                            select new Models.ViewModels.SanPhamViewModel
                             {
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
 
-            PagedList<ViewModels.SanPhamViewModel> pagedList = new PagedList<ViewModels.SanPhamViewModel>(products, pageNumber, pageSize);
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
             return PartialView("SearchProducts", pagedList);
         }
 
@@ -76,7 +81,7 @@ namespace codeBTL.Controllers
                                join sp in db.Sanphams on ctdh.MaSp equals sp.MaSp
                                join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                                orderby ctdh.Sldat descending
-                               select new ViewModels.SanPhamViewModel
+                               select new Models.ViewModels.SanPhamViewModel
                                {
                                    TenSp = sp.TenSp,
                                    AnhDaiDien = sp.AnhDaiDien,
@@ -122,9 +127,60 @@ namespace codeBTL.Controllers
             return View();
         }
 
-        public IActionResult Order()
+        public IActionResult Order(string maDh)
         {
-            return View();
+            // Lấy thông tin đơn đặt hàng và chi tiết đơn đặt hàng tương ứng
+            var donDatHang = db.Dondathangs.Include(d => d.User).Where(d => d.MaDh == maDh).FirstOrDefault();
+            var chiTietDDHs = db.Chitietddhs.Include(c => c.MaSpNavigation).Where(c => c.MaDh == maDh).ToList();
+
+            // Tạo ViewModel và truyền dữ liệu vào
+            var viewModel = new OrderDetailsViewModel();
+            viewModel.MaDh = donDatHang.MaDh;
+            viewModel.NgayDat = donDatHang.NgayDat;
+            viewModel.Username = donDatHang.User.Username;
+            viewModel.DiaChiUser = donDatHang.User.DiaChiUser;
+            viewModel.TenSp = SanPham.TenSp;
+            viewModel.TongTien = chiTietDDHs.Sum(c => c.Sldat * c.DonGiaBan);
+
+            // Trả về View với ViewModel
+            return View(viewModel);
+
+        }
+     
+        public IActionResult CreateOrder(string maSp)
+        {
+            // Tạo đơn đặt hàng mới
+            var donDatHang = new Dondathang();
+
+            // Tạo mã đơn đặt hàng tự động
+            int nextMaDh = db.Dondathangs.Count() + 1;
+            donDatHang.MaDh = "DDH" + nextMaDh.ToString();
+
+            // Lấy UserId của người đăng nhập hiện tại
+            string userId = User.Identity.GetUserId();
+
+            // Cập nhật thông tin cho đơn đặt hàng mới
+            donDatHang.UserId = userId;
+            donDatHang.NgayDat = DateTime.Now;
+
+            // Thêm đơn đặt hàng vào cơ sở dữ liệu
+            db.Dondathangs.Add(donDatHang);
+            db.SaveChanges();
+
+            // Tạo chi tiết đơn đặt hàng mới cho sản phẩm được chọn
+            var sanPham = db.Sanphams.Find(maSp);
+            var donGiaBan = db.Chitietsps.Where(c => c.MaSp == maSp).Select(c => c.DonGiaBan).FirstOrDefault();
+
+            var chiTietDDH = new Chitietddh();
+            chiTietDDH.MaDh = donDatHang.MaDh;
+            chiTietDDH.MaSp = maSp;
+            chiTietDDH.Sldat = 1;
+
+            db.Chitietddhs.Add(chiTietDDH);
+            db.SaveChanges();
+
+            // Chuyển hướng sang trang ChiTietDDH với mã đơn đặt hàng
+            return RedirectToAction("Order", new { maDh = donDatHang.MaDh });
         }
 
         public IActionResult HistoryOrder()

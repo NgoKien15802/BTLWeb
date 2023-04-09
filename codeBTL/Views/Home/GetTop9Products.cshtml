@@ -1,4 +1,4 @@
-﻿@model List<codeBTL.ViewModels.SanPhamViewModel>
+﻿@model List<codeBTL.Models.ViewModels.SanPhamViewModel>
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 <style>
     .item-img-info {
@@ -77,11 +77,10 @@
                                 </div>
                                 <!--item-Giá-->
                                 <div class="action">
-                                    <button type="button"
-                                            title="Thêm giỏ hàng"
-                                            class="button btn-cart">
-                                        <span>Thêm giỏ hàng</span>
-                                    </button>
+                                    <a asp-controller="Home" asp-action="Order"
+                                       class="button btn-cart">
+                                        <span>Đặt hàng</span>
+                                    </a>
                                 </div>
                                 <!--action-->
                             </div>
