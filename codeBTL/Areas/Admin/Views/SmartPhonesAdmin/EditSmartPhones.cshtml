@@ -1,0 +1,71 @@
+﻿@model codeBTL.Models.Sanpham
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "EditSmartPhones";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Sửa điện thoại</h3>
+            <div class="tile-body">
+                <form asp-action="EditSmartPhones" class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="MaSp" />
+                    <div class="form-group col-md-4">
+                        <label asp-for="TenSp" class="control-label"></label>
+                        <input asp-for="TenSp" class="form-control" />
+                        <span asp-validation-for="TenSp" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MaLoai" class="control-label"></label>
+                        <select asp-for="MaLoai" class="form-control" asp-items="ViewBag.MaLoai"></select>
+                        <span asp-validation-for="MaLoai" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MaHangSx" class="control-label"></label>
+                        <select asp-for="MaHangSx" class="form-control" asp-items="ViewBag.MaHangSx"></select>
+                        <span asp-validation-for="MaHangSx" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="AnhDaiDien" class="control-label"></label>
+                        <input asp-for="AnhDaiDien" class="form-control" />
+                        <span asp-validation-for="AnhDaiDien" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="SoLuong" class="control-label"></label>
+                        <input asp-for="SoLuong" class="form-control" />
+                        <span asp-validation-for="SoLuong" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MieuTa" class="control-label"></label>
+                        <input asp-for="MieuTa" class="form-control" />
+                        <span asp-validation-for="MieuTa" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MauSac" class="control-label"></label>
+                        <input asp-for="MauSac" class="form-control" />
+                        <span asp-validation-for="MauSac" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="TrongLuong" class="control-label"></label>
+                        <input asp-for="TrongLuong" class="form-control" />
+                        <span asp-validation-for="TrongLuong" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="ThoiGianBh" class="control-label"></label>
+                        <input asp-for="ThoiGianBh" class="form-control" />
+                        <span asp-validation-for="ThoiGianBh" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="submit" value="Lưu và sửa chi tiết điện thoại" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

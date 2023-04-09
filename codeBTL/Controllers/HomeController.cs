@@ -1,5 +1,6 @@
 ﻿using codeBTL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -123,9 +124,60 @@ namespace codeBTL.Controllers
             return View();
         }
 
-        public IActionResult Order()
+        public IActionResult Order(string maDh)
         {
-            return View();
+            // Lấy thông tin đơn đặt hàng và chi tiết đơn đặt hàng tương ứng
+            var donDatHang = db.Dondathangs.Include(d => d.User).Where(d => d.MaDh == maDh).FirstOrDefault();
+            var chiTietDDHs = db.Chitietddhs.Include(c => c.MaSpNavigation).Where(c => c.MaDh == maDh).ToList();
+
+            // Tạo ViewModel và truyền dữ liệu vào
+            var viewModel = new OrderDetailsViewModel();
+            viewModel.MaDh = donDatHang.MaDh;
+            viewModel.NgayDat = donDatHang.NgayDat;
+            viewModel.Username = donDatHang.User.Username;
+            viewModel.DiaChiUser = donDatHang.User.DiaChiUser;
+            viewModel.TenSp = SanPham.TenSp;
+            viewModel.TongTien = chiTietDDHs.Sum(c => c.Sldat * c.DonGiaBan);
+
+            // Trả về View với ViewModel
+            return View(viewModel);
+
+        }
+     
+        public IActionResult CreateOrder(string maSp)
+        {
+            // Tạo đơn đặt hàng mới
+            var donDatHang = new Dondathang();
+
+            // Tạo mã đơn đặt hàng tự động
+            int nextMaDh = db.Dondathangs.Count() + 1;
+            donDatHang.MaDh = "DDH" + nextMaDh.ToString();
+
+            // Lấy UserId của người đăng nhập hiện tại
+            string userId = User.Identity.GetUserId();
+
+            // Cập nhật thông tin cho đơn đặt hàng mới
+            donDatHang.UserId = userId;
+            donDatHang.NgayDat = DateTime.Now;
+
+            // Thêm đơn đặt hàng vào cơ sở dữ liệu
+            db.Dondathangs.Add(donDatHang);
+            db.SaveChanges();
+
+            // Tạo chi tiết đơn đặt hàng mới cho sản phẩm được chọn
+            var sanPham = db.Sanphams.Find(maSp);
+            var donGiaBan = db.Chitietsps.Where(c => c.MaSp == maSp).Select(c => c.DonGiaBan).FirstOrDefault();
+
+            var chiTietDDH = new Chitietddh();
+            chiTietDDH.MaDh = donDatHang.MaDh;
+            chiTietDDH.MaSp = maSp;
+            chiTietDDH.Sldat = 1;
+
+            db.Chitietddhs.Add(chiTietDDH);
+            db.SaveChanges();
+
+            // Chuyển hướng sang trang ChiTietDDH với mã đơn đặt hàng
+            return RedirectToAction("Order", new { maDh = donDatHang.MaDh });
         }
 
         public IActionResult HistoryOrder()

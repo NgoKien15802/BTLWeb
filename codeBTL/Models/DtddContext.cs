@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using codeBTL.ViewModels;
 
 namespace codeBTL.Models;
 
@@ -47,15 +48,15 @@ public partial class DtddContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-M6VR1FU;Initial Catalog=DTDD3;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-M6VR1FU;Initial Catalog=DTDD6;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Chitietanh>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("CHITIETANH");
+
+            entity.HasKey(e => e.MaCTA).HasName("PK__CHITIETANH__27258E765F0F938C");
+            entity.ToTable("CHITIETANH");
 
             entity.Property(e => e.MaSp)
                 .HasMaxLength(50)
@@ -72,9 +73,8 @@ public partial class DtddContext : DbContext
 
         modelBuilder.Entity<Chitietddh>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("CHITIETDDH");
+            entity.HasKey(e => e.MaDh).HasName("PK__CHITIETDDH__27258E765F0F938C");
+            entity.ToTable("CHITIETDDH");
 
             entity.Property(e => e.KhuyenMai).HasColumnType("money");
             entity.Property(e => e.MaDh)
@@ -84,7 +84,7 @@ public partial class DtddContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("MaSP");
             entity.Property(e => e.Sldat).HasColumnName("SLDat");
-
+            
             entity.HasOne(d => d.MaDhNavigation).WithMany()
                 .HasForeignKey(d => d.MaDh)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -214,7 +214,6 @@ public partial class DtddContext : DbContext
             entity.Property(e => e.UserId)
                 .HasMaxLength(20)
                 .HasColumnName("UserID");
-
             entity.HasOne(d => d.MaNvNavigation).WithMany(p => p.Dondathangs)
                 .HasForeignKey(d => d.MaNv)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -407,6 +406,7 @@ public partial class DtddContext : DbContext
             entity.Property(e => e.Sdtuser)
                 .HasMaxLength(10)
                 .HasColumnName("SDTUser");
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.Username).HasMaxLength(100);
         });
 
@@ -414,4 +414,6 @@ public partial class DtddContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    public DbSet<codeBTL.ViewModels.OrderViewModel>? OrderViewModel { get; set; }
 }
