@@ -6,8 +6,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+
+using codeBTL.Models.Authentication;
 using codeBTL.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using codeBTL.ViewModels;
 
 namespace codeBTL.Controllers
 {
@@ -19,7 +22,7 @@ namespace codeBTL.Controllers
         {
             _logger = logger;
         }
-
+       [Authentication]
         public IActionResult Index(int? page)
         {
             int pageSize = 9;
@@ -29,6 +32,7 @@ namespace codeBTL.Controllers
                             orderby sp.TenSp
                             select new Models.ViewModels.SanPhamViewModel
                             {
+                                MaSp = sp.MaSp,
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
@@ -124,14 +128,40 @@ namespace codeBTL.Controllers
             return View();
         }
 
-      /*  public IActionResult Order(string maDh)
+        public IActionResult Order(string? maDh)
         {
-           
-            return View(viewModel);
+            var orders = from ddh in db.Dondathangs
+                         join user in db.Userinfos on ddh.UserId equals user.UserId
+                         join ctdh in db.Chitietddhs on ddh.MaDh equals ctdh.MaDh
+                         join sp in db.Sanphams on ctdh.MaSp equals sp.MaSp
+                         join ctsp in db.Chitietsps on sp.MaSp equals ctsp.MaSp
+                         where ddh.MaDh == maDh
+                         select new OrderDetailsViewModel
+                         {
+                             MaDh = ddh.MaDh,
+                             TenSp = sp.TenSp,
+                             Sldat = ctdh.Sldat,
+                             Username = user.Username,
+                             MaSp = sp.MaSp,
+                             NgayDat = ddh.NgayDat,
+                             DonGiaBan = ctsp.DonGiaBan,
+                             DiaChiUser=user.DiaChiUser,
+                             TongTien = ddh.TongTien
+                         };
 
+
+            if (orders != null)
+            {
+                var orderList = orders.FirstOrDefault();
+                return View(orderList);
+            }
+            else
+            {
+                return View();
+            }
         }
-     */
-        public IActionResult CreateOrder(string maSp)
+
+        public IActionResult CreateOrder(string? MaSp)
         {
 
             // Tạo đơn đặt hàng mới
@@ -140,32 +170,47 @@ namespace codeBTL.Controllers
             // Tạo mã đơn đặt hàng tự động
             int nextMaDh = db.Dondathangs.Count() + 1;
             donDatHang.MaDh = "DDH" + nextMaDh.ToString();
+            string username = HttpContext.Session.GetString("Username");
+            var user = db.Userinfos.AsNoTracking().FirstOrDefault(x => x.Username == username);
+            if (user != null)
+            {
+                donDatHang.UserId = user.UserId;
+                // Lấy UserId của người đăng nhập hiện tại
 
-            // Lấy UserId của người đăng nhập hiện tại
-            string userId = User.Identity.GetUserId();
+                // Cập nhật thông tin cho đơn đặt hàng mới
+                donDatHang.UserId = user.UserId;
+                donDatHang.NgayDat = DateTime.Now;
+                donDatHang.MaNv = "NV01";
+                var ctsp = db.Chitietsps.AsNoTracking().Where(x => x.MaSp == MaSp).FirstOrDefault();
+                donDatHang.TongTien = ctsp.DonGiaBan;
+                // Thêm đơn đặt hàng vào cơ sở dữ liệu
+                db.Dondathangs.Add(donDatHang);
+                db.SaveChanges();
 
-            // Cập nhật thông tin cho đơn đặt hàng mới
-            donDatHang.UserId = userId;
-            donDatHang.NgayDat = DateTime.Now;
+                // Tạo chi tiết đơn đặt hàng mới cho sản phẩm được chọn
+               
+                var chiTietDDH = new Chitietddh();
+                chiTietDDH.MaDh = donDatHang.MaDh;
+                chiTietDDH.MaSp = MaSp;
+                chiTietDDH.Sldat = 1;
 
-            // Thêm đơn đặt hàng vào cơ sở dữ liệu
-            db.Dondathangs.Add(donDatHang);
-            db.SaveChanges();
+                db.Chitietddhs.Add(chiTietDDH);
+                db.SaveChanges();
 
-            // Tạo chi tiết đơn đặt hàng mới cho sản phẩm được chọn
-            var sanPham = db.Sanphams.Find(maSp);
-            var donGiaBan = db.Chitietsps.Where(c => c.MaSp == maSp).Select(c => c.DonGiaBan).FirstOrDefault();
+                // Chuyển hướng sang trang ChiTietDDH với mã đơn đặt hàng
+                return RedirectToAction("Order", new { maDh = donDatHang.MaDh });
+            }
+            else
+            {
+                return RedirectToAction("Login", "Access");
+            }
 
-            var chiTietDDH = new Chitietddh();
-            chiTietDDH.MaDh = donDatHang.MaDh;
-            chiTietDDH.MaSp = maSp;
-            chiTietDDH.Sldat = 1;
+         
+        }
 
-            db.Chitietddhs.Add(chiTietDDH);
-            db.SaveChanges();
-
-            // Chuyển hướng sang trang ChiTietDDH với mã đơn đặt hàng
-            return RedirectToAction("Order", new { maDh = donDatHang.MaDh });
+        public IActionResult UpdateOrder(string? MaSp)
+        {
+            return View();
         }
 
         public IActionResult HistoryOrder()

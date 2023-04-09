@@ -1,8 +1,10 @@
-﻿
+﻿@using codeBTL.Models.ViewModels
+
 @{
     ViewData["Title"] = "Order";
     Layout = "~/Views/Shared/_LayoutQLBDT.cshtml";
 }
+@model OrderDetailsViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,9 +96,9 @@
                         <tbody>
                             <tr>
                                 <td style="width: 50%" class="text-left">
-                                    <b>Mã đơn hàng:</b> MaDh
+                                    <b>Mã đơn hàng:</b> @Model.MaDh
                                     <br />
-                                    <b>Ngày đặt:</b> NgayDat
+                                    <b>Ngày đặt:</b>  @Model.NgayDat
                                 </td>
                                 <td style="width: 50%" class="text-left">
                                     <b>Phương thức thanh toán:</b> Thanh
@@ -121,8 +123,8 @@
                         <tbody>
                             <tr>
                                 <td class="text-left">
-                                    Username <br />Address
-                                </td>
+                                    Username: @Model.Username <br />Address: @Model.DiaChiUser
+                                </td >
                             </tr>
                         </tbody>
                     </table>
@@ -140,10 +142,10 @@
                             <tbody>
                                 <tr>
                                     <td class="text-left">
-                                        TenSp
+                                        @Model.TenSp
                                     </td>
                                     <td class="text-right option-sldat">
-                                        <select>
+                                        <select onchange="handleSelectValue(this.value)">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -156,16 +158,15 @@
                                             <option value="10">10</option>
                                         </select>
                                     </td>
-                                    <td class="text-right">DonGiaBan</td>
-                                    <td class="text-right">TongTien</td>
+                                    <td class="text-right">@Model.DonGiaBan</td>
+                                    <td class="text-right" id="totalAmount">@Model.TongTien</td>
                                     <td style="white-space: nowrap"
                                         class="text-right">
                                         <a class="btn btn-primary"
                                            title=""
                                            data-toggle="tooltip"
-                                           href="#"
                                            data-original-title="Đặt lại">
-                                            <i class="fa fa-shopping-cart"></i>
+                                            Đặt lại
                                         </a>
                                         @*
                                         <a class="btn btn-danger"
@@ -181,34 +182,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <h3>Order History</h3>
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <td class="text-left">Ngày đặt</td>
-                                <td class="text-left">Tình trạng</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-left">20/06/2022</td>
-                                <td class="text-left">Đang xử lí</td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">21/06/2022</td>
-                                <td class="text-left">Đang giao hàng</td>
-                            </tr>
-                            <tr>
-                                <td class="text-left">24/06/2022</td>
-                                <td class="text-left">Đã giao</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="buttons clearfix">
-                        <div class="pull-right">
-                            <a class="btn btn-primary" href="#">Tiếp tục</a>
-                        </div>
-                    </div>
                 </div>
                 <!--Middle Part End-->
             </div>
@@ -216,6 +189,12 @@
         <!-- //Main Container -->
     </div>
 
+    <script>
+        function handleSelectValue(value){
+            let totalAmount = value * @Model.DonGiaBan;
+            $('#totalAmount').text(totalAmount);
+        }
+    </script>
     <!-- Include Libs & Plugins
     ============================================ -->
     <!-- Placed at the end of the document so the pages load faster -->

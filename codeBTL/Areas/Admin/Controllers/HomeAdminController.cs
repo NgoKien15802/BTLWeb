@@ -1,5 +1,6 @@
 ﻿using Azure;
 using codeBTL.Models;
+using codeBTL.Models.Authentication;
 using codeBTL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,6 +19,8 @@ namespace codeBTL.Areas.Admin.Controllers
 
         [Route("")]
         [Route("index")]
+
+        [Authentication]
 
         public IActionResult Index()
         {

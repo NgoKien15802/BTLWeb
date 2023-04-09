@@ -1,24 +1,29 @@
 ﻿
 using codeBTL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace codeBTL.Controllers
 {
     public class AccessController : Controller
     {
-       
+
         DtddContext db = new DtddContext();
 
         [HttpGet]
+        [HttpGet]
         public IActionResult Login()
         {
-            if (HttpContext.Session.GetString("UserName") == null)
+            if (HttpContext.Session.GetString("Username") == null)
             {
                 return View();
             }
+            else if (HttpContext.Session.GetString("Username") == "admin")
+            {
+                return RedirectToAction("index", "admin");
+            }
             else
             {
-
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -27,21 +32,28 @@ namespace codeBTL.Controllers
         [HttpPost]
         public IActionResult Login(Userinfo user)
         {
-            if (HttpContext.Session.GetString("UserName") == null)
+            var obj = db.Userinfos.FirstOrDefault(x => x.Username == user.Username && x.Password == user.Password);
+            if (obj != null)
             {
 
-                var obj = db.Userinfos.Where(x => x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
-                if (obj != null)
+                if (obj.Role == 1)
                 {
-                    // nếu có tồn tại thì set string cho 1 key = username và value là tên                   
-                    HttpContext.Session.SetString("UserName", obj.Username.ToString());
+                    HttpContext.Session.SetString("Username", obj.Username.ToString());
+                    return RedirectToAction("index", "admin");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Username", obj.Username.ToString());
                     return RedirectToAction("Index", "Home");
                 }
 
             }
-            // nếu ko có tồn tại trong db thì vẫn trang login
+
+            // Trả về trang Login với thông báo lỗi tương ứng
             return View();
+            //return RedirectToAction("Index", "Home");
         }
+
 
 
         public IActionResult LogOut()
@@ -50,5 +62,21 @@ namespace codeBTL.Controllers
             HttpContext.Session.Remove("Username");
             return RedirectToAction("Login", "Access");
         }
+        [AllowAnonymous, HttpGet("forgot-password")]
+        public IActionResult ForgortPassword()
+        {
+            return View();
+        }
+        /* [AllowAnonymous, HttpGet("forgot-password")]*/
+        /*  public IActionResult ForgetPassword(ForgetPassword model)
+          {
+              if (!ModelState.IsValid)
+              {
+                  ModelState.Clear();
+                  model.EmailSent = true;
+              }
+              return View();
+          }*/
+
     }
 }
