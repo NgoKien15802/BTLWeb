@@ -9,15 +9,15 @@ public partial class Userinfo
 {
     [Required(ErrorMessage = "Mã khách hàng không được để trống.")]
     [DisplayName("Mã khách hàng( KH-xx )")]
-    public string UserId { get; set; }
+    public string? UserId { get; set; }
 
     [Required(ErrorMessage = "Tên khách hàng không được để trống.")]
     [DisplayName("Tên khách hàng")]
-    public string Username { get; set; }
+    public string? Username { get; set; }
 
     [Required(ErrorMessage = "Mật khẩu không được để trống.")]
     [DisplayName("Mật khẩu")]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
     [DisplayName("Số điện thoại")]
     public string? Sdtuser { get; set; }
