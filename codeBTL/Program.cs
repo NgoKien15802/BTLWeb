@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using codeBTL.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     // tắt bỏ 
     options.SuppressModelStateInvalidFilter = true;
 });
+builder.Services.AddDbContext<DtddContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DtddContext")));
 builder.Services.AddSession();
 var app = builder.Build();
 

@@ -6,8 +6,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;
+
+using codeBTL.Models.Authentication;
 using codeBTL.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace codeBTL.Controllers
 {
@@ -19,7 +22,7 @@ namespace codeBTL.Controllers
         {
             _logger = logger;
         }
-
+       [Authentication]
         public IActionResult Index(int? page)
         {
             int pageSize = 9;

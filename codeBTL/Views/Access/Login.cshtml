@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-
+@model codeBTL.Models.Userinfo
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +39,8 @@
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            @*<form action="#">*@
+                @using(Html.BeginForm("Login","Access", FormMethod.Post)){
                 <h1>Đăng nhập</h1>
                 <div class="social-container">
                     <a href="#" class="social">
@@ -53,11 +54,22 @@
                     </a>
                 </div>
                 <span>hoặc dùng tài khoản của bạn</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                @*<input type="email" placeholder="Email" />*@
+                @Html.TextBoxFor(x=>x.Email, new{@class = "form-control",placeholder="Email", required="required", autofocus="autofocus", id="log-email"})
+                //@Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Email", required = "required", autofocus = "autofocus" })
+
+                @*<input type="password" placeholder="Password" />*@
+                @Html.TextBoxFor(x=>x.Password, new{@class = "form-control", placeholder="Password",  id="log-password"})
+                //@Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "Password", required = "required", autofocus = "autofocus" })
+
                 <a href="forgotPassword.html">Quên mật khẩu?</a>
-                <button>Đăng nhập</button>
-            </form>
+                <button type="submit">Đăng nhập</button>
+                <script>
+                    var username = document.getElementById("log-email").value;
+                    console.log(username);
+
+                </script>
+            }@*</form>*@
         </div>
         <div class="overlay-container">
             <div class="overlay">

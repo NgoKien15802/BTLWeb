@@ -1,5 +1,6 @@
 ﻿
 using codeBTL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace codeBTL.Controllers
@@ -11,10 +12,10 @@ namespace codeBTL.Controllers
 
         [HttpGet]
         public IActionResult Login()
-        {
+		{
             if (HttpContext.Session.GetString("UserName") == null)
             {
-                return View();
+                return View();                
             }
             else
             {
@@ -24,23 +25,24 @@ namespace codeBTL.Controllers
 
         // login vào hệ thống
         [HttpPost]
-        public IActionResult Login(Userinfo user)
+        public IActionResult Login(UserLogin user)
         {
-            if (HttpContext.Session.GetString("UserName") == null)
+            if (ModelState.IsValid)
             {
-
-                var obj = db.Userinfos.Where(x => x.Username.Equals(user.Username) && x.Password.Equals(user.Password)).FirstOrDefault();
+                var obj = db.Userinfos.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
                 if (obj != null)
                 {
-                    // nếu có tồn tại thì set string cho 1 key = username và value là tên                   
                     HttpContext.Session.SetString("UserName", obj.Username.ToString());
                     return RedirectToAction("Index", "Home");
                 }
-
             }
-            // nếu ko có tồn tại trong db thì vẫn trang login
-            return View();
+
+            // Trả về trang Login với thông báo lỗi tương ứng
+            ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không đúng.");
+            return View(user);
+            //return RedirectToAction("Index", "Home");
         }
+
 
 
         public IActionResult LogOut()
@@ -49,5 +51,21 @@ namespace codeBTL.Controllers
             HttpContext.Session.Remove("Username");
             return RedirectToAction("Login", "Access");
         }
+        [AllowAnonymous, HttpGet("forgot-password")]
+        public IActionResult ForgortPassword()
+        {
+            return View();
+        }
+        [AllowAnonymous, HttpGet("forgot-password")]
+        public IActionResult ForgetPassword(ForgetPassword model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.Clear();
+                model.EmailSent = true;
+            }
+            return View();
+        }
+
     }
 }
