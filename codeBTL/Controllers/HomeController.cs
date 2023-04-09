@@ -149,7 +149,6 @@ namespace codeBTL.Controllers
                              TongTien = ddh.TongTien
                          };
 
-
             if (orders != null)
             {
                 var orderList = orders.FirstOrDefault();

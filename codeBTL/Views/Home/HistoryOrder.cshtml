@@ -1,259 +1,246 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "HistoryOrder";
     Layout = "~/Views/Shared/_LayoutQLBDT.cshtml";
 }
 
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Basic page needs
+<head>
+    <!-- Basic page needs
     ============================================ -->
-        <title>Lịch sử đặt hàng</title>
-        <meta charset="utf-8" />
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="Magentech" />
-        <meta name="robots" content="index, follow" />
+    <title>Lịch sử đặt hàng</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech" />
+    <meta name="robots" content="index, follow" />
 
-        <!-- Mobile specific metas
+    <!-- Mobile specific metas
     ============================================ -->
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-        <!-- Favicon
+    <!-- Favicon
     ============================================ -->
 
-        <link rel="shortcut icon" type="image/png" href="ico/" />
+    <link rel="shortcut icon" type="image/png" href="ico/" />
 
-        <!-- Libs CSS
+    <!-- Libs CSS
     ============================================ -->
-        <link
-            rel="stylesheet"
-            href="./assets/css/bootstrap/css/bootstrap.min.css"
-        />
-        <link
-            href="./assets/css/font-awesome/css/font-awesome.min.css"
-            rel="stylesheet"
-        />
-        <link
-            href="js/datetimepicker/bootstrap-datetimepicker.min.css"
-            rel="stylesheet"
-        />
-        <link
-            href="./assets/js/owl-carousel/owl.carousel.css"
-            rel="stylesheet"
-        />
-        <link href="./assets/css/themecss/lib.css" rel="stylesheet" />
-        <link href="./assets/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-        <link href="./assets/js/minicolors/miniColors.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="./assets/css/bootstrap/css/bootstrap.min.css" />
+    <link href="./assets/css/font-awesome/css/font-awesome.min.css"
+          rel="stylesheet" />
+    <link href="js/datetimepicker/bootstrap-datetimepicker.min.css"
+          rel="stylesheet" />
+    <link href="./assets/js/owl-carousel/owl.carousel.css"
+          rel="stylesheet" />
+    <link href="./assets/css/themecss/lib.css" rel="stylesheet" />
+    <link href="./assets/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="./assets/js/minicolors/miniColors.css" rel="stylesheet" />
 
-        <!-- Theme CSS
+    <!-- Theme CSS
     ============================================ -->
-        <link href="./assets/css/themecss/so_searchpro.css" rel="stylesheet" />
-        <link href="./assets/css/themecss/so_megamenu.css" rel="stylesheet" />
-        <link href="./assets/css/themecss/so-categories.css" rel="stylesheet" />
-        <link
-            href="./assets/css/themecss/so-listing-tabs.css"
-            rel="stylesheet"
-        />
-        <link
-            href="./assets/css/themecss/so-newletter-popup.css"
-            rel="stylesheet"
-        />
+    <link href="./assets/css/themecss/so_searchpro.css" rel="stylesheet" />
+    <link href="./assets/css/themecss/so_megamenu.css" rel="stylesheet" />
+    <link href="./assets/css/themecss/so-categories.css" rel="stylesheet" />
+    <link href="./assets/css/themecss/so-listing-tabs.css"
+          rel="stylesheet" />
+    <link href="./assets/css/themecss/so-newletter-popup.css"
+          rel="stylesheet" />
 
-        <link href="./assets/css/footer/footer1.css" rel="stylesheet" />
-        <link href="./assets/css/header/header1.css" rel="stylesheet" />
-        <link
-            id="color_scheme"
-            href="./assets/css/theme.css"
-            rel="stylesheet"
-        />
-        <link href="./assets/css/responsive.css" rel="stylesheet" />
+    <link href="./assets/css/footer/footer1.css" rel="stylesheet" />
+    <link href="./assets/css/header/header1.css" rel="stylesheet" />
+    <link id="color_scheme"
+          href="./assets/css/theme.css"
+          rel="stylesheet" />
+    <link href="./assets/css/responsive.css" rel="stylesheet" />
 
-        <!-- Google web fonts
+    <!-- Google web fonts
     ============================================ -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700"
-            rel="stylesheet"
-            type="text/css"
-        />
-        <style type="text/css">
-            body {
-                font-family: "Roboto", sans-serif;
-            }
-        </style>
-    </head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700"
+          rel="stylesheet"
+          type="text/css" />
+    <style type="text/css">
+        body {
+            font-family: "Roboto", sans-serif;
+        }
+    </style>
+</head>
 
-    <body class="res layout-1 layout-subpage">
-        <div id="wrapper" class="wrapper-fluid banners-effect-5">
-            <!-- Main Container  -->
-            <div class="main-container container">
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#"><i class="fa fa-home"></i></a>
-                    </li>
-                    <li><a href="#">Lịch sử đặt hàng</a></li>
-                </ul>
+<body class="res layout-1 layout-subpage">
+    @*<div id="wrapper" class="wrapper-fluid banners-effect-5">
+    <!-- Main Container  -->
+    <div class="main-container container">
+    <ul class="breadcrumb">
+    <li>
+    <a href="#"><i class="fa fa-home"></i></a>
+    </li>
+    <li><a href="#">Lịch sử đặt hàng</a></li>
+    </ul>
 
-                <div class="row">
-                    <!--Middle Part Start-->
-                    <div id="content" class="col-sm-9">
-                        <h2 class="title">Lịch sử đặt hàng</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <td class="text-center">Hình ảnh</td>
-                                        <td class="text-left">Tên sản phẩm</td>
-                                        <td class="text-center">Mã đơn hàng</td>
-                                        <td class="text-center">Số lượng</td>
-                                        <td class="text-center">Tình trạng</td>
-                                        <td class="text-center">Ngày mua</td>
-                                        <td class="text-right">Tổng tiền</td>
-                                        <td></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center">
-                                            <a href="product.html"
-                                                ><img
-                                                    width="85"
-                                                    class="img-thumbnail"
-                                                    title="iPhone 13 Pro Max - 128GB"
-                                                    alt="iPhone 13 Pro Max - 128GB"
-                                                    src="./assets/images/products/ip13pm.png"
-                                                />
-                                            </a>
-                                        </td>
-                                        <td class="text-left">
-                                            <a href="product.html"
-                                                >iPhone 13 Pro Max - 128GB</a
-                                            >
-                                        </td>
-                                        <td class="text-center">#1</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">Đã giao</td>
-                                        <td class="text-center">21/06/2022</td>
-                                        <td class="text-right">21.890.000₫</td>
-                                        <td class="text-center">
-                                            <a
-                                                class="btn btn-info"
-                                                title=""
-                                                data-toggle="tooltip"
-                                                href="order-information.html"
-                                                data-original-title="Xem chi tiết"
-                                                ><i class="fa fa-eye"></i
-                                            ></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">
-                                            <a href="product.html"
-                                                ><img
-                                                    width="85"
-                                                    class="img-thumbnail"
-                                                    title="Samsung Galaxy Z Fold 4 5G - RAM 12GB - 512GB"
-                                                    alt="Samsung Galaxy Z Fold 4 5G - RAM 12GB - 512GB"
-                                                    src="./assets/images/products/ss_z_fold4_5g.png"
-                                                />
-                                            </a>
-                                        </td>
-                                        <td class="text-left">
-                                            <a href="product.html"
-                                                >Samsung Galaxy Z Fold 4 5G -
-                                                RAM 12GB - 512GB</a
-                                            >
-                                        </td>
-                                        <td class="text-center">#2</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">Đã giao</td>
-                                        <td class="text-center">20/06/2022</td>
-                                        <td class="text-right">32.690.000₫</td>
-                                        <td class="text-center">
-                                            <a
-                                                class="btn btn-info"
-                                                title=""
-                                                data-toggle="tooltip"
-                                                href="order-information.html"
-                                                data-original-title="Xem chi tiết"
-                                                ><i class="fa fa-eye"></i
-                                            ></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!--Middle Part End-->
-                </div>
-            </div>
-            <!-- //Main Container -->
-        </div>
+    <div class="row">
+    <!--Middle Part Start-->
+    <div id="content" class="col-sm-9">
+    <h2 class="title">Lịch sử đặt hàng</h2>
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+    <td class="text-center">Hình ảnh</td>
+    <td class="text-left">Tên sản phẩm</td>
+    <td class="text-center">Mã đơn hàng</td>
+    <td class="text-center">Số lượng</td>
+    <td class="text-center">Ngày mua</td>
+    <td class="text-right">Tổng tiền</td>
+    <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="text-center">
+    <a href="product.html"
+    ><img
+    width="85"
+    class="img-thumbnail"
+    title="iPhone 13 Pro Max - 128GB"
+    alt="iPhone 13 Pro Max - 128GB"
+    src="./assets/images/products/ip13pm.png"
+    />
+    </a>
+    </td>
+    <td class="text-left">
+    <a href="product.html"
+    >iPhone 13 Pro Max - 128GB</a
+    >
+    </td>
+    <td class="text-center">#1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">21/06/2022</td>
+    <td class="text-right">21.890.000₫</td>
+    <td class="text-center">
+    <a
+    class="btn btn-info"
+    title=""
+    data-toggle="tooltip"
+    href="order-information.html"
+    data-original-title="Xem chi tiết"
+    ><i class="fa fa-eye"></i
+    ></a>
+    </td>
+    </tr>
+    <tr>
+    <td class="text-center">
+    <a href="product.html"
+    ><img
+    width="85"
+    class="img-thumbnail"
+    title="Samsung Galaxy Z Fold 4 5G - RAM 12GB - 512GB"
+    alt="Samsung Galaxy Z Fold 4 5G - RAM 12GB - 512GB"
+    src="./assets/images/products/ss_z_fold4_5g.png"
+    />
+    </a>
+    </td>
+    <td class="text-left">
+    <a href="product.html"
+    >Samsung Galaxy Z Fold 4 5G -
+    RAM 12GB - 512GB</a
+    >
+    </td>
+    <td class="text-center">#2</td>
+    <td class="text-center">1</td>
+    <td class="text-center">20/06/2022</td>
+    <td class="text-right">32.690.000₫</td>
+    <td class="text-center">
+    <a
+    class="btn btn-info"
+    title=""
+    data-toggle="tooltip"
+    href="order-information.html"
+    data-original-title="Xem chi tiết"
+    ><i class="fa fa-eye"></i
+    ></a>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <!--Middle Part End-->
+    </div>
+    </div>
+    <!-- //Main Container -->
+    </div>*@
+    <div id="history-orders"></div>
 
-        <!-- Include Libs & Plugins
-	============================================ -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script
-            type="text/javascript"
-            src="./assets/js/jquery-2.2.4.min.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/bootstrap.min.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/owl-carousel/owl.carousel.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/themejs/libs.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/unveil/jquery.unveil.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/countdown/jquery.countdown.min.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/datetimepicker/moment.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/datetimepicker/bootstrap-datetimepicker.min.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/jquery-ui/jquery-ui.min.js"
-        ></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/HistoryOrderAPI/GetHistoryOrder',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var html = '';
+                    $.each(data, function (index, order) {
+                        html += '<div class="order">';
+                        html += '<div class="order-date">' + order.NgayDat + '</div>';
+                        html += '<div class="order-item">';
+                        html += '<p>' + order.TenSp + '</p>';
+                        html += '<div class="order-item-info">';
+                        html += '<div class="order-item-name">' + order.TenSp + '</div>';
+                        html += '<div class="order-item-quantity">Số lượng: ' + order.Sldat + '</div>';
+                        html += '<div class="order-item-price">Tổng tiền: ' + order.TongTien + '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                    });
+                    $('#history-orders').html(html);
+                },
+                error: function (xhr, status, error) {
+                    alert('Error');
+                }
+            });
+        });
+    </script>
+    <!-- Include Libs & Plugins
+     ============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript"
+            src="./assets/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/themejs/libs.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/unveil/jquery.unveil.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/datetimepicker/moment.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/jquery-ui/jquery-ui.min.js"></script>
 
-        <!-- Theme files
-	============================================ -->
+    <!-- Theme files
+    ============================================ -->
 
-        <script
-            type="text/javascript"
-            src="./assets/js/themejs/so_megamenu.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/themejs/addtocart.js"
-        ></script>
-        <script
-            type="text/javascript"
-            src="./assets/js/themejs/application.js"
-        ></script>
-    </body>
+    <script type="text/javascript"
+            src="./assets/js/themejs/so_megamenu.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/themejs/addtocart.js"></script>
+    <script type="text/javascript"
+            src="./assets/js/themejs/application.js"></script>
+</body>
+
+
+
+
 </html>
 
 
