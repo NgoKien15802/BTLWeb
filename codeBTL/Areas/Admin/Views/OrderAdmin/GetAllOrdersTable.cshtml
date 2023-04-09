@@ -1,0 +1,95 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList.Mvc.Core
+@using codeBTL.ViewModels
+@model X.PagedList.IPagedList<OrderViewModel>
+<table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.988px;text-align: center;">Tên khách hàng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.925px;text-align: center;">Email khách hàng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.1125px;text-align: center;">Địa chỉ</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 50.275px;text-align: center;">Số lượng đặt</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 50.325px;text-align: center;">Tổng tiền</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.325px;text-align: center;">Ngày đặt hàng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.325px;text-align: center;">Chức năng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SLDat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDatHang)
+                </td>
+                <td class="d-flex" style="column-gap: 6px;">
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
+                        <a asp-action="EditOrders" asp-route-maDH="@item.IdOrder"> <i class="fas fa-edit btn-primary"></i></a>
+                    </button>
+                    <a type="button" class="btn btn-primary delete-btn" data-toggle="modal" data-target="#deleteDialog" onclick="openDeleteDialog('@item.IdOrder')"><i class="fas fa-trash-alt btn-cart"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_PagingPartialOrder")
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="deleteDialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteDialogLabel">Xác nhận xóa?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa mã <span id="deleteUserId"></span> không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                    <a id="deleteLink">Xóa</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*show toast*@
+@if (TempData["Message"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: '@TempData["MessageType"]',
+            title: '@TempData["Message"]'
+        });
+    </script>
+}
+
+<script>
+    function openDeleteDialog(maDH) {
+        $("#deleteDialog").modal("show"); // hiển thị modal
+        $("#deleteUserId").text(maDH); // hiển thị userId trong modal body
+        $("#confirmDeleteBtn").on("click", function () { // xóa khi nhấn vào nút Xóa trong modal footer
+            $("#deleteDialog").modal("hide"); // ẩn modal
+            $("#deleteLink").attr("href", "DeleteOrders?maDH=" + maDH);
+        });
+    }
+</script>

@@ -1,49 +1,50 @@
-﻿
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using codeBTL.Models
 @using X.PagedList.Mvc.Core
-@model X.PagedList.IPagedList<Userinfo>
+@model X.PagedList.IPagedList<Sanpham>
 <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
     <thead>
         <tr role="row">
-            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Mã khách hàng: activate to sort column ascending" style="width: 118.988px;text-align: center;">Họ tên</th>
-            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Tên khách hàng: activate to sort column ascending" style="width: 41.925px;text-align: center;">Số điện thoại</th>
-            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Ảnh: activate to sort column ascending" style="width: 200.1125px;text-align: center;">Địa chỉ</th>
-            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Số lượng: activate to sort column ascending" style="width: 86.275px;text-align: center;">Email</th>
-            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Tình trạng: activate to sort column ascending" style="width: 93.325px;text-align: center;">Role</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Mã phụ kiện: activate to sort column ascending" style="width: 100.988px;text-align: center;">Tên phụ kiện</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Tên phụ kiện: activate to sort column ascending" style="width: 100.925px;text-align: center;">Ảnh phụ kiện</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Ảnh: activate to sort column ascending" style="width: 50.1125px;text-align: center;">Số lượng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Số lượng: activate to sort column ascending" style="width: 50.275px;text-align: center;">Trọng lượng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Tình trạng: activate to sort column ascending" style="width: 50.325px;text-align: center;">Thời gian bảo hành</th>
             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Chức năng: activate to sort column ascending" style="width: 100.325px;text-align: center;">Chức năng</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Username)
+                    @Html.DisplayFor(modelItem => item.TenSp)
+                </td>
+                <td style="text-align:center">
+                    <img style="height:100px; text-align:center;" src="@Url.Content("~/assets/images/products/"+@item.AnhDaiDien)" alt="Ảnh sản phẩm">
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sdtuser)
+                    @Html.DisplayFor(modelItem => item.SoLuong)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DiaChiUser)
+                    @Html.DisplayFor(modelItem => item.TrongLuong)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.ThoiGianBh)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Role)
-                </td>
-                <td style="display: flex; align-items: center;justify-content: center;column-gap: 6px;">
+                <td class="d-flex" style="column-gap: 6px;">
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
-                        <a asp-action="EditUsers" asp-route-maKH="@item.UserId"> <i class="fas fa-edit btn-primary"></i></a>
+                        <a asp-action="EditPhoneAccessorises" asp-route-maSp="@item.MaSp"> <i class="fas fa-edit btn-primary"></i></a>
                     </button>
-                    <a type="button" class="btn btn-primary delete-btn" data-toggle="modal" data-target="#deleteDialog" onclick="openDeleteDialog('@item.UserId')"><i class="fas fa-trash-alt btn-cart"></i></a>
+                    <a type="button" class="btn btn-primary delete-btn" data-toggle="modal" data-target="#deleteDialog" onclick="openDeleteDialog('@item.MaSp')"><i class="fas fa-trash-alt btn-cart"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-@Html.Partial("_PagingPartial")
+
+@Html.Partial("_PagingPartialAccessories")
 <!-- Modal xác nhận xóa -->
 <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="deleteDialogLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -85,7 +86,7 @@
         $("#deleteUserId").text(userId); // hiển thị userId trong modal body
         $("#confirmDeleteBtn").on("click", function () { // xóa khi nhấn vào nút Xóa trong modal footer
             $("#deleteDialog").modal("hide"); // ẩn modal
-            $("#deleteLink").attr("href", "DeleteUsers?maKH=" + userId);
-        }); 
+            $("#deleteLink").attr("href", "DeletePhoneAccessorises?maSp=" + userId);
+        });
     }
 </script>

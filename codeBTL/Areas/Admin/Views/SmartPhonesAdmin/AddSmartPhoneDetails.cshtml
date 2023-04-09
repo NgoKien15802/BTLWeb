@@ -1,0 +1,65 @@
+﻿@model codeBTL.Models.Chitietsp
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "addSmartPhoneDetails";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Tạo mới chi tiết phụ kiện</h3>
+            <div class="tile-body">
+                <form asp-action="addSmartPhoneDetails" class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MaChiTietSp" class="control-label"></label>
+                        <input asp-for="MaChiTietSp" class="form-control" value="@ViewBag.CTMaSp" readonly />
+                        <span asp-validation-for="MaChiTietSp" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="MaSp" class="control-label"></label>
+                        <input asp-for="MaSp" class="form-control" value="@ViewBag.MaSp" readonly />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="DonGiaBan" class="control-label"></label>
+                        <input asp-for="DonGiaBan" class="form-control" />
+                        <span asp-validation-for="DonGiaBan" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="DonGiaNhap" class="control-label"></label>
+                        <input asp-for="DonGiaNhap" class="form-control" />
+                        <span asp-validation-for="DonGiaNhap" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Ram" class="control-label"></label>
+                        <input asp-for="Ram" class="form-control" />
+                        <span asp-validation-for="Ram" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Rom" class="control-label"></label>
+                        <input asp-for="Rom" class="form-control" />
+                        <span asp-validation-for="Rom" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Cpu" class="control-label"></label>
+                        <input asp-for="Cpu" class="form-control" />
+                        <span asp-validation-for="Cpu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Dlpin" class="control-label"></label>
+                        <input asp-for="Dlpin" class="form-control" />
+                        <span asp-validation-for="Dlpin" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="submit" value="Lưu lại" class="btn btn-save" />
+                        <a class="btn btn-cancel" asp-controller="SmartPhonesAdmin" asp-action="GetAllSmartPhones">Hủy bỏ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

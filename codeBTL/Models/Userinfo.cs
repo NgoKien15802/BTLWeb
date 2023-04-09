@@ -9,15 +9,15 @@ public partial class Userinfo
 {
     [Required(ErrorMessage = "Mã khách hàng không được để trống.")]
     [DisplayName("Mã khách hàng( KH-xx )")]
-    public string UserId { get; set; }
+    public string? UserId { get; set; }
 
     [Required(ErrorMessage = "Tên khách hàng không được để trống.")]
     [DisplayName("Tên khách hàng")]
-    public string Username { get; set; }
+    public string? Username { get; set; }
 
     [Required(ErrorMessage = "Mật khẩu không được để trống.")]
     [DisplayName("Mật khẩu")]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
     [DisplayName("Số điện thoại")]
     public string? Sdtuser { get; set; }
@@ -33,6 +33,8 @@ public partial class Userinfo
     [Range(0, 1, ErrorMessage = "Vai trò không hợp lệ ( 0:User, 1:Admin ).")]
     [DisplayName("Vai trò ( 0:User, 1:Admin )")]
     public int Role { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
     public virtual ICollection<Dondathang> Dondathangs { get; } = new List<Dondathang>();
 
     public virtual ICollection<Hoadonban> Hoadonbans { get; } = new List<Hoadonban>();

@@ -1,0 +1,93 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using codeBTL.Models
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Sanpham>
+
+<table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+    <thead>
+        <tr role="row">
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.988px;text-align: center;">Tên điện thoại</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 100.925px;text-align: center;">Ảnh điện thoại</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 20.1125px;text-align: center;">Số lượng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 20.275px;text-align: center;">Trọng lượng</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 20.325px;text-align: center;">Thời gian bảo hành</th>
+            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" style="width: 50.325px;text-align: center;">Chức năng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSp)
+                </td>
+                <td style="text-align:center">
+                    <img style="height:100px; text-align:center;" src="@Url.Content("~/assets/images/products/"+@item.AnhDaiDien)" alt="Ảnh sản phẩm">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrongLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiGianBh)
+                </td>
+                <td class="d-flex" style="column-gap: 6px;">
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
+                        <a asp-action="EditSmartPhones" asp-route-maSp="@item.MaSp"> <i class="fas fa-edit btn-primary"></i></a>
+                    </button>
+                    <a type="button" class="btn btn-primary delete-btn" data-toggle="modal" data-target="#deleteDialog" onclick="openDeleteDialog('@item.MaSp')"><i class="fas fa-trash-alt btn-cart"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_PagingPartialSmartPhone")
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="deleteDialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteDialogLabel">Xác nhận xóa?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa mã <span id="deleteUserId"></span> không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                    <a id="deleteLink">Xóa</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*show toast*@
+@if (TempData["Message"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: '@TempData["MessageType"]',
+            title: '@TempData["Message"]'
+        });
+    </script>
+}
+
+<script>
+    function openDeleteDialog(userId) {
+        $("#deleteDialog").modal("show"); // hiển thị modal
+        $("#deleteUserId").text(userId); // hiển thị userId trong modal body
+        $("#confirmDeleteBtn").on("click", function () { // xóa khi nhấn vào nút Xóa trong modal footer
+            $("#deleteDialog").modal("hide"); // ẩn modal
+            $("#deleteLink").attr("href", "DeleteSmartPhones?maSp=" + userId);
+        });
+    }
+</script>
