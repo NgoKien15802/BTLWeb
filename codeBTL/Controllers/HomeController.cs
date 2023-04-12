@@ -180,13 +180,13 @@ namespace codeBTL.Controllers
                 donDatHang.NgayDat = DateTime.Now;
                 donDatHang.MaNv = "NV01";
                 var ctsp = db.Chitietsps.AsNoTracking().Where(x => x.MaSp == MaSp).FirstOrDefault();
-                donDatHang.TongTien = ctsp.DonGiaBan;
+                donDatHang.TongTien = 0;
                 // Thêm đơn đặt hàng vào cơ sở dữ liệu
                 db.Dondathangs.Add(donDatHang);
                 db.SaveChanges();
 
                 // Tạo chi tiết đơn đặt hàng mới cho sản phẩm được chọn
-               
+
                 var chiTietDDH = new Chitietddh();
                 chiTietDDH.MaDh = donDatHang.MaDh;
                 chiTietDDH.MaSp = MaSp;
@@ -202,14 +202,9 @@ namespace codeBTL.Controllers
             {
                 return RedirectToAction("Login", "Access");
             }
-
-         
         }
 
-        public IActionResult UpdateOrder(string? MaSp)
-        {
-            return View();
-        }
+      
 
         public IActionResult HistoryOrder()
         {

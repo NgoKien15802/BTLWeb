@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutQLBDT.cshtml";
 }
 @model OrderDetailsViewModel
-
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +113,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                
+
                                 <td style=" vertical-align: top"
                                     class="text-left">
                                     Địa chỉ giao hàng
@@ -124,7 +124,7 @@
                             <tr>
                                 <td class="text-left">
                                     Username: @Model.Username <br />Address: @Model.DiaChiUser
-                                </td >
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -165,10 +165,13 @@
                                         <a class="btn btn-primary"
                                            title=""
                                            data-toggle="tooltip"
+                                           id="resetBtn"
+                                           onclick="resetOrder('@Model.MaDh', '@Model.MaSp')"
                                            data-original-title="Đặt lại">
                                             Đặt lại
                                         </a>
-                                        
+
+
                                         <a class="btn btn-danger"
                                            title=""
                                            data-toggle="tooltip"
@@ -190,10 +193,40 @@
     </div>
 
     <script>
-        function handleSelectValue(value){
+        var slDat = 1
+        function handleSelectValue(value) {
+            slDat = value;
             let totalAmount = value * @Model.DonGiaBan;
             $('#totalAmount').text(totalAmount);
         }
+
+        function resetOrder(maDh, maSp) {
+            $.ajax({
+                url: 'https://localhost:7206/api/HistoryOrderAPI/' + maDh + '?MaSp=' + maSp,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(slDat),
+                success: function (result) {
+                    // Handle success
+                    Swal.fire({
+                        title: 'Thông báo!',
+                        text: 'Bạn đã sửa đơn hàng thành công',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/home/index'; // Chuyển hướng về trang index
+                        }
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle error
+                    alert(jqXHR);
+                }
+            });
+            }
     </script>
     <!-- Include Libs & Plugins
     ============================================ -->

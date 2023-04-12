@@ -3,6 +3,7 @@ using codeBTL.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using X.PagedList;
 
 namespace codeBTL.Areas.Admin.Controllers
@@ -280,15 +281,9 @@ namespace codeBTL.Areas.Admin.Controllers
             {
                 try
                 {// Select the record that you want to update
-                    var originalChitietddh = db.Chitietddhs.Find(chitietddh.MaDh);
-
-                    // Modify the selected record
-                    originalChitietddh.MaSp = chitietddh.MaSp;
-                    originalChitietddh.KhuyenMai = chitietddh.KhuyenMai;
-                    originalChitietddh.Sldat = chitietddh.Sldat;
-
+                    var query = $"UPDATE CHITIETDDH SET SLDat = {chitietddh.Sldat} WHERE MaDH = N'{chitietddh.MaDh}' AND MaSP = N'{chitietddh.MaSp}'";
                     // Save the changes back to the database
-                    db.SaveChanges();
+                    var result = db.Database.ExecuteSqlRaw(query);
                 }
                 catch (Exception ex)
                 {
@@ -315,10 +310,12 @@ namespace codeBTL.Areas.Admin.Controllers
            
             try
             {
-                var ctHD = db.Chitietddhs.Where(x => x.MaDh == maDH).ToList();
-                if (ctHD.Any()) db.RemoveRange(ctHD);
-                db.Remove(db.Dondathangs.Find(maDH));
-                db.SaveChanges();
+                var query = $"delete from CHITIETDDH where CHITIETDDH.MaDH= N'{maDH}'";
+                // Save the changes back to the database
+                var result = db.Database.ExecuteSqlRaw(query);
+                var query1 = $"delete from DONDATHANG where DONDATHANG.MaDH= N'{maDH}'";
+                // Save the changes back to the database
+                var result1 = db.Database.ExecuteSqlRaw(query1);
                 TempData["Message"] = $"Đơn đặt hàng có mã {maDH} đã được xóa";
                 TempData["MessageType"] = "success";
             }

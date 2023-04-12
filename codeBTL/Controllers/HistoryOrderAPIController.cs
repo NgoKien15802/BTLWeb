@@ -41,6 +41,26 @@ namespace codeBTL.Controllers
             }
             
         }
+        [HttpPut("{MaDh}")]
+        public IActionResult UpdateRecord([FromBody] int slDat, [FromRoute] string MaDh, [FromQuery] string MaSp)
+        {
+            try
+            {
+                var query = $"UPDATE CHITIETDDH SET SLDat = {slDat} WHERE MaDH = N'{MaDh}' AND MaSP = N'{MaSp}'";
+                var result = db.Database.ExecuteSqlRaw(query);
+
+                if (result == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
 
     }
 }
