@@ -93,17 +93,133 @@ namespace codeBTL.Controllers
             return PartialView("GetTop9Products", topProducts);
         }
 
-        public IActionResult SmartPhone()
+        public IActionResult SmartPhone(int? page, string searchString = null, int pageSize = 9)
         {
-            return View();
+            ViewBag.psz = pageSize;
+            int pageNumber = page == null || page < 0 ? 1 : page.Value;
+            if(searchString != null)
+            {
+                var productsSearch = (from sp in db.Sanphams
+                                join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                                where sp.TenSp.Contains(searchString) && sp.MaLoai == "LOAI01"
+                                orderby sp.TenSp
+                                select new Models.ViewModels.SanPhamViewModel
+                                {
+                                    MaSp = sp.MaSp,
+                                    TenSp = sp.TenSp,
+                                    AnhDaiDien = sp.AnhDaiDien,
+                                    DonGiaBan = cts.DonGiaBan
+                                }).OrderBy(x => x.TenSp);
+                ViewBag.Search = searchString;
+                PagedList<SanPhamViewModel> pagedListSearch = new PagedList<SanPhamViewModel>(productsSearch, pageNumber, pageSize);
+                return View(pagedListSearch);
+            }
+            var products = (from sp in db.Sanphams
+                            join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                            where sp.MaLoai == "LOAI01"
+                            orderby sp.TenSp
+                            select new Models.ViewModels.SanPhamViewModel
+                            {
+                                MaSp = sp.MaSp,
+                                TenSp = sp.TenSp,
+                                AnhDaiDien = sp.AnhDaiDien,
+                                DonGiaBan = cts.DonGiaBan
+                            }).OrderBy(x => x.TenSp);
+
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
+            return View(pagedList);
         }
 
-        public IActionResult PhoneAccessories()
+        public IActionResult SmartphoneByBrand(string maHang, int? page, string searchString = null, int pageSize = 9)
         {
+            ViewBag.psz = pageSize;
+            ViewBag.MaHang = maHang;
+            ViewBag.TenHang = db.Hangs.Where(x=>x.MaHangSx == maHang).Select(x=>x.TenHangSx).FirstOrDefault();
+            int pageNumber = page == null || page < 0 ? 1 : page.Value;
+            if (searchString != null)
+            {
+                var productsSearch = (from sp in db.Sanphams
+                                      join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                                      where sp.TenSp.Contains(searchString) && sp.MaLoai == "LOAI01"
+                                      orderby sp.TenSp
+                                      select new Models.ViewModels.SanPhamViewModel
+                                      {
+                                          MaSp = sp.MaSp,
+                                          TenSp = sp.TenSp,
+                                          AnhDaiDien = sp.AnhDaiDien,
+                                          DonGiaBan = cts.DonGiaBan
+                                      }).OrderBy(x => x.TenSp);
+                ViewBag.Search = searchString;
+                PagedList<SanPhamViewModel> pagedListSearch = new PagedList<SanPhamViewModel>(productsSearch, pageNumber, pageSize);
+                return View(pagedListSearch);
+            }
+            var products = (from sp in db.Sanphams
+                            join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                            where sp.MaLoai == "LOAI01" && sp.MaHangSx == maHang
+                            orderby sp.TenSp
+                            select new Models.ViewModels.SanPhamViewModel
+                            {
+                                MaSp = sp.MaSp,
+                                TenSp = sp.TenSp,
+                                AnhDaiDien = sp.AnhDaiDien,
+                                DonGiaBan = cts.DonGiaBan
+                            }).OrderBy(x => x.TenSp);
 
-            return View();
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
+            return View(pagedList);
+        }
+        public IActionResult PhoneAccessories(int? page, string searchString = null, int pageSize = 9)
+        {
+            ViewBag.psz = pageSize;
+            int pageNumber = page == null || page < 0 ? 1 : page.Value;
+            if (searchString != null)
+            {
+                var productsSearch = (from sp in db.Sanphams
+                                      join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                                      where sp.TenSp.Contains(searchString) && sp.MaLoai == "LOAI02"
+                                      orderby sp.TenSp
+                                      select new Models.ViewModels.SanPhamViewModel
+                                      {
+                                          MaSp = sp.MaSp,
+                                          TenSp = sp.TenSp,
+                                          AnhDaiDien = sp.AnhDaiDien,
+                                          DonGiaBan = cts.DonGiaBan
+                                      }).OrderBy(x => x.TenSp);
+                ViewBag.Search = searchString;
+                PagedList<SanPhamViewModel> pagedListSearch = new PagedList<SanPhamViewModel>(productsSearch, pageNumber, pageSize);
+                return View(pagedListSearch);
+            }
+            var products = (from sp in db.Sanphams
+                            join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                            where sp.MaLoai == "LOAI02"
+                            orderby sp.TenSp
+                            select new Models.ViewModels.SanPhamViewModel
+                            {
+                                MaSp = sp.MaSp,
+                                TenSp = sp.TenSp,
+                                AnhDaiDien = sp.AnhDaiDien,
+                                DonGiaBan = cts.DonGiaBan
+                            }).OrderBy(x => x.TenSp);
+
+            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
+            return View(pagedList);
         }
 
+        public JsonResult GetSuggestions(string keyword)
+        {
+            var products = (from sp in db.Sanphams
+                            join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                            where sp.TenSp.Contains(keyword)
+                            orderby sp.TenSp
+                            select new Models.ViewModels.SanPhamViewModel
+                            {
+                                MaSp = sp.MaSp,
+                                TenSp = sp.TenSp,
+                                AnhDaiDien = sp.AnhDaiDien,
+                                DonGiaBan = cts.DonGiaBan
+                            }).Take(5).OrderBy(x => x.TenSp);
+            return Json(products);
+        }
         public IActionResult News()
         {
             return View();

@@ -140,11 +140,15 @@
                                         });
                                     });
                                 });
+                                // hiện hộp gợi ý khi người dùng nhấn vào input
                                 document.getElementById("searchInput").addEventListener("focus", function () {
                                     $('#suggest-box').show();
                                 });
-                                document.getElementById("searchInput").addEventListener("blur", function () {
-                                    $('#suggest-box').hide();
+                                // ẩn hộp gợi ý khi người dùng click ra ngoài input hoặc suggest box
+                                $(document).on('click', function (e) {
+                                    if (!$(e.target).is('#searchInput') && !$(e.target).is('#suggest-box *')) {
+                                        $('#suggest-box').hide();
+                                    }
                                 });
                             </script>
                         </div>
@@ -161,13 +165,13 @@
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
                                                 <li>
-                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="9">9</a>
+                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search">9</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="15">15</a>
+                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search">15</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="21">21</a>
+                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search">21</a>
                                                 </li>
                                             </ul>
                                         </li>

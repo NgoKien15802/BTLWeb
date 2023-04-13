@@ -124,7 +124,7 @@
                                                 // Xóa danh sách gợi ý sản phẩm cũ
                                             $('#suggest-box').empty();
                                                 // Hiển thị danh sách gợi ý sản phẩm mới
-                                                for (var i = 0; i < data.length; i++){
+                                            for (var i = 0; i < data.length; i++){
                                                     var str = "";
                                                     str+=    '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
                                                     str += '<img src=\"../assets/images/products/' + $.trim(data[i].anhDaiDien) + '\" alt = "Anh san pham">';
@@ -132,16 +132,20 @@
                                                     str += '<span class="price">' + data[i].donGiaBan.toLocaleString() + '₫</span>';
                                                     str+= '</div></a></li>';
                                                     $('#suggest-box').append(str);
-                                                };
+                                            };
                                             };
                                             });
                                         });
                                     });
+                                    // hiện hộp gợi ý khi người dùng nhấn vào input
                                     document.getElementById("searchInput").addEventListener("focus", function () {
                                         $('#suggest-box').show();
                                     });
-                                    document.getElementById("searchInput").addEventListener("blur", function () {
-                                    $('#suggest-box').hide();
+                                    // ẩn hộp gợi ý khi người dùng click ra ngoài input hoặc suggest box
+                                    $(document).on('click', function (e) {
+                                        if (!$(e.target).is('#searchInput') && !$(e.target).is('#suggest-box *')) {
+                                            $('#suggest-box').hide();
+                                        }
                                     });
                                </script>
                         </div>
@@ -158,13 +162,13 @@
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9">9</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search">9</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15">15</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search">15</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21">21</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search">21</a>
                                                 </li>
                                             </ul>
                                         </li>
