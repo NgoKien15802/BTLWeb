@@ -1,20 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Điện thoại thông minh";
+    ViewData["Title"] = ViewBag.TenHang;
     Layout = "_LayoutQLBDT";
 }
 @using X.PagedList.Mvc.Core
 @model X.PagedList.IPagedList<codeBTL.Models.ViewModels.SanPhamViewModel>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 <style>
     form {
         display: flex;
         width: 825px;
     }
+
     #search-btn {
         margin-left: 10px;
     }
 
-        #suggest-box {
-            display:block;
+    #suggest-box {
+        display: block;
         position: absolute;
         top: 32px;
         width: 400px;
@@ -23,7 +25,7 @@
         box-shadow: 0 0 10px #ccc;
         z-index: 3;
         background-color: #fff;
-        }
+    }
 
         #suggest-box li {
             list-style: none;
@@ -59,10 +61,11 @@
                 font-weight: 700;
                 color: #d70018
             }
-            #searchForm {
-                position: relative;
-                overflow: show;
-            }
+
+    #searchForm {
+        position: relative;
+        overflow: show;
+    }
 </style>
 <!-- Begin main -->
 <div id="main">
@@ -71,7 +74,7 @@
 
             <div class="col-sm-9 col-sm-push-3">
                 <h2 class="page-heading">
-                    <span class="page-heading-title">Smartphones</span>
+                    <span class="page-heading-title">Smartphones > @ViewBag.TenHang</span>
                 </h2>
                 @if (ViewBag.Search != null)
                 {
@@ -86,64 +89,66 @@
                                 align-items: center;
                                 column-gap: 10px;
                             ">
-                            <form method="post" action="@Url.Action("Smartphone", "Home")" id="searchForm" >
+                            <form method="post" action="@Url.Action("SmartphoneByBrand", "Home")" id="searchForm">
                                 <input id="searchInput" name="searchString" type="text" class="form-control" style="height: 100%" placeholder="Bạn cần tìm gì?">
                                 <div class="input-group-append">
-                                    <button asp-controller="Home" asp-action="Smartphone" asp-route-pageSize="@ViewBag.psz" id="search-btn" class="btn btn-primary" type="submit">
+                                    <button asp-controller="Home" asp-action="SmartphoneByBrand" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="@ViewBag.psz" id="search-btn" class="btn btn-primary" type="submit">
                                         Search <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-
                                 <ul id="suggest-box">
                                 </ul>
                             </form>
-                                <script>
-                                  var form = document.getElementById("searchForm");
-                                  var input = document.getElementsByName("searchString")[0];
 
-                                  input.addEventListener("keyup", function(event) {
+                            <script>
+                                var form = document.getElementById("searchForm");
+                                var input = document.getElementsByName("searchString")[0];
+
+                                input.addEventListener("keyup", function (event) {
                                     event.preventDefault();
                                     if (event.keyCode === 13) { // Kiểm tra xem phím nhấn là phím Enter
-                                      form.submit(); // Gọi hành động submit của form
+                                        form.submit(); // Gọi hành động submit của form
                                     }
-                                  });
+                                });
 
-                                    $('#suggest-box').hide();
-                                        
-                                    $(function () {
-                                        // Khi người dùng nhập từ khóa vào thẻ input
-                                        $('#searchInput').keyup(function () {
-                                            // Lấy từ khóa và gửi yêu cầu AJAX để tải danh sách gợi ý sản phẩm
-                                            var keyword = $(this).val();
-                                            $.getJSON('/Home/GetSuggestions', { keyword: keyword }, function (data) {
-                                            if(data == ""){
+
+                                $('#suggest-box').hide();
+
+                                $(function () {
+                                    // Khi người dùng nhập từ khóa vào thẻ input
+                                    $('#searchInput').keyup(function () {
+                                        // Lấy từ khóa và gửi yêu cầu AJAX để tải danh sách gợi ý sản phẩm
+                                        var keyword = $(this).val();
+                                        $.getJSON('/Home/GetSuggestions', { keyword: keyword }, function (data) {
+                                            if (data == "") {
                                                 $('#suggest-box').hide();
                                             }
                                             else {
-                                            $('#suggest-box').show();
+                                                $('#suggest-box').show();
                                                 // Xóa danh sách gợi ý sản phẩm cũ
-                                            $('#suggest-box').empty();
+                                                $('#suggest-box').empty();
                                                 // Hiển thị danh sách gợi ý sản phẩm mới
-                                                for (var i = 0; i < data.length; i++){
+                                                for (var i = 0; i < data.length; i++) {
                                                     var str = "";
-                                                    str+=    '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
+                                                    str += '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
                                                     str += '<img src=\"../assets/images/products/' + $.trim(data[i].anhDaiDien) + '\" alt = "Anh san pham">';
                                                     str += '<div><h4 class="productName">' + data[i].tenSp + '</h4>';
                                                     str += '<span class="price">' + data[i].donGiaBan.toLocaleString() + '₫</span>';
-                                                    str+= '</div></a></li>';
+                                                    str += '</div></a></li>';
                                                     $('#suggest-box').append(str);
                                                 };
                                             };
-                                            });
                                         });
                                     });
-                                    document.getElementById("searchInput").addEventListener("focus", function () {
-                                        $('#suggest-box').show();
-                                    });
-                                    document.getElementById("searchInput").addEventListener("blur", function () {
+                                });
+                                document.getElementById("searchInput").addEventListener("focus", function () {
+                                    $('#suggest-box').show();
+                                });
+                                document.getElementById("searchInput").addEventListener("blur", function () {
                                     $('#suggest-box').hide();
-                                    });
-                               </script>
+                                });
+                            </script>
+
                         </div>
                     </div>
 
@@ -158,13 +163,13 @@
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9">9</a>
+                                                    <a asp-action="SmartphoneByBrand" asp-controller="Home" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="9">9</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15">15</a>
+                                                    <a asp-action="SmartphoneByBrand" asp-controller="Home" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="15">15</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21">21</a>
+                                                    <a asp-action="SmartphoneByBrand" asp-controller="Home" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="21">21</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -186,7 +191,7 @@
                                 @if (!Model.Any())
                                 {
                                     <div class="message">
-                                        <h4 style="text-align:center">Không tìm thấy sản phẩm phù hợp</h4>
+                                        <h4 style="text-align:center" >Không tìm thấy sản phẩm phù hợp</h4>
                                     </div>
                                 }
                                 else
@@ -197,7 +202,7 @@
                                             <div class="item-inner">
                                                 <div class="item-img">
                                                     <div class="item-img-info">
-                                                        <a asp-controller="Home" asp-action="SmartphoneDetails" asp-route-maSp="@item.MaSp"
+                                                    <a asp-controller="Home" asp-action="SmartphoneDetails" asp-route-maSp="@item.MaSp"
                                                    class="product-image">
                                                             <img id="product-collection-image-446"
                                                          class="img-responsive"
@@ -276,7 +281,7 @@
                                 }
                             </div>
                             <div class="row product_pagination col-12">
-                                        @Html.PagedListPager(Model,page => Url.Action("Smartphone","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search ,page=page}))
+                                @Html.PagedListPager(Model,page => Url.Action("SmartphoneByBrand","Home", new {maHang = ViewBag.MaHang, pageSize= ViewBag.psz, searchString = ViewBag.Search ,page=page}))
                             </div>
 
                         </ul>
@@ -287,6 +292,7 @@
                     <!-- begin bottom toolbar -->
                     <div class="bottom-toolbar" style="overflow: visible;">
                         <div class="toolbar">
+
                             <div class="pager">
                                 <div id="limiter">
                                     <ul>
@@ -294,15 +300,15 @@
                                         <li>
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
-                                                <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9">9</a>
-                                                </li>
-                                                <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15">15</a>
-                                                </li>
-                                                <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21">21</a>
-                                                </li>
+                                            <li>
+                                                <a asp-action="SmartphoneByBrand" asp-controller="Home" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="9">9</a>
+                                            </li>
+                                            <li>
+                                                <a asp-action="SmartphoneByBrand" asp-controller="Home" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="15">15</a>
+                                            </li>
+                                            <li>
+                                                <a asp-action="SmartphoneByBrand" asp-controller="Home" asp-route-maHang="@ViewBag.MaHang" asp-route-pageSize="21">21</a>
+                                            </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -322,7 +328,7 @@
                     <div class="box-content box-category">
                         <ul>
                             <li>
-                                <a class="active" asp-action="Smartphone" asp-controller="Home">Smartphones</a>
+                            <a class="active" asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="@ViewBag.psz">Smartphones</a>
                                 <span class="subDropdown minus"></span>
                                 <ul class="level0_2022" style="display:block">
                                     @await Component.InvokeAsync("BrandMenu")
@@ -331,7 +337,7 @@
                             </li><!--level 0-->
 
                             <li class="mega-menu">
-                                <a class="level-top" asp-action="PhoneAccessories" asp-controller="Home"><span>Phụ kiện</span></a>
+                            <a class="level-top" asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="@ViewBag.psz"><span>Phụ kiện</span></a>
                     </div><!--box-content box-category-->
                 </div><!--side-nav-categories-->
 
@@ -396,11 +402,11 @@
         </div>
     </div>
 </div>
-                            @if (!Model.Any())
-                                {
-                                    <script>
-                                        $(".top-toolbar").hide();
-                                        $(".bottom-toolbar").hide();
-                                        $(".product_pagination").hide();
-                                    </script>
-                                }
+@if (!Model.Any())
+{
+    <script>
+        $(".top-toolbar").hide();
+        $(".bottom-toolbar").hide();
+        $(".product_pagination").hide();
+    </script>
+}

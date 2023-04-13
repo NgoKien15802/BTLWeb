@@ -1,4 +1,5 @@
 ﻿using codeBTL.Models;
+using codeBTL.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 builder.Services.AddDbContext<DtddContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DtddContext")));
 builder.Services.AddSession();
+builder.Services.AddScoped<IBrandMenuRepository, BrandMenuRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,5 +39,10 @@ app.MapControllerRoute(
    name: "default",
     pattern: "{controller=Access}/{action=Login}/{id?}");
 
+app.MapControllerRoute(
+    name: "SmartphoneByBrand",
+    pattern: "Home/SmartphoneByBrand/{maHang}/{page?}",
+    defaults: new { controller = "Home", action = "SmartphoneByBrand", maHang = "" }
+);
 
 app.Run();

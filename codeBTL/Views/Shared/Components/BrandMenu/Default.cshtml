@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Hang>
+<style>
+    li a.active {
+        color: #0aa2ee !important;
+		letter-spacing: 1px !important;
+    }
+    li.level1:hover {
+        background-color: #ddd;
+    }
+</style>
+@foreach (var item in Model){
+    var active = "";
+    if (ViewBag.TenHang == item.TenHangSx)
+    {
+        active = "active";
+    }
+    <li class="level1">
+        <a class="@active" asp-controller="Home" asp-action="SmartphoneByBrand" asp-route-maHang="@item.MaHangSx" asp-route-pageSize="@ViewBag.psz">@item.TenHangSx</a>
+        </li>
+}
