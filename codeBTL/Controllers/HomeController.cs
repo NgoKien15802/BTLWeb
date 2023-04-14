@@ -22,7 +22,7 @@ namespace codeBTL.Controllers
         {
             _logger = logger;
         }
-       [Authentication]
+       //[Authentication]
         public IActionResult Index(int? page)
         {
             int pageSize = 9;
@@ -93,7 +93,7 @@ namespace codeBTL.Controllers
             return PartialView("GetTop9Products", topProducts);
         }
 
-        public IActionResult SmartPhone(int? page, string searchString = null, int pageSize = 9)
+        public IActionResult SmartPhone(int? page, string sort, string searchString = null, int pageSize = 9)
         {
             ViewBag.psz = pageSize;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
