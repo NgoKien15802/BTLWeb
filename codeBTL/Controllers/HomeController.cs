@@ -11,6 +11,7 @@ using codeBTL.Models.Authentication;
 using codeBTL.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using codeBTL.ViewModels;
+using System.Threading.Tasks.Dataflow;
 
 namespace codeBTL.Controllers
 {
@@ -124,9 +125,51 @@ namespace codeBTL.Controllers
             return View();
         }
 
-        public IActionResult SmartphoneDetails()
+        public IActionResult SmartphoneDetails(string? MaSp)
         {
-            return View();
+
+            var sanPham = (from sp in db.Sanphams
+                           join ctsp in db.Chitietsps on sp.MaSp equals ctsp.MaSp
+                           where sp.MaSp == MaSp
+                           select new SanPhamDetailsViewModel
+                           {
+                               MaSp = MaSp,
+                               TenSP = sp.TenSp,
+                               DonGiaBan=ctsp.DonGiaBan,
+                               MaHangSx=sp.MaHangSx,
+                               AnhDaiDien=sp.AnhDaiDien,
+                               SoLuong=sp.SoLuong,
+                               MieuTa=sp.MieuTa,
+                               MauSac=sp.MauSac,
+                               TrongLuong=sp.TrongLuong,
+                               ThoiGianBh=sp.ThoiGianBh,
+                               Ram=ctsp.Ram,
+                               Rom = ctsp.Rom,
+                               Cpu = ctsp.Cpu,
+                               Dlpin = ctsp.Dlpin,
+                           }).FirstOrDefault();
+            var lstAnhSp = db.Chitietanhs.Where(x => x.MaSp == MaSp).ToList();
+
+            var cungHangSanPham = (from sp in db.Sanphams
+                                   join ctsp in db.Chitietsps on sp.MaSp equals ctsp.MaSp
+                                   where sp.MaHangSx == sanPham.MaHangSx
+                                   select new SanPhamDetailsViewModel
+                                   {
+                                       MaSp = sp.MaSp,
+                                       TenSP = sp.TenSp,
+                                       DonGiaBan = ctsp.DonGiaBan,
+                                       MaHangSx = sp.MaHangSx,
+                                       AnhDaiDien = sp.AnhDaiDien,
+                                   }).ToList();
+           
+            ViewBag.lstAnhSp = lstAnhSp;
+            ViewBag.spCungHang = cungHangSanPham;
+            if (sanPham == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(sanPham);
         }
 
         public IActionResult Order(string? maDh)
