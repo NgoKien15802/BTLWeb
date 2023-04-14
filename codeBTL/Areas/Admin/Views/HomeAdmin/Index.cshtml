@@ -74,7 +74,14 @@
                                         <td>@item.Order.MaDh</td>
                                         <td>@item.User.Username</td>
                                         <td>
-                                            @item.Order.TongTien đ
+                                            <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                                                @{
+                                                    //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                                                    string formattedPrice = string.Format("{0:N0} ₫", item.Order.TongTien);
+                                                }
+                                                @formattedPrice
+                                            </span>
+                                           
                                         </td>
                                         <td>@item.Order.NgayDat</td>
                                     </tr>

@@ -32,7 +32,13 @@
                     @Html.DisplayFor(modelItem => item.SLDat)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TongTien)
+                    <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                        @{
+                            //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                            string formattedPrice = string.Format("{0:N0} ₫", item.TongTien);
+                        }
+                        @formattedPrice
+                    </span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NgayDatHang)

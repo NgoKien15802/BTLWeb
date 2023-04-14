@@ -158,8 +158,24 @@
                                             <option value="10">10</option>
                                         </select>
                                     </td>
-                                    <td class="text-right">@Model.DonGiaBan</td>
-                                    <td class="text-right" id="totalAmount">@Model.TongTien</td>
+                                    <td class="text-right">
+                                        <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                                            @{
+                                                //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                                                string formattedPrice = string.Format("{0:N0} ₫", @Model.DonGiaBan);
+                                            }
+                                            @formattedPrice
+                                        </span>
+                                    </td>
+                                    <td class="text-right" id="totalAmount">
+                                        <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                                            @{
+                                                //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                                                string formattedPrice1 = string.Format("{0:N0} ₫", @Model.TongTien);
+                                            }
+                                            @formattedPrice1
+                                        </span>
+                                    </td>
                                     <td style="white-space: nowrap"
                                         class="text-right">
                                         <a class="btn btn-primary"
@@ -192,13 +208,30 @@
         <!-- //Main Container -->
     </div>
 
+    @*show toast*@
+    @if (TempData["Message"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: '@TempData["MessageType"]',
+                title: '@TempData["Message"]'
+            });
+        </script>
+    }
     <script>
+
+
+
         var slDat = 1
         function handleSelectValue(value) {
             slDat = value;
-            let totalAmount = value * @Model.DonGiaBan;
-            $('#totalAmount').text(totalAmount);
+            var totalAmount = value * @Model.DonGiaBan;
+
+            var formattedPrice = (new Number(totalAmount)).toLocaleString('vi', { style: 'currency', currency: 'VND' });
+
+            $('#totalAmount').html('<span class="regular-Giá" style="color: #d70018; font-weight: 700; font-size: 16px">' + formattedPrice + '</span>');
         }
+
 
         function resetOrder(maDh, maSp) {
             $.ajax({
@@ -226,7 +259,7 @@
                     alert(jqXHR);
                 }
             });
-            }
+        }
     </script>
     <!-- Include Libs & Plugins
     ============================================ -->

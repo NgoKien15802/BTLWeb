@@ -11,6 +11,8 @@ using codeBTL.Models.Authentication;
 using codeBTL.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using codeBTL.ViewModels;
+using System.Threading.Tasks.Dataflow;
+using System;
 
 namespace codeBTL.Controllers
 {
@@ -55,6 +57,7 @@ namespace codeBTL.Controllers
                                       orderby sp.TenSp
                                       select new Models.ViewModels.SanPhamViewModel
                                       {
+                                          MaSp = sp.MaSp,
                                           TenSp = sp.TenSp,
                                           AnhDaiDien = sp.AnhDaiDien,
                                           DonGiaBan = cts.DonGiaBan
@@ -85,6 +88,7 @@ namespace codeBTL.Controllers
                                orderby ctdh.Sldat descending
                                select new Models.ViewModels.SanPhamViewModel
                                {
+                                   MaSp = sp.MaSp,
                                    TenSp = sp.TenSp,
                                    AnhDaiDien = sp.AnhDaiDien,
                                    DonGiaBan = cts.DonGiaBan
@@ -240,9 +244,51 @@ namespace codeBTL.Controllers
             return View();
         }
 
-        public IActionResult SmartphoneDetails()
+        public IActionResult SmartphoneDetails(string? MaSp)
         {
-            return View();
+
+            var sanPham = (from sp in db.Sanphams
+                           join ctsp in db.Chitietsps on sp.MaSp equals ctsp.MaSp
+                           where sp.MaSp == MaSp
+                           select new SanPhamDetailsViewModel
+                           {
+                               MaSp = MaSp,
+                               TenSP = sp.TenSp,
+                               DonGiaBan=ctsp.DonGiaBan,
+                               MaHangSx=sp.MaHangSx,
+                               AnhDaiDien=sp.AnhDaiDien,
+                               SoLuong=sp.SoLuong,
+                               MieuTa=sp.MieuTa,
+                               MauSac=sp.MauSac,
+                               TrongLuong=sp.TrongLuong,
+                               ThoiGianBh=sp.ThoiGianBh,
+                               Ram=ctsp.Ram,
+                               Rom = ctsp.Rom,
+                               Cpu = ctsp.Cpu,
+                               Dlpin = ctsp.Dlpin,
+                           }).FirstOrDefault();
+            var lstAnhSp = db.Chitietanhs.Where(x => x.MaSp == MaSp).ToList();
+
+            var cungHangSanPham = (from sp in db.Sanphams
+                                   join ctsp in db.Chitietsps on sp.MaSp equals ctsp.MaSp
+                                   where sp.MaHangSx == sanPham.MaHangSx
+                                   select new SanPhamDetailsViewModel
+                                   {
+                                       MaSp = sp.MaSp,
+                                       TenSP = sp.TenSp,
+                                       DonGiaBan = ctsp.DonGiaBan,
+                                       MaHangSx = sp.MaHangSx,
+                                       AnhDaiDien = sp.AnhDaiDien,
+                                   }).ToList();
+           
+            ViewBag.lstAnhSp = lstAnhSp;
+            ViewBag.spCungHang = cungHangSanPham;
+            if (sanPham == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(sanPham);
         }
 
         public IActionResult Order(string? maDh)
@@ -284,8 +330,9 @@ namespace codeBTL.Controllers
             var donDatHang = new Dondathang();
 
             // Tạo mã đơn đặt hàng tự động
-            int nextMaDh = db.Dondathangs.Count() + 1;
-            donDatHang.MaDh = "DDH" + nextMaDh.ToString();
+            var maxMaDH = db.Dondathangs.Max(x => x.MaDh);
+            var maxMaDHNumber = int.Parse(maxMaDH.Substring(3)) + 1;
+            donDatHang.MaDh = "DDH" + maxMaDHNumber;
             string userId = HttpContext.Session.GetString("UserId");
             if (userId != null)
             {
@@ -312,10 +359,14 @@ namespace codeBTL.Controllers
                 db.SaveChanges();
 
                 // Chuyển hướng sang trang ChiTietDDH với mã đơn đặt hàng
+                TempData["Message"] = $"Đơn hàng đã đặt thành công";
+                TempData["MessageType"] = "success";
                 return RedirectToAction("Order", new { maDh = donDatHang.MaDh });
             }
             else
             {
+                TempData["Message"] = $"Mời bạn đăng nhập trước khi đặt hàng";
+                TempData["MessageType"] = "error";
                 return RedirectToAction("Login", "Access");
             }
         }
