@@ -74,7 +74,15 @@
 
             <div class="col-sm-9 col-sm-push-3">
                 <h2 class="page-heading">
-                    <span class="page-heading-title">Phone Accessories</span>
+                    <span class="page-heading-title">
+                        Phụ kiện điện thoại
+                        @{
+                            if(ViewBag.TenLoai != null)
+                            {
+                                <span> > @ViewBag.TenLoai</span>
+                            }
+                        }
+                    </span>
                 </h2>
                 @if (ViewBag.Search != null)
                 {
@@ -129,7 +137,12 @@
                                                 // Hiển thị danh sách gợi ý sản phẩm mới
                                                 for (var i = 0; i < data.length; i++) {
                                                     var str = "";
-                                                    str += '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
+                                                    if(data[i].maLoai == 'LOAI01'){
+                                                        str += '<li><a href=\"/Home/SmartphoneDetails?MaSp=' + $.trim(data[i].maSp) + '\">';
+                                                    }
+                                                    else {
+                                                        str += '<li><a href="#">';
+                                                    }
                                                     str += '<img src=\"../assets/images/products/' + $.trim(data[i].anhDaiDien) + '\" alt = "Anh san pham">';
                                                     str += '<div><h4 class="productName">' + data[i].tenSp + '</h4>';
                                                     str += '<span class="price">' + data[i].donGiaBan.toLocaleString() + '₫</span>';
@@ -165,13 +178,13 @@
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
                                                 <li>
-                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search">9</a>
+                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search" asp-route-maLoai="@ViewBag.MaLoai">9</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search">15</a>
+                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search" asp-route-maLoai="@ViewBag.MaLoai">15</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search">21</a>
+                                                    <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search" asp-route-maLoai="@ViewBag.MaLoai">21</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -284,7 +297,7 @@
                                 }
                     </div>
                     <div class="row product_pagination col-12">
-                                @Html.PagedListPager(Model,page => Url.Action("PhoneAccessories","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search ,page=page}))
+                                @Html.PagedListPager(Model,page => Url.Action("PhoneAccessories","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search, maLoai = ViewBag.MaLoai ,page=page}))
                     </div>
 
                     </ul>
@@ -303,13 +316,13 @@
                                         <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                         <ul>
                                             <li>
-                                                <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="9">9</a>
+                                                <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search" asp-route-maLoai="@ViewBag.MaLoai">9</a>
                                             </li>
                                             <li>
-                                                <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="15">15</a>
+                                                <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search" asp-route-maLoai="@ViewBag.MaLoai">15</a>
                                             </li>
                                             <li>
-                                                <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="21">21</a>
+                                                <a asp-action="PhoneAccessories" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search" asp-route-maLoai="@ViewBag.MaLoai">21</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -331,15 +344,16 @@
                     <ul>
                         <li>
                             <a asp-action="Smartphone" asp-controller="Home">Smartphones</a>
-                            <span class="subDropdown minus"></span>
-                            <ul class="level0_2022" style="display:block">
-                                    @await Component.InvokeAsync("BrandMenu")
-
-                            </ul><!--level0-->
                         </li><!--level 0-->
 
                         <li class="mega-menu">
                             <a class="level-top active" asp-action="PhoneAccessories" asp-controller="Home"><span>Phụ kiện</span></a>
+                            <span class="subDropdown minus"></span>
+                            <ul class="level0_2022" style="display:block">
+                                    @await Component.InvokeAsync("TypeMenu")
+                            </ul><!--level0-->
+                        </li>
+                    </ul>
                 </div><!--box-content box-category-->
             </div><!--side-nav-categories-->
 

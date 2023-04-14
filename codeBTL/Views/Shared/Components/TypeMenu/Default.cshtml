@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Hang>
+﻿@model IEnumerable<Loaisp>
 <style>
     li a.active {
         color: #0aa2ee !important;
@@ -10,11 +10,11 @@
 </style>
 @foreach (var item in Model){
     var active = "";
-    if (ViewBag.TenHang == item.TenHangSx)
+    if (ViewBag.TenLoai == item.TenLoai)
     {
         active = "active";
     }
     <li class="level1">
-        <a class="@active" asp-controller="Home" asp-action="Smartphone" asp-route-maHang="@item.MaHangSx" asp-route-pageSize="@ViewBag.psz">@item.TenHangSx</a>
+        <a class="@active" asp-controller="Home" asp-action="PhoneAccessories" asp-route-maLoai="@item.MaLoai" asp-route-pageSize="@ViewBag.psz">@item.TenLoai</a>
         </li>
 }
