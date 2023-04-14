@@ -158,8 +158,13 @@
                                         </div>
                                         <div class="item-Giá">
                                             <div class="Giá-box">
-                                                <span class="regular-Giá">
-                                                    <span class="Giá">@item.DonGiaBan</span>
+                                               
+                                                <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                                                    @{
+                                                        //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                                                        string formattedPrice = string.Format("{0:N0} ₫", item.DonGiaBan);
+                                                    }
+                                                    @formattedPrice
                                                 </span>
                                             </div>
                                         </div>

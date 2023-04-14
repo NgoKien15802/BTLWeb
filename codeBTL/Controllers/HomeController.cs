@@ -12,6 +12,7 @@ using codeBTL.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using codeBTL.ViewModels;
 using System.Threading.Tasks.Dataflow;
+using System;
 
 namespace codeBTL.Controllers
 {
@@ -56,6 +57,7 @@ namespace codeBTL.Controllers
                                       orderby sp.TenSp
                                       select new Models.ViewModels.SanPhamViewModel
                                       {
+                                          MaSp = sp.MaSp,
                                           TenSp = sp.TenSp,
                                           AnhDaiDien = sp.AnhDaiDien,
                                           DonGiaBan = cts.DonGiaBan
@@ -86,6 +88,7 @@ namespace codeBTL.Controllers
                                orderby ctdh.Sldat descending
                                select new Models.ViewModels.SanPhamViewModel
                                {
+                                   MaSp = sp.MaSp,
                                    TenSp = sp.TenSp,
                                    AnhDaiDien = sp.AnhDaiDien,
                                    DonGiaBan = cts.DonGiaBan
@@ -327,8 +330,9 @@ namespace codeBTL.Controllers
             var donDatHang = new Dondathang();
 
             // Tạo mã đơn đặt hàng tự động
-            int nextMaDh = db.Dondathangs.Count() + 1;
-            donDatHang.MaDh = "DDH" + nextMaDh.ToString();
+            var maxMaDH = db.Dondathangs.Max(x => x.MaDh);
+            var maxMaDHNumber = int.Parse(maxMaDH.Substring(3)) + 1;
+            donDatHang.MaDh = "DDH" + maxMaDHNumber;
             string userId = HttpContext.Session.GetString("UserId");
             if (userId != null)
             {
@@ -355,10 +359,14 @@ namespace codeBTL.Controllers
                 db.SaveChanges();
 
                 // Chuyển hướng sang trang ChiTietDDH với mã đơn đặt hàng
+                TempData["Message"] = $"Đơn hàng đã đặt thành công";
+                TempData["MessageType"] = "success";
                 return RedirectToAction("Order", new { maDh = donDatHang.MaDh });
             }
             else
             {
+                TempData["Message"] = $"Mời bạn đăng nhập trước khi đặt hàng";
+                TempData["MessageType"] = "error";
                 return RedirectToAction("Login", "Access");
             }
         }

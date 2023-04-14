@@ -9,12 +9,13 @@
         display: flex;
         width: 825px;
     }
+
     #search-btn {
         margin-left: 10px;
     }
 
-        #suggest-box {
-            display:block;
+    #suggest-box {
+        display: block;
         position: absolute;
         top: 32px;
         width: 400px;
@@ -23,7 +24,7 @@
         box-shadow: 0 0 10px #ccc;
         z-index: 3;
         background-color: #fff;
-        }
+    }
 
         #suggest-box li {
             list-style: none;
@@ -59,10 +60,11 @@
                 font-weight: 700;
                 color: #d70018
             }
-            #searchForm {
-                position: relative;
-                overflow: show;
-            }
+
+    #searchForm {
+        position: relative;
+        overflow: show;
+    }
 </style>
 <!-- Begin main -->
 <div id="main">
@@ -86,7 +88,7 @@
                                 align-items: center;
                                 column-gap: 10px;
                             ">
-                            <form method="post" action="@Url.Action("Smartphone", "Home")" id="searchForm" >
+                            <form method="post" action="@Url.Action("Smartphone", "Home")" id="searchForm">
                                 <input id="searchInput" name="searchString" type="text" class="form-control" style="height: 100%" placeholder="Bạn cần tìm gì?">
                                 <div class="input-group-append">
                                     <button asp-controller="Home" asp-action="Smartphone" asp-route-pageSize="@ViewBag.psz" id="search-btn" class="btn btn-primary" type="submit">
@@ -97,57 +99,57 @@
                                 <ul id="suggest-box">
                                 </ul>
                             </form>
-                                <script>
-                                  var form = document.getElementById("searchForm");
-                                  var input = document.getElementsByName("searchString")[0];
+                            <script>
+                                var form = document.getElementById("searchForm");
+                                var input = document.getElementsByName("searchString")[0];
 
-                                  input.addEventListener("keyup", function(event) {
+                                input.addEventListener("keyup", function (event) {
                                     event.preventDefault();
                                     if (event.keyCode === 13) { // Kiểm tra xem phím nhấn là phím Enter
-                                      form.submit(); // Gọi hành động submit của form
+                                        form.submit(); // Gọi hành động submit của form
                                     }
-                                  });
+                                });
 
-                                    $('#suggest-box').hide();
-                                        
-                                    $(function () {
-                                        // Khi người dùng nhập từ khóa vào thẻ input
-                                        $('#searchInput').keyup(function () {
-                                            // Lấy từ khóa và gửi yêu cầu AJAX để tải danh sách gợi ý sản phẩm
-                                            var keyword = $(this).val();
-                                            $.getJSON('/Home/GetSuggestions', { keyword: keyword }, function (data) {
-                                            if(data == ""){
+                                $('#suggest-box').hide();
+
+                                $(function () {
+                                    // Khi người dùng nhập từ khóa vào thẻ input
+                                    $('#searchInput').keyup(function () {
+                                        // Lấy từ khóa và gửi yêu cầu AJAX để tải danh sách gợi ý sản phẩm
+                                        var keyword = $(this).val();
+                                        $.getJSON('/Home/GetSuggestions', { keyword: keyword }, function (data) {
+                                            if (data == "") {
                                                 $('#suggest-box').hide();
                                             }
                                             else {
-                                            $('#suggest-box').show();
+                                                $('#suggest-box').show();
                                                 // Xóa danh sách gợi ý sản phẩm cũ
-                                            $('#suggest-box').empty();
+                                                $('#suggest-box').empty();
                                                 // Hiển thị danh sách gợi ý sản phẩm mới
-                                            for (var i = 0; i < data.length; i++){
+                                                for (var i = 0; i < data.length; i++) {
                                                     var str = "";
-                                                    str+=    '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
+                                                    str += '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
                                                     str += '<img src=\"../assets/images/products/' + $.trim(data[i].anhDaiDien) + '\" alt = "Anh san pham">';
                                                     str += '<div><h4 class="productName">' + data[i].tenSp + '</h4>';
                                                     str += '<span class="price">' + data[i].donGiaBan.toLocaleString() + '₫</span>';
-                                                    str+= '</div></a></li>';
+                                                    str += '</div></a></li>';
                                                     $('#suggest-box').append(str);
+                                                };
                                             };
-                                            };
-                                            });
                                         });
                                     });
-                                    // hiện hộp gợi ý khi người dùng nhấn vào input
-                                    document.getElementById("searchInput").addEventListener("focus", function () {
-                                        $('#suggest-box').show();
-                                    });
-                                    // ẩn hộp gợi ý khi người dùng click ra ngoài input hoặc suggest box
-                                    $(document).on('click', function (e) {
-                                        if (!$(e.target).is('#searchInput') && !$(e.target).is('#suggest-box *')) {
-                                            $('#suggest-box').hide();
-                                        }
-                                    });
-                               </script>
+                                });
+                                // hiện hộp gợi ý khi người dùng nhấn vào input
+                                document.getElementById("searchInput").addEventListener("focus", function () {
+                                    $('#suggest-box').show();
+                                });
+                                // ẩn hộp gợi ý khi người dùng click ra ngoài input hoặc suggest box
+                                $(document).on('click', function (e) {
+                                    if (!$(e.target).is('#searchInput') && !$(e.target).is('#suggest-box *')) {
+                                        $('#suggest-box').hide();
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
 
@@ -185,8 +187,9 @@
                     <div class="category-products">
                         <ul class="row products-grid first last odd" id="products-filter">
                         </ul>
-                        <ul class="row products-grid first last odd" id="default-products">
-                            <div class="row">
+                        <div class="row">
+                            <ul class="products-grid first last odd col-12" id="default-products">
+
                                 @if (!Model.Any())
                                 {
                                     <div class="message">
@@ -236,7 +239,7 @@
                                                 <div class="item-info">
                                                     <div class="info-inner">
                                                         <div class="item-title">
-                                                        <a style="font-weight: 600" asp-action="SmartphoneDetails" asp-controller="Home" asp-route-maSp="@item.MaSp">@item.TenSp</a>
+                                                            <a style="font-weight: 600" asp-action="SmartphoneDetails" asp-controller="Home" asp-route-maSp="@item.MaSp">@item.TenSp</a>
                                                         </div>
                                                         <!--item-title-->
                                                         <div class="item-content">
@@ -249,13 +252,13 @@
                                                             <div class="item-Giá">
                                                                 <div class="Giá-box">
                                                                     <span class="regular-Giá">
-                                                                    <span class="Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                                                                        <span class="Giá" style="color: #d70018; font-weight:700; font-size:16px">
                                                                             @{
                                                                                 //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
                                                                                 string formattedPrice = string.Format("{0:N0} ₫", item.DonGiaBan);
                                                                             }
                                                                             @formattedPrice
-                                                                    </span>
+                                                                        </span>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -278,15 +281,15 @@
                                         </li>
                                     }
                                 }
-                            </div>
-                            <div class="row product_pagination col-12">
-                                        @Html.PagedListPager(Model,page => Url.Action("Smartphone","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search ,page=page}))
-                            </div>
 
-                        </ul>
-                        
+                            </ul>
+                            <div class="row product_pagination col-12">
+                                @Html.PagedListPager(Model,page => Url.Action("Smartphone","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search ,page=page}))
+                            </div>
+                        </div>
+
                     </div>
-                    
+
                     <!-- end products  -->
                     <!-- begin bottom toolbar -->
                     <div class="bottom-toolbar" style="overflow: visible;">
@@ -400,11 +403,11 @@
         </div>
     </div>
 </div>
-                            @if (!Model.Any())
-                                {
-                                    <script>
-                                        $(".top-toolbar").hide();
-                                        $(".bottom-toolbar").hide();
-                                        $(".product_pagination").hide();
-                                    </script>
-                                }
+@if (!Model.Any())
+{
+    <script>
+        $(".top-toolbar").hide();
+        $(".bottom-toolbar").hide();
+        $(".product_pagination").hide();
+    </script>
+}

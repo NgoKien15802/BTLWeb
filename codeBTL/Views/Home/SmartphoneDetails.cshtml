@@ -52,7 +52,15 @@
                                     @Model.TenSP</h2>
                                     <p class="product-rating">Be the first to review this product.</p>
                                     <div class="price-box">
-                                        <span class="price">Giá: <span class="regular-price">@Model.DonGiaBan</span> VNĐ</span>
+                                        <span class="price">
+                                            Giá:  <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:30px">
+                                                @{
+                                                    //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                                                    string formattedPrice = string.Format("{0:N0} ₫", @Model.DonGiaBan);
+                                                }
+                                                @formattedPrice
+                                            </span>
+                                        </span>
                                         <p class="availability">
                                             Tình trạng:
                                             @if (Model.SoLuong > 1)
@@ -207,7 +215,7 @@
                                 </div>
                             </div>
                             <!-- end comment  -->
-                            <p class="titleList"cl>Danh sách sản phẩm liên quan</p>
+                            <p class="titleList" cl>Danh sách sản phẩm liên quan</p>
                             <div class="row">
                                 <ul class="products-grid first last odd col-12" id="default-products">
                                     @foreach (var item in ViewBag.spCungHang)
@@ -263,8 +271,12 @@
                                                             </div>
                                                             <div class="item-Giá">
                                                                 <div class="Giá-box">
-                                                                    <span class="regular-Giá">
-                                                                        <span class="Giá">@item.DonGiaBan</span>
+                                                                    <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
+                                                                        @{
+                                                                            //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN
+                                                                            string formattedPrice1 = string.Format("{0:N0} ₫", item.DonGiaBan);
+                                                                        }
+                                                                        @formattedPrice1
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -319,14 +331,14 @@
             margin-right: 30px;
         }
 
-        .item-img-info{
-                margin: 0 auto;
-        }
+    .item-img-info {
+        margin: 0 auto;
+    }
 
-        .titleList{
-            font-size:30px;
-            text-align:center;
-            font-weight:600;
-                margin-top: 20px;
-        }
+    .titleList {
+        font-size: 30px;
+        text-align: center;
+        font-weight: 600;
+        margin-top: 20px;
+    }
 </style>

@@ -120,34 +120,38 @@
                 success: function (data) {
                     var html = '';
                     $.each(data, function (index, order) {
+                        var formattedPrice = (new Number(order.tongTien)).toLocaleString('vi', { style: 'currency', currency: 'VND' });
+
                         html += `
-                                    <tr>
-                                            <td class="text-center">
-                                                <a href="product.html">
-                                                    <img width="85"
-                                                         class="img-thumbnail"
-                                                                 alt=${order.tenSp}
-                                                                 src="../assets/images/products/${order.anhDaiDien}" />
-                                                </a>
-                                            </td>
-                                            <td class="text-left">
-                                                 <a href="product.html">${order.tenSp}</a>
-                                            </td>
-                                                            <td class="text-center">${order.maDh} </td>
-                                                            <td class="text-center">${order.sldat}</td>
-                                                            <td class="text-center">${order.ngayDat}</td>
-                                                            <td class="text-right">${order.tongTien}₫</td>
-                                            <td class="text-center">
-                                                <a class="btn btn-info"
-                                                   title=""
-                                                   data-toggle="tooltip"
-                                                   href="order-information.html"
-                                                   data-original-title="Xem chi tiết">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                        `
+                            <tr>
+                                <td class="text-center">
+                                    <a href="product.html">
+                                        <img width="85"
+                                             class="img-thumbnail"
+                                             alt=${order.tenSp}
+                                             src="../assets/images/products/${order.anhDaiDien}" />
+                                    </a>
+                                </td>
+                                <td class="text-left">
+                                    <a href="product.html">${order.tenSp}</a>
+                                </td>
+                                <td class="text-center">${order.maDh} </td>
+                                <td class="text-center">${order.sldat}</td>
+                                <td class="text-center">${order.ngayDat}</td>
+                                <td class="text-right">
+                                    <span class="regular-Giá" style="color: #d70018; font-weight: 700; font-size: 16px">${formattedPrice}</span>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-info"
+                                       title=""
+                                       data-toggle="tooltip"
+                                       href="order-information.html"
+                                       data-original-title="Xem chi tiết">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        `;
                     });
                     $('#showHistoryOrder').html(html);
                 },
@@ -156,6 +160,7 @@
                 }
             });
         });
+
     </script>
     <!-- Include Libs & Plugins
      ============================================ -->
