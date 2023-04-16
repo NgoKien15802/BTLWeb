@@ -23,12 +23,24 @@
                 <div class="item-inner">
                     <div class="item-img">
                         <div class="item-img-info">
-                            <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp"
-                               class="product-image">
-                                <img id="product-collection-image-446"
-                                     class="img-responsive"
-                                     src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
-                            </a>
+                            @if (item.MaLoai == "LOAI01")
+                            {
+                                <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp"
+                                   class="product-image">
+                                    <img id="product-collection-image-446"
+                                         class="img-responsive"
+                                         src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#"
+                                   class="product-image">
+                                    <img id="product-collection-image-446"
+                                         class="img-responsive"
+                                         src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
+                                </a>
+                            }
                             <div class="box-hover">
                                 <ul class="add-to-links">
                                     <li>
@@ -58,7 +70,14 @@
                     <div class="item-info">
                         <div class="info-inner">
                             <div class="item-title">
-                                <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp">@item.TenSp</a>
+                                @if (item.MaLoai == "LOAI01")
+                                {
+                                    <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp">@item.TenSp</a>
+                                }
+                                else
+                                {
+                                    <span>@item.TenSp</span>
+                                }
                             </div>
                             <!--item-title-->
                             <div class="item-content">
