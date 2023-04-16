@@ -18,6 +18,7 @@
         display: block;
         position: absolute;
         top: 32px;
+        left: 0;
         width: 400px;
         border: 1px #ddd solid;
         border-radius: 10px;
@@ -73,7 +74,15 @@
 
             <div class="col-sm-9 col-sm-push-3">
                 <h2 class="page-heading">
-                    <span class="page-heading-title">Smartphones</span>
+                    <span class="page-heading-title">
+                        Smartphones
+                        @{
+                            if (ViewBag.TenHang != null)
+                            {
+                                <span> > @ViewBag.TenHang</span>
+                            }
+                        }
+                        </span>
                 </h2>
                 @if (ViewBag.Search != null)
                 {
@@ -128,7 +137,12 @@
                                                 // Hiển thị danh sách gợi ý sản phẩm mới
                                                 for (var i = 0; i < data.length; i++) {
                                                     var str = "";
-                                                    str += '<li><a href=\"/Home/SmartphoneDetails?maSp=' + $.trim(data[i].maSp) + '\">';
+                                                    if (data[i].maLoai == 'LOAI01') {
+                                                        str += '<li><a href=\"/Home/SmartphoneDetails?MaSp=' + $.trim(data[i].maSp) + '\">';
+                                                    }
+                                                    else {
+                                                        str += '<li><a href="#">';
+                                                    }
                                                     str += '<img src=\"../assets/images/products/' + $.trim(data[i].anhDaiDien) + '\" alt = "Anh san pham">';
                                                     str += '<div><h4 class="productName">' + data[i].tenSp + '</h4>';
                                                     str += '<span class="price">' + data[i].donGiaBan.toLocaleString() + '₫</span>';
@@ -164,13 +178,13 @@
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search">9</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search" asp-route-maHang="@ViewBag.MaHang">9</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search">15</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search" asp-route-maHang="@ViewBag.MaHang">15</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search">21</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search" asp-route-maHang="@ViewBag.MaHang">21</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -204,7 +218,7 @@
                                             <div class="item-inner">
                                                 <div class="item-img">
                                                     <div class="item-img-info">
-                                                        <a asp-controller="Home" asp-action="SmartphoneDetails" asp-route-maSp="@item.MaSp"
+                                                        <a asp-controller="Home" asp-action="SmartphoneDetails" asp-route-MaSp="@item.MaSp"
                                                    class="product-image">
                                                             <img id="product-collection-image-446"
                                                          class="img-responsive"
@@ -239,7 +253,7 @@
                                                 <div class="item-info">
                                                     <div class="info-inner">
                                                         <div class="item-title">
-                                                            <a style="font-weight: 600" asp-action="SmartphoneDetails" asp-controller="Home" asp-route-maSp="@item.MaSp">@item.TenSp</a>
+                                                            <a style="font-weight: 600" asp-action="SmartphoneDetails" asp-controller="Home" asp-route-MaSp="@item.MaSp">@item.TenSp</a>
                                                         </div>
                                                         <!--item-title-->
                                                         <div class="item-content">
@@ -284,7 +298,7 @@
 
                             </ul>
                             <div class="row product_pagination col-12">
-                                @Html.PagedListPager(Model,page => Url.Action("Smartphone","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search ,page=page}))
+                                @Html.PagedListPager(Model,page => Url.Action("Smartphone","Home", new {pageSize = ViewBag.psz, searchString = ViewBag.Search, maHang = ViewBag.MaHang ,page=page}))
                             </div>
                         </div>
 
@@ -302,13 +316,13 @@
                                             <a href="#">@ViewBag.psz<span class="right-arrow"></span></a>
                                             <ul>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9">9</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="9" asp-route-searchString="@ViewBag.Search" asp-route-maHang="@ViewBag.MaHang">9</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15">15</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="15" asp-route-searchString="@ViewBag.Search" asp-route-maHang="@ViewBag.MaHang">15</a>
                                                 </li>
                                                 <li>
-                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21">21</a>
+                                                    <a asp-action="Smartphone" asp-controller="Home" asp-route-pageSize="21" asp-route-searchString="@ViewBag.Search" asp-route-maHang="@ViewBag.MaHang">21</a>
                                                 </li>
                                             </ul>
                                         </li>

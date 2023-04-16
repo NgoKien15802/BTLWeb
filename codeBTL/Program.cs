@@ -17,6 +17,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddDbContext<DtddContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DtddContext")));
 builder.Services.AddSession();
 builder.Services.AddScoped<IBrandMenuRepository, BrandMenuRepository>();
+builder.Services.AddScoped<ITypeMenuRepository, TypeMenuRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,11 +40,5 @@ app.UseSession();
 app.MapControllerRoute(
    name: "default",
     pattern: "{controller=Access}/{action=Login}/{id?}");
-
-app.MapControllerRoute(
-    name: "SmartphoneByBrand",
-    pattern: "Home/SmartphoneByBrand/{maHang}/{page?}",
-    defaults: new { controller = "Home", action = "SmartphoneByBrand", maHang = "" }
-);
 
 app.Run();

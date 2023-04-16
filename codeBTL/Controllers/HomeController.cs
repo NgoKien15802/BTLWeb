@@ -24,7 +24,7 @@ namespace codeBTL.Controllers
         {
             _logger = logger;
         }
-       [Authentication]
+        [Authentication]
         public IActionResult Index(int? page)
         {
             int pageSize = 9;
@@ -97,7 +97,7 @@ namespace codeBTL.Controllers
             return PartialView("GetTop9Products", topProducts);
         }
 
-        public IActionResult SmartPhone(int? page, string searchString = null, int pageSize = 9)
+        public IActionResult SmartPhone(int? page, string maHang = null, string searchString = null, int pageSize = 9)
         {
             ViewBag.psz = pageSize;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
@@ -118,6 +118,26 @@ namespace codeBTL.Controllers
                 PagedList<SanPhamViewModel> pagedListSearch = new PagedList<SanPhamViewModel>(productsSearch, pageNumber, pageSize);
                 return View(pagedListSearch);
             }
+
+            if (maHang != null)
+            {
+                ViewBag.MaHang = maHang;
+                ViewBag.TenHang = db.Hangs.Where(x => x.MaHangSx == maHang).Select(x => x.TenHangSx).FirstOrDefault();
+                var productsByType = (from sp in db.Sanphams
+                                      join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                                      where sp.MaLoai == "LOAI01" && sp.MaHangSx == maHang
+                                      orderby sp.TenSp
+                                      select new Models.ViewModels.SanPhamViewModel
+                                      {
+                                          MaSp = sp.MaSp,
+                                          TenSp = sp.TenSp,
+                                          AnhDaiDien = sp.AnhDaiDien,
+                                          DonGiaBan = cts.DonGiaBan
+                                      }).OrderBy(x => x.TenSp);
+
+                PagedList<SanPhamViewModel> pagedListByType = new PagedList<SanPhamViewModel>(productsByType, pageNumber, pageSize);
+                return View(pagedListByType);
+            }
             var products = (from sp in db.Sanphams
                             join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
                             where sp.MaLoai == "LOAI01"
@@ -133,18 +153,15 @@ namespace codeBTL.Controllers
             PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
             return View(pagedList);
         }
-
-        public IActionResult SmartphoneByBrand(string maHang, int? page, string searchString = null, int pageSize = 9)
+        public IActionResult PhoneAccessories(int? page, string maLoai = null, string searchString = null, int pageSize = 9)
         {
             ViewBag.psz = pageSize;
-            ViewBag.MaHang = maHang;
-            ViewBag.TenHang = db.Hangs.Where(x=>x.MaHangSx == maHang).Select(x=>x.TenHangSx).FirstOrDefault();
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
             if (searchString != null)
             {
                 var productsSearch = (from sp in db.Sanphams
                                       join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
-                                      where sp.TenSp.Contains(searchString) && sp.MaLoai == "LOAI01"
+                                      where sp.TenSp.Contains(searchString) && sp.MaLoai != "LOAI01"
                                       orderby sp.TenSp
                                       select new Models.ViewModels.SanPhamViewModel
                                       {
@@ -157,45 +174,28 @@ namespace codeBTL.Controllers
                 PagedList<SanPhamViewModel> pagedListSearch = new PagedList<SanPhamViewModel>(productsSearch, pageNumber, pageSize);
                 return View(pagedListSearch);
             }
-            var products = (from sp in db.Sanphams
-                            join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
-                            where sp.MaLoai == "LOAI01" && sp.MaHangSx == maHang
-                            orderby sp.TenSp
-                            select new Models.ViewModels.SanPhamViewModel
-                            {
-                                MaSp = sp.MaSp,
-                                TenSp = sp.TenSp,
-                                AnhDaiDien = sp.AnhDaiDien,
-                                DonGiaBan = cts.DonGiaBan
-                            }).OrderBy(x => x.TenSp);
-
-            PagedList<SanPhamViewModel> pagedList = new PagedList<SanPhamViewModel>(products, pageNumber, pageSize);
-            return View(pagedList);
-        }
-        public IActionResult PhoneAccessories(int? page, string searchString = null, int pageSize = 9)
-        {
-            ViewBag.psz = pageSize;
-            int pageNumber = page == null || page < 0 ? 1 : page.Value;
-            if (searchString != null)
+            if (maLoai != null)
             {
-                var productsSearch = (from sp in db.Sanphams
-                                      join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
-                                      where sp.TenSp.Contains(searchString) && sp.MaLoai == "LOAI02"
-                                      orderby sp.TenSp
-                                      select new Models.ViewModels.SanPhamViewModel
-                                      {
-                                          MaSp = sp.MaSp,
-                                          TenSp = sp.TenSp,
-                                          AnhDaiDien = sp.AnhDaiDien,
-                                          DonGiaBan = cts.DonGiaBan
-                                      }).OrderBy(x => x.TenSp);
-                ViewBag.Search = searchString;
-                PagedList<SanPhamViewModel> pagedListSearch = new PagedList<SanPhamViewModel>(productsSearch, pageNumber, pageSize);
-                return View(pagedListSearch);
+                ViewBag.MaLoai = maLoai;
+                ViewBag.TenLoai = db.Loaisps.Where(x => x.MaLoai == maLoai).Select(x => x.TenLoai).FirstOrDefault();
+                var productsByType = (from sp in db.Sanphams
+                                join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
+                                where sp.MaLoai != "LOAI01" && sp.MaLoai == maLoai
+                                orderby sp.TenSp
+                                select new Models.ViewModels.SanPhamViewModel
+                                {
+                                    MaSp = sp.MaSp,
+                                    TenSp = sp.TenSp,
+                                    AnhDaiDien = sp.AnhDaiDien,
+                                    DonGiaBan = cts.DonGiaBan
+                                }).OrderBy(x => x.TenSp);
+
+                PagedList<SanPhamViewModel> pagedListByType = new PagedList<SanPhamViewModel>(productsByType, pageNumber, pageSize);
+                return View(pagedListByType);
             }
             var products = (from sp in db.Sanphams
                             join cts in db.Chitietsps on sp.MaSp equals cts.MaSp
-                            where sp.MaLoai == "LOAI02"
+                            where sp.MaLoai != "LOAI01"
                             orderby sp.TenSp
                             select new Models.ViewModels.SanPhamViewModel
                             {
@@ -220,7 +220,8 @@ namespace codeBTL.Controllers
                                 MaSp = sp.MaSp,
                                 TenSp = sp.TenSp,
                                 AnhDaiDien = sp.AnhDaiDien,
-                                DonGiaBan = cts.DonGiaBan
+                                DonGiaBan = cts.DonGiaBan,
+                                MaLoai = sp.MaLoai
                             }).Take(5).OrderBy(x => x.TenSp);
             return Json(products);
         }
@@ -264,7 +265,7 @@ namespace codeBTL.Controllers
                                ThoiGianBh=sp.ThoiGianBh,
                                Ram=ctsp.Ram,
                                Rom = ctsp.Rom,
-                               Cpu = ctsp.Cpu,
+                               Cpu = ctsp.Cpu, 
                                Dlpin = ctsp.Dlpin,
                            }).FirstOrDefault();
             var lstAnhSp = db.Chitietanhs.Where(x => x.MaSp == MaSp).ToList();
