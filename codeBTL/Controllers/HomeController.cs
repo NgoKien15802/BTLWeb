@@ -259,6 +259,7 @@ namespace codeBTL.Controllers
                            {
                                MaSp = MaSp,
                                TenSP = sp.TenSp,
+                               MaLoai = sp.MaLoai,
                                DonGiaBan=ctsp.DonGiaBan,
                                MaHangSx=sp.MaHangSx,
                                AnhDaiDien=sp.AnhDaiDien,
@@ -281,6 +282,7 @@ namespace codeBTL.Controllers
                                    {
                                        MaSp = sp.MaSp,
                                        TenSP = sp.TenSp,
+                                       MaLoai = sp.MaLoai,
                                        DonGiaBan = ctsp.DonGiaBan,
                                        MaHangSx = sp.MaHangSx,
                                        AnhDaiDien = sp.AnhDaiDien,

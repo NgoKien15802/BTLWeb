@@ -4,6 +4,7 @@
     {
         public string? MaSp { get; set; }
         public string? TenSP { get; set; }
+        public string? MaLoai { get; set; }
         public decimal? DonGiaBan { get; set; }
         public string? MaHangSx { get; set; }
         public string? AnhDaiDien { get; set; }

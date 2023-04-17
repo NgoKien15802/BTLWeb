@@ -33,11 +33,11 @@ namespace codeBTL.Areas.Admin.Controllers
             int currentPageSize = pageSize == null || pageSize < 1 ? defaultPageSize : pageSize.Value;
             if (filter != null)
             {
-                var lstSpFilter = db.Sanphams.AsNoTracking().Where(x => x.MaLoai.Equals("LOAI02") && x.TenSp.Contains(filter)).ToList();
+                var lstSpFilter = db.Sanphams.AsNoTracking().Where(x => !x.MaLoai.Equals("LOAI01") && x.TenSp.Contains(filter)).ToList();
                 PagedList<Sanpham> lstFilter = new PagedList<Sanpham>(lstSpFilter, pageNumber, currentPageSize);
                 return View(lstFilter);
             }
-            var lstSp = db.Sanphams.AsNoTracking().Where(x => x.MaLoai.Equals("LOAI02")).ToList();
+            var lstSp = db.Sanphams.AsNoTracking().Where(x => !x.MaLoai.Equals("LOAI01")).ToList();
             PagedList<Sanpham> lst = new PagedList<Sanpham>(lstSp, pageNumber, currentPageSize);
             return View(lst);
         }
@@ -56,11 +56,11 @@ namespace codeBTL.Areas.Admin.Controllers
             if (filter != null)
             {
                 ViewBag.filter = filter;
-                var lstSpFilter = db.Sanphams.AsNoTracking().Where(x => x.MaLoai.Equals("LOAI02") && x.TenSp.Contains(filter)).ToList();
+                var lstSpFilter = db.Sanphams.AsNoTracking().Where(x => !x.MaLoai.Equals("LOAI01") && x.TenSp.Contains(filter)).ToList();
                 PagedList<Sanpham> lstFilter = new PagedList<Sanpham>(lstSpFilter, pageNumber, currentPageSize);
                 return PartialView("GetAllPhoneAccessoriesTable", lstFilter);
             }
-            var lstSp = db.Sanphams.AsNoTracking().Where(x => x.MaLoai.Equals("LOAI02")).ToList();
+            var lstSp = db.Sanphams.AsNoTracking().Where(x => !x.MaLoai.Equals("LOAI01")).ToList();
             PagedList<Sanpham> lst = new PagedList<Sanpham>(lstSp, pageNumber, currentPageSize);
             return PartialView("GetAllPhoneAccessoriesTable", lst);
         }
@@ -75,9 +75,9 @@ namespace codeBTL.Areas.Admin.Controllers
         [Route("AddPhoneAccessories")]
         public IActionResult AddPhoneAccessories()
         {
-            ViewBag.MaLoai = new SelectList(db.Loaisps.Where(x => x.MaLoai.Equals("LOAI02")).ToList(), "MaLoai", "TenLoai");
+            ViewBag.MaLoai = new SelectList(db.Loaisps.Where(x => !x.MaLoai.Equals("LOAI01")).ToList(), "MaLoai", "TenLoai");
             ViewBag.MaHangSx = new SelectList(db.Hangs.ToList(), "MaHangSx", "TenHangSx");
-            var maxMaSP = db.Sanphams.Where(x => x.MaLoai.Equals("LOAI02")).Max(x => x.MaSp);
+            var maxMaSP = db.Sanphams.Where(x => !x.MaLoai.Equals("LOAI01")).Max(x => x.MaSp);
             var maxMaSPNumber = int.Parse(maxMaSP.Substring(2)) + 1;
             ViewBag.maxMaSPNumber = "PK" + maxMaSPNumber;
             return View();
@@ -92,9 +92,9 @@ namespace codeBTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddPhoneAccessories(Sanpham sp)
         {
-            ViewBag.MaLoai = new SelectList(db.Loaisps.Where(x => x.MaLoai.Equals("LOAI02")).ToList(), "MaLoai", "TenLoai");
+            ViewBag.MaLoai = new SelectList(db.Loaisps.Where(x => !x.MaLoai.Equals("LOAI01")).ToList(), "MaLoai", "TenLoai");
             ViewBag.MaHangSx = new SelectList(db.Hangs.ToList(), "MaHangSx", "TenHangSx");
-            var maxMaSP = db.Sanphams.Where(x => x.MaLoai.Equals("LOAI02")).Max(x => x.MaSp);
+            var maxMaSP = db.Sanphams.Where(x => !x.MaLoai.Equals("LOAI01")).Max(x => x.MaSp);
             var maxMaSPNumber = int.Parse(maxMaSP.Substring(2)) + 1;
             ViewBag.maxMaSPNumber = "PK" + maxMaSPNumber;
             RouteValueDictionary rv = new RouteValueDictionary();
@@ -155,7 +155,7 @@ namespace codeBTL.Areas.Admin.Controllers
         public IActionResult EditPhoneAccessorises(string maSp)
         {
             ViewBag.MaHangSx = new SelectList(db.Hangs.ToList(), "MaHangSx", "TenHangSx");
-            ViewBag.MaLoai = new SelectList(db.Loaisps.Where(x => x.MaLoai.Equals("LOAI02")), "MaLoai", "TenLoai");
+            ViewBag.MaLoai = new SelectList(db.Loaisps.Where(x => !x.MaLoai.Equals("LOAI01")), "MaLoai", "TenLoai");
             var sp = db.Sanphams.Find(maSp);
             return View(sp);
         }

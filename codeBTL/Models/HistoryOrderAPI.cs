@@ -3,6 +3,9 @@
     public class HistoryOrderAPI
     {
         public string? MaDh { get; set; }
+
+        public string? MaSp { get; set; }
+
         public string? TenSp { get; set; }
 
         public string? AnhDaiDien { get; set; } = null!;

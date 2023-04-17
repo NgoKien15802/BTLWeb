@@ -30,6 +30,7 @@ namespace codeBTL.Controllers
                                   NgayDat = ddh.NgayDat,
                                   TongTien = ddh.TongTien,
                                   AnhDaiDien = sp.AnhDaiDien,
+                                  MaSp = sp.MaSp,
                                   TenSp = sp.TenSp,
                                   Sldat = ctdh.Sldat
                               }).ToList();

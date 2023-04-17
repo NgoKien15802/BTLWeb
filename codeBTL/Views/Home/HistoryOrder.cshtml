@@ -121,7 +121,7 @@
                     var html = '';
                     $.each(data, function (index, order) {
                         var formattedPrice = (new Number(order.tongTien)).toLocaleString('vi', { style: 'currency', currency: 'VND' });
-
+                        console.log(order)
                         html += `
                             <tr>
                                 <td class="text-center">
@@ -145,7 +145,7 @@
                                     <a class="btn btn-info"
                                        title=""
                                        data-toggle="tooltip"
-                                       href="order-information.html"
+                                       href="SmartphoneDetails?MaSp=${order.maSp}"
                                        data-original-title="Xem chi tiết">
                                         <i class="fa fa-eye"></i>
                                     </a>
