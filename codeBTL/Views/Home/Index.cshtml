@@ -29,7 +29,11 @@
         form input {
             margin-right: 30px;
         }
+    .pagination {
+        width: -webkit-fill-available;
+    }
 </style>
+
 
 <!-- content ở đây -->
 <!-- begin banner -->
@@ -58,24 +62,24 @@
             </form>
             <script>
 
-                    $(".btn-filter-products").on("click", function (event) {
-                        var searchText = $("#searchProducts").val();
-                        event.preventDefault(); // ngăn chặn trang bị load lại
-                        $.ajax({
-                            url: "@Url.Action("SearchProducts", "Home")", // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
-                            type: 'GET', // Phương thức HTTP để lấy dữ liệu
-                            data: { searchString: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
-                            success: function (result) {
-                                console.log(result);
-                                $('#products-filter').html(result); // Cập nhật nội dung của bảng dữ liệu trong trang web
-                                $('#default-products').hide();
-                                $("#top-products").hide();
-                                if ($('#products-filter').is(":hidden")) {
-                                    $('#products-filter').show();
-                                }
+                $(".btn-filter-products").on("click", function (event) {
+                    var searchText = $("#searchProducts").val();
+                    event.preventDefault(); // ngăn chặn trang bị load lại
+                    $.ajax({
+                        url: "@Url.Action("SearchProducts", "Home")", // Đường dẫn đến hành động trong controller để lấy dữ liệu từ máy chủ
+                        type: 'GET', // Phương thức HTTP để lấy dữ liệu
+                        data: { searchString: searchText }, // Các tham số để truyền cho hành động lấy dữ liệu
+                        success: function (result) {
+                            console.log(result);
+                            $('#products-filter').html(result); // Cập nhật nội dung của bảng dữ liệu trong trang web
+                            $('#default-products').hide();
+                            $("#top-products").hide();
+                            if ($('#products-filter').is(":hidden")) {
+                                $('#products-filter').show();
                             }
-                        });
-                    })
+                        }
+                    });
+                })
 
                 $(".btn-top-products").on("click", function (event) {
                     event.preventDefault(); // ngăn chặn trang bị load lại
@@ -111,12 +115,24 @@
                         <div class="item-inner">
                             <div class="item-img">
                                 <div class="item-img-info">
-                                    <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp"
-                                       class="product-image">
-                                        <img id="product-collection-image-446"
-                                             class="img-responsive"
-                                             src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)"  />
-                                    </a>
+                                    @if (item.MaLoai == "LOAI01")
+                                    {
+                                        <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp"
+                                           class="product-image">
+                                            <img id="product-collection-image-446"
+                                                 class="img-responsive"
+                                                 src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#"
+                                           class="product-image">
+                                            <img id="product-collection-image-446"
+                                                 class="img-responsive"
+                                                 src="@Url.Content("../assets/images/products/"+item.AnhDaiDien)" />
+                                        </a>
+                                    }
                                     <div class="box-hover">
                                         <ul class="add-to-links">
                                             <li>
@@ -146,7 +162,15 @@
                             <div class="item-info">
                                 <div class="info-inner">
                                     <div class="item-title">
-                                        <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp">@item.TenSp</a>
+                                        @if (item.MaLoai == "LOAI01")
+                                        {
+                                            <a asp-action="SmartphoneDetails" asp-controller="home" asp-route-MaSp="@item.MaSp">@item.TenSp</a>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.TenSp</span>
+                                        }
+                                        <!-- Debug code -->
                                     </div>
                                     <!--item-title-->
                                     <div class="item-content">
@@ -158,7 +182,7 @@
                                         </div>
                                         <div class="item-Giá">
                                             <div class="Giá-box">
-                                               
+
                                                 <span class="regular-Giá" style="color: #d70018; font-weight:700; font-size:16px">
                                                     @{
                                                         //ĐỔI ĐỊNH DẠNG CỦA ĐƠN GIÁ BÁN

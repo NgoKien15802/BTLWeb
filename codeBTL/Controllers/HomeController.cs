@@ -36,6 +36,7 @@ namespace codeBTL.Controllers
                             {
                                 MaSp = sp.MaSp,
                                 TenSp = sp.TenSp,
+                                MaLoai = sp.MaLoai,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
@@ -59,6 +60,7 @@ namespace codeBTL.Controllers
                                       {
                                           MaSp = sp.MaSp,
                                           TenSp = sp.TenSp,
+                                          MaLoai = sp.MaLoai,
                                           AnhDaiDien = sp.AnhDaiDien,
                                           DonGiaBan = cts.DonGiaBan
                                       }).OrderBy(x => x.TenSp);
@@ -72,6 +74,7 @@ namespace codeBTL.Controllers
                             select new Models.ViewModels.SanPhamViewModel
                             {
                                 TenSp = sp.TenSp,
+                                MaLoai = sp.MaLoai,
                                 AnhDaiDien = sp.AnhDaiDien,
                                 DonGiaBan = cts.DonGiaBan
                             }).OrderBy(x => x.TenSp);
@@ -90,6 +93,7 @@ namespace codeBTL.Controllers
                                {
                                    MaSp = sp.MaSp,
                                    TenSp = sp.TenSp,
+                                   MaLoai = sp.MaLoai,
                                    AnhDaiDien = sp.AnhDaiDien,
                                    DonGiaBan = cts.DonGiaBan
                                }).Take(9).ToList();
