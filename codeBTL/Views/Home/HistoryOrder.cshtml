@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_LayoutQLBDT.cshtml";
 }
 
+@using codeBTL.Models.ViewModels
+@model OrderDetailsViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -142,12 +144,8 @@
                                     <span class="regular-Giá" style="color: #d70018; font-weight: 700; font-size: 16px">${formattedPrice}</span>
                                 </td>
                                 <td class="text-center">
-                                    <a class="btn btn-info"
-                                       title=""
-                                       data-toggle="tooltip"
-                                       href=""
-                                       data-original-title="Xem chi tiết">
-                                       <i class="fa fa-eye">@Url.Action("SmartphoneDetails", "Home")</i>
+                                    <a class="btn btn-info" data-toggle="tooltip" data-original-title="Xem chi tiết">
+                                        <i class="fa fa-eye" asp-controller="Home" asp-action="SmartphoneDetails" asp-route-maSp="@Model.MaSp">@Url.Action("SmartphoneDetails", "Home")</i>
                                     </a>
                                 </td>
                             </tr>
