@@ -154,7 +154,7 @@ namespace codeBTL.Areas.Admin.Controllers
         }
 
         /// <summary>   
-        ///      Create 1 ctsp
+        ///      Create 1 ct anh
         /// </summary>
         /// <returns></returns>
         [Route("AddImageDetails")]
@@ -175,8 +175,6 @@ namespace codeBTL.Areas.Admin.Controllers
             ViewBag.MaSp = new SelectList(db.Sanphams.Where(x => x.MaLoai.Equals("LOAI01")).ToList(), "MaSp", "TenSp");
             if (ModelState.IsValid)
             {
-                // Tạo một giá trị Guid mới
-                chitietanh.MaCTA = Guid.NewGuid();
                 db.Chitietanhs.Add(chitietanh);
                 db.SaveChanges();
                 return RedirectToAction("GetAllSmartPhones");

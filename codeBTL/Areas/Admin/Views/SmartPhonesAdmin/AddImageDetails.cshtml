@@ -5,28 +5,29 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+
 <div class="row">
     <div class="col-md-12">
         <div class="tile">
             <h3 class="tile-title">Tạo mới chi tiết phụ kiện</h3>
             <div class="tile-body">
-                <form asp-action="AddImageDetails" class="row">
+                <form asp-action="AddImageDetails">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group">
                         <label asp-for="MaSp" class="control-label"></label>
                         <select asp-for="MaSp" class="form-control" asp-items="ViewBag.MaSp"></select>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group">
                         <label asp-for="TenFileAnh" class="control-label"></label>
                         <input asp-for="TenFileAnh" class="form-control" />
                         <span asp-validation-for="TenFileAnh" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-12">
-                        <input type="submit" value="Lưu lại" class="btn btn-save" />
-                        <a class="btn btn-cancel" asp-controller="SmartPhonesAdmin" asp-action="GetAllSmartPhones">Hủy bỏ</a>
+                    <div class="form-group">
+                        <input type="submit" value="Lưu lại" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+

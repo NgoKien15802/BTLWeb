@@ -63,7 +63,7 @@ public partial class DtddContext : DbContext
                 .HasColumnName("MaSP");
             entity.Property(e => e.TenFileAnh)
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .HasColumnName("TenFileAnh");
 
             entity.HasOne(d => d.MaSpNavigation).WithMany()
                 .HasForeignKey(d => d.MaSp)

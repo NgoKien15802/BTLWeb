@@ -213,6 +213,8 @@ namespace codeBTL.Areas.Admin.Controllers
             }
             try
             {
+                var ctsp = db.Chitietsps.Where(x => x.MaSp == maSp).ToList();
+                if (ctsp.Any()) db.RemoveRange(ctsp);
                 db.Remove(db.Sanphams.Find(maSp));
                 db.SaveChanges();
                 TempData["Message"] = $"Sản phẩm có mã {maSp} đã được xóa";
