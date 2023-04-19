@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace codeBTL.Models;
 
@@ -25,7 +26,6 @@ public partial class Sanpham
     [DisplayName("Hãng sản xuất")]
     public string MaHangSx { get; set; } = null!;
 
-    [FileExtensions(Extensions = "jpg,img", ErrorMessage = "đuôi file ảnh phải img, jpg")]
     [Required(ErrorMessage = "Ảnh đại diện không được để trống.")]
     [DisplayName("Ảnh đại diện")]
     public string AnhDaiDien { get; set; } = null!;
@@ -51,6 +51,11 @@ public partial class Sanpham
 
     public virtual Hang? MaHangSxNavigation { get; set; } = null!;
 
+    [NotMapped]
+    public IFormFile? formFile { get; set; }
+
     public virtual Loaisp? MaLoaiNavigation { get; set; } = null!;
+
+    
 
 }

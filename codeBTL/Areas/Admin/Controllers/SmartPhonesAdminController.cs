@@ -106,12 +106,12 @@ namespace codeBTL.Areas.Admin.Controllers
             ViewBag.maxMaSPNumber = "DT" + maxMaSPNumber;
             RouteValueDictionary rv = new RouteValueDictionary();
             rv.Add("MaSp", ViewBag.maxMaSPNumber);
-            if (ModelState.IsValid)
-            {
+            sp.AnhDaiDien = sp.formFile.FileName;
+             // Lưu tên tệp ảnh vào đối tượng Sanpham
+                // Lấy tên tệp ảnh
                 db.Sanphams.Add(sp);
                 db.SaveChanges();
                 return RedirectToAction("AddSmartPhoneDetails", rv);
-            }
 
             return View(sp);
         }
